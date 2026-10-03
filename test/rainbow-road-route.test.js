@@ -1,6 +1,6 @@
 // Where the car drives on Rainbow road's roundabout, and which way it faces.
 import { describe, expect, it } from 'vitest';
-import { CENTER, EXITS, RADIUS, START, carTransform, poseAt, route, turnToward } from '../public/game/rainbow-road-route.js';
+import { CENTER, EXITS, RADIUS, START, carTransform, poseAt, route, stillPose, turnToward } from '../public/game/rainbow-road-route.js';
 
 const close = (a, b) => expect(a).toBeCloseTo(b, 5);
 const ring = (r) => r.pieces[1];
@@ -66,6 +66,25 @@ describe('poseAt', () => {
       return ((poseAt(r, r.length - 1).heading % 360) + 360) % 360;
     });
     headings.forEach((h, i) => close(h, [270, 0, 90][i]));
+  });
+});
+
+describe('stillPose', () => {
+  it('stands on the exit road, inside the picture, facing out of it', () => {
+    const expected = [
+      { heading: -90, onRoad: (p) => p.y === 250 && p.x < CENTER.x - RADIUS },
+      { heading: 0, onRoad: (p) => p.x === 300 && p.y < CENTER.y - RADIUS },
+      { heading: 90, onRoad: (p) => p.y === 250 && p.x > CENTER.x + RADIUS },
+    ];
+    EXITS.forEach((_, i) => {
+      const pose = stillPose(route(i));
+      expect(pose.x).toBeGreaterThan(30);
+      expect(pose.x).toBeLessThan(570);
+      expect(pose.y).toBeGreaterThan(30);
+      expect(pose.y).toBeLessThan(430);
+      expect(expected[i].onRoad(pose)).toBe(true);
+      close(((pose.heading % 360) + 360) % 360, ((expected[i].heading % 360) + 360) % 360);
+    });
   });
 });
 

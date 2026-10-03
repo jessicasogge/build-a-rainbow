@@ -5,7 +5,7 @@ import './components.js'; // the shared page pieces (header, helper, ...)
 import { colorById } from './colors.js';
 import { onTap, wiggle } from './page-helpers.js';
 import { isDone, message, newTrip, pick, turn } from './rainbow-road.js';
-import { START, carTransform, poseAt, route, turnToward } from './rainbow-road-route.js';
+import { START, carTransform, poseAt, route, stillPose, turnToward } from './rainbow-road-route.js';
 
 const SPEED = 0.5; // picture units per millisecond
 const TURN_RATE = 0.5; // the most the car turns, in degrees per millisecond
@@ -15,12 +15,15 @@ const PARKED = { ...START, heading: 0 };
 // Drives the car along a route one animation frame at a time, calling
 // `show` with each pose, then `done` at the end. The car's heading follows
 // the road but turns at a limited rate, so it swings smoothly into and out of
-// the ring. With reduced motion on, it skips straight to the end.
-function animateDrive(r, show, done) {
+// the ring. With reduced motion on (an iPhone's Reduce Motion setting, say),
+// the car doesn't move: it shows up partway down the road it took for a
+// moment, then `done` parks it again.
+export const STILL_MS = 900;
+export function animateDrive(r, show, done) {
   const reduce = globalThis.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
   if (reduce) {
-    show(poseAt(r, r.length));
-    setTimeout(done, 250);
+    show(stillPose(r));
+    setTimeout(done, STILL_MS);
     return;
   }
   let heading = 0;

@@ -74,6 +74,14 @@ export function poseAt(r, distance) {
   return { ...START, heading: 0 };
 }
 
+// Where to show the car, standing still, when motion is turned down: halfway
+// along the exit road, so you can see which way it went without it moving.
+// (The very end of a route is off the edge of the picture.)
+export function stillPose(r) {
+  const exitRoad = r.pieces[r.pieces.length - 1];
+  return poseAt(r, r.length - exitRoad.length / 2);
+}
+
 // Turn from one heading toward another by at most `maxStep` degrees, the
 // short way round. The page uses this so the car swings smoothly into and
 // out of the ring instead of snapping around.
