@@ -31,6 +31,10 @@ describe('pick a level page', () => {
     expect(html).toContain('<a class="level-card" href="./color-order.html" data-level="2">');
   });
 
+  it('opens Memory rainbow from the level 3 card', () => {
+    expect(html).toContain('<a class="level-card" href="./memory-rainbow.html" data-level="3">');
+  });
+
   it('puts a little six-stripe rainbow on every card, hidden from screen readers', () => {
     const minis = [...html.matchAll(/<svg class="mini-rainbow"[^>]*aria-hidden="true">([\s\S]*?)<\/svg>/g)];
     expect(minis).toHaveLength(4);
