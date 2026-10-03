@@ -3,7 +3,7 @@ import { readFileSync } from 'node:fs';
 import { describe, expect, it } from 'vitest';
 
 const html = readFileSync(new URL('../public/levels.html', import.meta.url), 'utf8');
-const cards = [...html.matchAll(/<button type="button" class="level-card" data-level="(\d)"( disabled)?>/g)];
+const cards = [...html.matchAll(/<(?:button type="button"|a) class="level-card"(?: href="[^"]*")? data-level="(\d)"( disabled)?>/g)];
 
 describe('pick a level page', () => {
   it('has a title', () => {
@@ -21,6 +21,10 @@ describe('pick a level page', () => {
   it('has every level open, none locked', () => {
     expect(cards.map((m) => Boolean(m[2]))).toEqual([false, false, false, false]);
     expect(html).not.toContain('unlock');
+  });
+
+  it('opens Color order from the level 1 card', () => {
+    expect(html).toContain('<a class="level-card" href="./color-order.html" data-level="1">');
   });
 
   it('puts a little six-stripe rainbow on every card, hidden from screen readers', () => {

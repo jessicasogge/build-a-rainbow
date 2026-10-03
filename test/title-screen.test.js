@@ -15,8 +15,8 @@ describe('title screen', () => {
     expect(fills).toEqual(['#E5383B', '#F77F00', '#FCBF49', '#43AA8B', '#277DA1', '#7B4FA0']);
   });
 
-  it('has a Play button', () => {
-    expect(html).toMatch(/<button[^>]*id="play"/);
+  it('has a Play button that starts level 1', () => {
+    expect(html).toMatch(/<a class="button button-play" id="play" href="\.\/color-order\.html">/);
   });
 
   it('has a Levels button that opens the level picker', () => {
