@@ -134,7 +134,7 @@ body {
 }
 
 .logo {
-  margin: -2.5rem 0 0;
+  margin: -1rem 0 0; /* tucked up a little toward the rainbow, with a small gap */
   font-family: Fredoka, system-ui, sans-serif;
   font-weight: 700;
   font-size: clamp(3rem, 9vw, 6rem);
@@ -144,6 +144,7 @@ body {
 .tagline {
   margin: 0;
   font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+  text-wrap: balance; /* on phones, two even lines rather than one word alone */
 }
 
 .buttons {
@@ -327,9 +328,9 @@ body {
   font-size: 1.5rem;
 }
 
-.mini-rainbow {
-  width: 64px;
-  height: 34px;
+.level-picture {
+  width: 118px;
+  height: 75px;
 }
 
 /* ---- Level pages (shared by every level) ---- */
@@ -340,7 +341,8 @@ body {
 level-header,
 helper-bubble,
 level-done,
-rainbow-stripes {
+rainbow-stripes,
+level-picture {
   display: contents;
 }
 
