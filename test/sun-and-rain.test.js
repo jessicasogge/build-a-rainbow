@@ -5,12 +5,13 @@ import { WEATHER, hasRainbow, message, newSky, toggle } from '../public/game/sun
 const sky = (...on) => on.reduce(toggle, newSky());
 
 describe('weather', () => {
-  it('is sun, rain and snow', () => {
-    expect(WEATHER.map((w) => w.id)).toEqual(['sun', 'rain', 'snow']);
+  it('is sun, rain, snow and clouds', () => {
+    expect(WEATHER.map((w) => w.id)).toEqual(['sun', 'rain', 'snow', 'clouds']);
+    expect(WEATHER.map((w) => w.name)).toEqual(['Sun', 'Rain', 'Snow', 'Cloudy']);
   });
 
-  it('starts cloudy, with nothing on', () => {
-    expect(newSky()).toEqual({ sun: false, rain: false, snow: false });
+  it('starts with nothing on', () => {
+    expect(newSky()).toEqual({ sun: false, rain: false, snow: false, clouds: false });
   });
 
   it('turns on and off', () => {
@@ -35,6 +36,8 @@ describe('hasRainbow', () => {
     ['only snow', ['snow']],
     ['sun and snow', ['sun', 'snow']],
     ['sun, rain and snow', ['sun', 'rain', 'snow']],
+    ['only clouds', ['clouds']],
+    ['sun, rain and clouds', ['sun', 'rain', 'clouds']],
   ])('is not there with %s', (_, on) => {
     expect(hasRainbow(sky(...on))).toBe(false);
   });
@@ -47,6 +50,8 @@ describe('message', () => {
     [['rain'], 'Rainy! But a rainbow needs sunshine too.'],
     [['snow'], "Snowflakes don't make rainbows. Try rain!"],
     [['sun', 'rain', 'snow'], "Snowflakes don't make rainbows. Try rain!"],
+    [['clouds'], "Too many clouds! The sun can't shine through."],
+    [['sun', 'rain', 'clouds'], "Too many clouds! The sun can't shine through."],
     [['sun', 'rain'], 'Sun and rain make a rainbow!'],
   ])('with %j says "%s"', (on, words) => {
     expect(message(sky(...on))).toBe(words);

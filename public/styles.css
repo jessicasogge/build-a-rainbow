@@ -662,7 +662,7 @@ button.round-button {
   transition: fill 0.4s;
 }
 
-.has-sun .sky {
+.has-sun:not(.has-clouds) .sky {
   fill: #e8f6ff;
 }
 
@@ -675,7 +675,7 @@ button.round-button {
   transition: fill 0.4s;
 }
 
-.has-sun:not(.has-rain):not(.has-snow) .sky-cloud {
+.has-sun:not(.has-rain):not(.has-snow):not(.has-clouds) .sky-cloud {
   fill: #ffffff;
 }
 
@@ -683,6 +683,7 @@ button.round-button {
 .sky-sun,
 .sky-rain,
 .sky-snow,
+.sky-clouds,
 .sky-rainbow {
   opacity: 0;
   transition: opacity 0.4s, transform 0.4s;
@@ -690,6 +691,16 @@ button.round-button {
 
 .sky-sun {
   transform: translateY(40px);
+}
+
+.sky-clouds {
+  fill: #8492a3;
+  transform: translateX(-60px);
+}
+
+.has-clouds .sky-clouds {
+  opacity: 1;
+  transform: none;
 }
 
 .sky-sun circle {
@@ -748,9 +759,15 @@ button.round-button {
 
 .weather-controls {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 1rem;
-  width: min(640px, 100%);
+  width: min(820px, 100%);
+}
+
+@media (max-width: 600px) {
+  .weather-controls {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 }
 
 .weather-toggle {

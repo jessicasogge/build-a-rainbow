@@ -20,9 +20,10 @@
     </header>
 
     <main class="build">
-      <!-- The sky. sun-and-rain-page.js adds .has-sun, .has-rain, .has-snow
-           and .has-rainbow to show each part; styles.css fades them in. -->
-      <svg class="sky-scene" viewBox="0 0 800 420" role="img" aria-label="A sky: cloudy.">
+      <!-- The sky. sun-and-rain-page.js adds .has-sun, .has-rain, .has-snow,
+           .has-clouds and .has-rainbow to show each part; styles.css fades
+           them in. -->
+      <svg class="sky-scene" viewBox="0 0 800 420" role="img" aria-label="A sky: grey, with one small cloud.">
         <rect class="sky" width="800" height="420" rx="32" />
         <g class="sky-rainbow">
           <path d="M100 420 A300 300 0 0 1 700 420 L664 420 A264 264 0 0 0 136 420 Z" fill="#E5383B" />
@@ -69,6 +70,21 @@
           <circle cx="632" cy="122" r="44" />
           <rect x="478" y="122" width="196" height="45" rx="22" />
         </g>
+        <!-- Thick clouds that drift over the sun when Cloudy is on. -->
+        <g class="sky-clouds">
+          <g>
+            <circle cx="95" cy="120" r="48" />
+            <circle cx="160" cy="88" r="62" />
+            <circle cx="228" cy="118" r="50" />
+            <rect x="48" y="118" width="230" height="52" rx="26" />
+          </g>
+          <g>
+            <circle cx="320" cy="150" r="38" />
+            <circle cx="372" cy="126" r="50" />
+            <circle cx="425" cy="148" r="40" />
+            <rect x="282" y="146" width="182" height="42" rx="21" />
+          </g>
+        </g>
       </svg>
 
       <div class="helper">
@@ -91,6 +107,10 @@
         <button type="button" class="weather-toggle" data-weather="snow" aria-pressed="false">
           <svg viewBox="0 0 48 48" aria-hidden="true"><path d="M14 30a8 8 0 0 1 0-16 11 11 0 0 1 21 2 7 7 0 0 1-1 14z" fill="#9AA8B8" /><circle cx="16" cy="38" r="3" fill="#7FA9CC" /><circle cx="25" cy="41" r="3" fill="#7FA9CC" /><circle cx="33" cy="37" r="3" fill="#7FA9CC" /></svg>
           Snow
+        </button>
+        <button type="button" class="weather-toggle" data-weather="clouds" aria-pressed="false">
+          <svg viewBox="0 0 48 48" aria-hidden="true"><path d="M12 26a7 7 0 0 1 0-14 10 10 0 0 1 19 2 6 6 0 0 1-1 12z" fill="#B7C2CE" /><path d="M18 38a8 8 0 0 1 0-16 11 11 0 0 1 21 2 7 7 0 0 1-1 14z" fill="#8492A3" /></svg>
+          Cloudy
         </button>
       </div>
 

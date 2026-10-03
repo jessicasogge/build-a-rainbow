@@ -17,10 +17,11 @@ beforeEach(() => {
 });
 
 describe('sun and rain page', () => {
-  it('is level 4 and starts cloudy', () => {
+  it('is level 4 and starts with nothing on', () => {
     expect($('.level-title').textContent).toBe('Level 4 · Sun and rain');
     expect(scene().getAttribute('class')).toBe('sky-scene');
-    expect(scene().getAttribute('aria-label')).toBe('A sky: cloudy.');
+    expect(scene().getAttribute('aria-label')).toBe('A sky: grey, with one small cloud.');
+    expect(document.querySelectorAll('[data-weather]')).toHaveLength(4);
     expect($('.helper-text').textContent).toBe('Tap the weather to make a rainbow!');
     expect($('.level-done').hidden).toBe(true);
   });
@@ -44,6 +45,25 @@ describe('sun and rain page', () => {
     tap('snow');
     expect(scene().classList.contains('has-rainbow')).toBe(false);
     expect($('.helper-text').textContent).toBe("Snowflakes don't make rainbows. Try rain!");
+  });
+
+  it('makes no rainbow when thick clouds hide the sun', () => {
+    tap('sun');
+    tap('rain');
+    tap('clouds');
+    expect(scene().classList.contains('has-clouds')).toBe(true);
+    expect(scene().classList.contains('has-rainbow')).toBe(false);
+    expect($('[data-weather="clouds"]').getAttribute('aria-pressed')).toBe('true');
+    expect($('.helper-text').textContent).toBe("Too many clouds! The sun can't shine through.");
+    expect($('.level-done').hidden).toBe(true);
+  });
+
+  it('makes the rainbow once the clouds clear', () => {
+    tap('clouds');
+    tap('sun');
+    tap('rain');
+    tap('clouds');
+    expect(scene().classList.contains('has-rainbow')).toBe(true);
   });
 
   it('makes a rainbow with sun and rain, and celebrates', () => {
