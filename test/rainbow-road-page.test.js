@@ -2,11 +2,11 @@
 // @vitest-environment jsdom
 import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
-import { beforeEach, describe, expect, it } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { COLORS } from '../public/game/colors.js';
 import { turn } from '../public/game/rainbow-road.js';
-import { start } from '../public/game/rainbow-road-page.js';
-import { poseAt } from '../public/game/rainbow-road-route.js';
+import { STILL_MS, animateDrive, start } from '../public/game/rainbow-road-page.js';
+import { poseAt, route, stillPose } from '../public/game/rainbow-road-route.js';
 
 const html = readFileSync(join(process.cwd(), 'public/rainbow-road.html'), 'utf8');
 
@@ -115,5 +115,25 @@ describe('rainbow road page', () => {
     expect($('.road-scene').classList.contains('is-done')).toBe(false);
     expect($('.progress-pill').textContent).toBe('Turn 1 of 6');
     expect($('.level-done').hidden).toBe(true);
+  });
+});
+
+describe('driving with reduced motion on', () => {
+  afterEach(() => {
+    vi.useRealTimers();
+    delete globalThis.matchMedia;
+  });
+
+  it('shows the car still, partway down its road, then finishes the drive', () => {
+    vi.useFakeTimers();
+    globalThis.matchMedia = (query) => ({ matches: query === '(prefers-reduced-motion: reduce)' });
+    const shown = [];
+    let finished = false;
+    animateDrive(route(0), (pose) => shown.push(pose), () => { finished = true; });
+    expect(shown).toEqual([stillPose(route(0))]);
+    vi.advanceTimersByTime(STILL_MS - 1);
+    expect(finished).toBe(false);
+    vi.advanceTimersByTime(1);
+    expect(finished).toBe(true);
   });
 });
