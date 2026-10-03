@@ -320,17 +320,9 @@ body {
   font-size: 1.5rem;
 }
 
-.stars {
-  display: flex;
-  gap: 0.5rem;
-}
-
-.stars svg {
-  width: 44px;
-  height: 44px;
-  fill: none;
-  stroke: #7fa9cc;
-  stroke-width: 1.6;
+.mini-rainbow {
+  width: 64px;
+  height: 34px;
 }
 
 .signature {

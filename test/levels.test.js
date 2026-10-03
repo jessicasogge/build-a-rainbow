@@ -23,6 +23,12 @@ describe('pick a level page', () => {
     expect(html).not.toContain('unlock');
   });
 
+  it('puts a little six-stripe rainbow on every card, hidden from screen readers', () => {
+    const minis = [...html.matchAll(/<svg class="mini-rainbow"[^>]*aria-hidden="true">([\s\S]*?)<\/svg>/g)];
+    expect(minis).toHaveLength(4);
+    for (const [, inner] of minis) expect(inner.match(/<path/g)).toHaveLength(6);
+  });
+
   it('shares the title screen stylesheet, tab icon and signature', () => {
     expect(html).toContain('<link rel="stylesheet" href="./styles.css" />');
     expect(html).toContain('<link rel="icon" href="./favicon.svg" type="image/svg+xml" />');
