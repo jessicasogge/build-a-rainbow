@@ -18,8 +18,9 @@ describe('pick a level page', () => {
     expect(cards.map((m) => m[1])).toEqual(['1', '2', '3', '4']);
   });
 
-  it('has levels 1 and 2 open and levels 3 and 4 locked', () => {
-    expect(cards.map((m) => Boolean(m[2]))).toEqual([false, false, true, true]);
+  it('has every level open, none locked', () => {
+    expect(cards.map((m) => Boolean(m[2]))).toEqual([false, false, false, false]);
+    expect(html).not.toContain('unlock');
   });
 
   it('shares the title screen stylesheet, tab icon and signature', () => {

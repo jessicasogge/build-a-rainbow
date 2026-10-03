@@ -22,7 +22,6 @@
   --yellow: #ffc93c;
   --yellow-shadow: #c98f00;
   --cloud-shadow: #8fb8d6;
-  --muted: #3e5573;
 }
 
 * {
@@ -286,16 +285,9 @@ body {
   transition: transform 0.08s, box-shadow 0.08s;
 }
 
-.level-card:active:not(:disabled) {
+.level-card:active {
   transform: translateY(6px);
   box-shadow: 0 2px 0 var(--cloud-shadow);
-}
-
-.level-card:disabled {
-  background: rgb(255 255 255 / 0.5);
-  box-shadow: none;
-  color: var(--muted);
-  cursor: default;
 }
 
 .level-top {
@@ -318,20 +310,6 @@ body {
   font-size: 2.5rem;
 }
 
-.level-locked {
-  background: var(--cloud-shadow);
-}
-
-.level-locked svg {
-  width: 34px;
-  height: 34px;
-  fill: none;
-  stroke: #fff;
-  stroke-width: 2.6;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-}
-
 .level-name {
   font-family: Fredoka, system-ui, sans-serif;
   font-size: clamp(1.75rem, 3.5vw, 2.5rem);
@@ -340,10 +318,6 @@ body {
 
 .level-hint {
   font-size: 1.5rem;
-}
-
-.level-unlock {
-  font-size: 1.35rem;
 }
 
 .stars {
