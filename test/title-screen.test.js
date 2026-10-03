@@ -15,9 +15,12 @@ describe('title screen', () => {
     expect(fills).toEqual(['#E5383B', '#F77F00', '#FCBF49', '#43AA8B', '#277DA1', '#7B4FA0']);
   });
 
-  it('has Play and Levels buttons', () => {
+  it('has a Play button', () => {
     expect(html).toMatch(/<button[^>]*id="play"/);
-    expect(html).toMatch(/<button[^>]*id="levels"/);
+  });
+
+  it('has a Levels button that opens the level picker', () => {
+    expect(html).toContain('<a class="button button-levels" id="levels" href="./levels.html">Levels</a>');
   });
 
   it('is signed at the foot', () => {

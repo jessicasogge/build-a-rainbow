@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Pick a Level: Build a Rainbow</title>
+    <link rel="icon" href="./favicon.svg" type="image/svg+xml" />
+    <link rel="preload" href="./fonts/fredoka-700.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body class="page">
+    <header class="page-header">
+      <a class="round-button" href="./index.html" aria-label="Back to the title screen">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7" /></svg>
+      </a>
+      <h1 class="page-title">Pick a level</h1>
+    </header>
+
+    <!-- The levels aren't built yet, so these don't go anywhere. The little
+         rainbow on each card is just decoration. -->
+    <main class="level-grid">
+      <button type="button" class="level-card" data-level="1">
+        <span class="level-top">
+          <span class="level-number" style="--level-color: #d62f32">1</span>
+          <span class="level-name">Color order</span>
+        </span>
+        <span class="level-hint">Stack the stripes, red on top.</span>
+        <svg class="mini-rainbow" viewBox="0 0 64 34" aria-hidden="true">
+          <path d="M2 33 A30 30 0 0 1 62 33 L58 33 A26 26 0 0 0 6 33 Z" fill="#E5383B" />
+          <path d="M6 33 A26 26 0 0 1 58 33 L54 33 A22 22 0 0 0 10 33 Z" fill="#F77F00" />
+          <path d="M10 33 A22 22 0 0 1 54 33 L50 33 A18 18 0 0 0 14 33 Z" fill="#FCBF49" />
+          <path d="M14 33 A18 18 0 0 1 50 33 L46 33 A14 14 0 0 0 18 33 Z" fill="#43AA8B" />
+          <path d="M18 33 A14 14 0 0 1 46 33 L42 33 A10 10 0 0 0 22 33 Z" fill="#277DA1" />
+          <path d="M22 33 A10 10 0 0 1 42 33 L38 33 A6 6 0 0 0 26 33 Z" fill="#7B4FA0" />
+        </svg>
+      </button>
+
+      <button type="button" class="level-card" data-level="2">
+        <span class="level-top">
+          <span class="level-number" style="--level-color: #c25e00">2</span>
+          <span class="level-name">Mix a color</span>
+        </span>
+        <span class="level-hint">Red and yellow make…?</span>
+        <svg class="mini-rainbow" viewBox="0 0 64 34" aria-hidden="true">
+          <path d="M2 33 A30 30 0 0 1 62 33 L58 33 A26 26 0 0 0 6 33 Z" fill="#E5383B" />
+          <path d="M6 33 A26 26 0 0 1 58 33 L54 33 A22 22 0 0 0 10 33 Z" fill="#F77F00" />
+          <path d="M10 33 A22 22 0 0 1 54 33 L50 33 A18 18 0 0 0 14 33 Z" fill="#FCBF49" />
+          <path d="M14 33 A18 18 0 0 1 50 33 L46 33 A14 14 0 0 0 18 33 Z" fill="#43AA8B" />
+          <path d="M18 33 A14 14 0 0 1 46 33 L42 33 A10 10 0 0 0 22 33 Z" fill="#277DA1" />
+          <path d="M22 33 A10 10 0 0 1 42 33 L38 33 A6 6 0 0 0 26 33 Z" fill="#7B4FA0" />
+        </svg>
+      </button>
+
+      <button type="button" class="level-card" data-level="3">
+        <span class="level-top">
+          <span class="level-number" style="--level-color: #2e8a6e">3</span>
+          <span class="level-name">Memory rainbow</span>
+        </span>
+        <span class="level-hint">Build it with no hints.</span>
+        <svg class="mini-rainbow" viewBox="0 0 64 34" aria-hidden="true">
+          <path d="M2 33 A30 30 0 0 1 62 33 L58 33 A26 26 0 0 0 6 33 Z" fill="#E5383B" />
+          <path d="M6 33 A26 26 0 0 1 58 33 L54 33 A22 22 0 0 0 10 33 Z" fill="#F77F00" />
+          <path d="M10 33 A22 22 0 0 1 54 33 L50 33 A18 18 0 0 0 14 33 Z" fill="#FCBF49" />
+          <path d="M14 33 A18 18 0 0 1 50 33 L46 33 A14 14 0 0 0 18 33 Z" fill="#43AA8B" />
+          <path d="M18 33 A14 14 0 0 1 46 33 L42 33 A10 10 0 0 0 22 33 Z" fill="#277DA1" />
+          <path d="M22 33 A10 10 0 0 1 42 33 L38 33 A6 6 0 0 0 26 33 Z" fill="#7B4FA0" />
+        </svg>
+      </button>
+
+      <button type="button" class="level-card" data-level="4">
+        <span class="level-top">
+          <span class="level-number" style="--level-color: #277da1">4</span>
+          <span class="level-name">Sun and rain</span>
+        </span>
+        <span class="level-hint">Make the weather for a rainbow.</span>
+        <svg class="mini-rainbow" viewBox="0 0 64 34" aria-hidden="true">
+          <path d="M2 33 A30 30 0 0 1 62 33 L58 33 A26 26 0 0 0 6 33 Z" fill="#E5383B" />
+          <path d="M6 33 A26 26 0 0 1 58 33 L54 33 A22 22 0 0 0 10 33 Z" fill="#F77F00" />
+          <path d="M10 33 A22 22 0 0 1 54 33 L50 33 A18 18 0 0 0 14 33 Z" fill="#FCBF49" />
+          <path d="M14 33 A18 18 0 0 1 50 33 L46 33 A14 14 0 0 0 18 33 Z" fill="#43AA8B" />
+          <path d="M18 33 A14 14 0 0 1 46 33 L42 33 A10 10 0 0 0 22 33 Z" fill="#277DA1" />
+          <path d="M22 33 A10 10 0 0 1 42 33 L38 33 A6 6 0 0 0 26 33 Z" fill="#7B4FA0" />
+        </svg>
+      </button>
+    </main>
+
+    <footer class="signature">jsogge 2026</footer>
+  </body>
+</html>
