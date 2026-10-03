@@ -145,11 +145,11 @@ const PICTURES = {
       <rect x="59" y="27" width="10" height="7" fill="#B8C4D0" />
       <path d="M59 34h10l-2 12q-3 4-6 0z" fill="${PURPLE}" />
     </g>`,
-  // A little car on the road.
+  // A little white car on the road, like the one in the level.
   'rainbow-road': `
     <rect x="0" y="44" width="88" height="10" rx="5" fill="#7D8A99" />
     <path d="M10 48h12M38 48h12M66 48h12" stroke="#ffffff" stroke-width="2" stroke-linecap="round" />
-    <path d="M18 40v-8q0-4 4-4h8l7-9h16q3 0 5 3l6 6h6q4 0 4 4v8z" fill="${RED}" />
+    <path d="M18 40v-8q0-4 4-4h8l7-9h16q3 0 5 3l6 6h6q4 0 4 4v8z" fill="#ffffff" stroke="${ink}" stroke-width="2.5" stroke-linejoin="round" />
     <path d="M38 27l5-6h9l4 6z" fill="#8ECAE6" />
     <circle cx="30" cy="41" r="6" fill="${ink}" />
     <circle cx="62" cy="41" r="6" fill="${ink}" />
