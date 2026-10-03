@@ -6,7 +6,10 @@ import { describe, expect, it } from 'vitest';
 
 const SITE = 'https://jessicasogge.github.io/build-a-rainbow/';
 const publicDir = join(process.cwd(), 'public');
-const pages = readdirSync(publicDir).filter((f) => f.endsWith('.html')).sort();
+// Google Search Console's ownership file (google….html) isn't a page of the
+// game, so it's left out.
+const isGoogleVerification = (f) => /^google[0-9a-f]+\.html$/.test(f);
+const pages = readdirSync(publicDir).filter((f) => f.endsWith('.html') && !isGoogleVerification(f)).sort();
 const read = (name) => readFileSync(join(publicDir, name), 'utf8');
 const addressOf = (page) => (page === 'index.html' ? SITE : SITE + page);
 
@@ -24,6 +27,12 @@ describe.each(pages)('%s', (page) => {
 
   it('gives its one official address', () => {
     expect(html).toContain(`<link rel="canonical" href="${addressOf(page)}" />`);
+  });
+});
+
+describe('Google Search Console', () => {
+  it('has the file that proves the site is ours, exactly as Google gave it', () => {
+    expect(read('google32efa8321a61b455.html')).toBe('google-site-verification: google32efa8321a61b455.html');
   });
 });
 
