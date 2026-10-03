@@ -1,4 +1,4 @@
-// Level 1, Color order: tap the colors in rainbow order, red first, and each
+// Level 2, Color order: tap the colors in rainbow order, red first, and each
 // one fills in the next stripe.
 //
 // This file is only the rules. It doesn't touch the page, so the tests can

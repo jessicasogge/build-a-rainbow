@@ -16,12 +16,28 @@
       <h1 class="page-title">Pick a level</h1>
     </header>
 
-    <!-- Only level 1 is built so far; the other cards don't go anywhere yet.
+    <!-- Levels 1 and 2 are built so far; the other cards don't go anywhere yet.
          The little rainbow on each card is just decoration. -->
     <main class="level-grid">
-      <a class="level-card" href="./color-order.html" data-level="1">
+      <a class="level-card" href="./mix-a-color.html" data-level="1">
         <span class="level-top">
           <span class="level-number" style="--level-color: #d62f32">1</span>
+          <span class="level-name">Mix a color</span>
+        </span>
+        <span class="level-hint">Red and yellow make…?</span>
+        <svg class="mini-rainbow" viewBox="0 0 64 34" aria-hidden="true">
+          <path d="M2 33 A30 30 0 0 1 62 33 L58 33 A26 26 0 0 0 6 33 Z" fill="#E5383B" />
+          <path d="M6 33 A26 26 0 0 1 58 33 L54 33 A22 22 0 0 0 10 33 Z" fill="#F77F00" />
+          <path d="M10 33 A22 22 0 0 1 54 33 L50 33 A18 18 0 0 0 14 33 Z" fill="#FCBF49" />
+          <path d="M14 33 A18 18 0 0 1 50 33 L46 33 A14 14 0 0 0 18 33 Z" fill="#43AA8B" />
+          <path d="M18 33 A14 14 0 0 1 46 33 L42 33 A10 10 0 0 0 22 33 Z" fill="#277DA1" />
+          <path d="M22 33 A10 10 0 0 1 42 33 L38 33 A6 6 0 0 0 26 33 Z" fill="#7B4FA0" />
+        </svg>
+      </a>
+
+      <a class="level-card" href="./color-order.html" data-level="2">
+        <span class="level-top">
+          <span class="level-number" style="--level-color: #c25e00">2</span>
           <span class="level-name">Color order</span>
         </span>
         <span class="level-hint">Stack the stripes, red on top.</span>
@@ -34,22 +50,6 @@
           <path d="M22 33 A10 10 0 0 1 42 33 L38 33 A6 6 0 0 0 26 33 Z" fill="#7B4FA0" />
         </svg>
       </a>
-
-      <button type="button" class="level-card" data-level="2">
-        <span class="level-top">
-          <span class="level-number" style="--level-color: #c25e00">2</span>
-          <span class="level-name">Mix a color</span>
-        </span>
-        <span class="level-hint">Red and yellow make…?</span>
-        <svg class="mini-rainbow" viewBox="0 0 64 34" aria-hidden="true">
-          <path d="M2 33 A30 30 0 0 1 62 33 L58 33 A26 26 0 0 0 6 33 Z" fill="#E5383B" />
-          <path d="M6 33 A26 26 0 0 1 58 33 L54 33 A22 22 0 0 0 10 33 Z" fill="#F77F00" />
-          <path d="M10 33 A22 22 0 0 1 54 33 L50 33 A18 18 0 0 0 14 33 Z" fill="#FCBF49" />
-          <path d="M14 33 A18 18 0 0 1 50 33 L46 33 A14 14 0 0 0 18 33 Z" fill="#43AA8B" />
-          <path d="M18 33 A14 14 0 0 1 46 33 L42 33 A10 10 0 0 0 22 33 Z" fill="#277DA1" />
-          <path d="M22 33 A10 10 0 0 1 42 33 L38 33 A6 6 0 0 0 26 33 Z" fill="#7B4FA0" />
-        </svg>
-      </button>
 
       <button type="button" class="level-card" data-level="3">
         <span class="level-top">

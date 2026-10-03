@@ -1,4 +1,4 @@
-// The rules of Level 1, Color order.
+// The rules of Level 2, Color order.
 import { describe, expect, it } from 'vitest';
 import { COLORS, isDone, message, newGame, nextColor, pick, shuffledColors } from '../public/game/color-order.js';
 

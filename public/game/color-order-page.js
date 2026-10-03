@@ -1,4 +1,4 @@
-// Draws Level 1 (Color order) on color-order.html and handles the taps.
+// Draws Level 2 (Color order) on color-order.html and handles the taps.
 // The rules live in color-order.js.
 import { COLORS, isDone, message, newGame, nextColor, pick, shuffledColors } from './color-order.js';
 
