@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Every page of the game, for search engines. Submit it in Google Search
+     Console and Bing Webmaster Tools. Add new pages here too. -->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://jessicasogge.github.io/build-a-rainbow/</loc></url>
+  <url><loc>https://jessicasogge.github.io/build-a-rainbow/levels.html</loc></url>
+  <url><loc>https://jessicasogge.github.io/build-a-rainbow/mix-a-color.html</loc></url>
+  <url><loc>https://jessicasogge.github.io/build-a-rainbow/color-order.html</loc></url>
+  <url><loc>https://jessicasogge.github.io/build-a-rainbow/memory-rainbow.html</loc></url>
+  <url><loc>https://jessicasogge.github.io/build-a-rainbow/sun-and-rain.html</loc></url>
+  <url><loc>https://jessicasogge.github.io/build-a-rainbow/paint-a-rainbow.html</loc></url>
+  <url><loc>https://jessicasogge.github.io/build-a-rainbow/rainbow-road.html</loc></url>
+  <url><loc>https://jessicasogge.github.io/build-a-rainbow/word-scramble.html</loc></url>
+  <url><loc>https://jessicasogge.github.io/build-a-rainbow/fix-the-rainbow.html</loc></url>
+</urlset>

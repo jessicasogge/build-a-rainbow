@@ -44,6 +44,7 @@ Shared by every level:
 - `public/game/shuffle.js`: the shuffle every level uses to mix things up.
 - `public/game/page-helpers.js`: the wrong-answer wiggle and tapping drawn shapes.
 - `public/game/components.js`: the pieces every page repeats, written once: `<level-header>`, `<helper-bubble>`, `<level-done>` and `<rainbow-stripes>`.
+- `public/sitemap.xml`: every page, for search engines. A new page goes here too (a test checks).
 - `public/styles.css`: one stylesheet, in sections: the title screen, the level picker, what all levels share, then one section per level.
 
 ## Fonts
