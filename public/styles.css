@@ -1024,6 +1024,93 @@ button.round-button {
   }
 }
 
+/* ---- Word scramble ---- */
+
+.scramble-rainbow {
+  width: min(260px, 60%);
+  height: auto;
+}
+
+.letter-boxes {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: clamp(0.35rem, 1.5vw, 0.9rem);
+  width: min(700px, 100%);
+}
+
+/* An empty box is a dashed outline; the one that's next is darker. When its
+   letter goes in, it gets a thick border in its rainbow color. */
+.letter-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: 1;
+  border: 4px dashed #7fa9cc;
+  border-radius: 22%; /* stays a rounded square at any size */
+  background: rgb(255 255 255 / 0.55);
+  font-family: Fredoka, system-ui, sans-serif;
+  font-size: clamp(1.8rem, 6vw, 3.75rem);
+  line-height: 1;
+}
+
+.letter-box.is-next {
+  border-color: var(--ink);
+}
+
+.letter-box.is-filled {
+  border: clamp(5px, 1vw, 8px) solid var(--box-color);
+  background: #ffffff;
+  animation: pop 0.35s ease-out;
+}
+
+.letter-tray {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+  width: min(820px, 100%);
+}
+
+.letter-tile {
+  width: clamp(64px, 11vw, 96px);
+  aspect-ratio: 1;
+  border: 0;
+  border-radius: 22px;
+  background: #ffffff;
+  box-shadow: 0 7px 0 var(--cloud-shadow);
+  color: var(--ink);
+  font-family: Fredoka, system-ui, sans-serif;
+  font-size: clamp(2rem, 5vw, 3rem);
+  cursor: pointer;
+  transition: transform 0.08s, box-shadow 0.08s, opacity 0.2s;
+}
+
+.letter-tile:active:not(:disabled) {
+  transform: translateY(5px);
+  box-shadow: 0 2px 0 var(--cloud-shadow);
+}
+
+.letter-tile:disabled {
+  opacity: 0.3;
+  cursor: default;
+}
+
+.letter-tile.is-wrong {
+  animation: wiggle 0.4s;
+}
+
+.letter-tile:focus-visible {
+  outline: 4px solid var(--ink);
+  outline-offset: 4px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .letter-box.is-filled,
+  .letter-tile.is-wrong {
+    animation: none;
+  }
+}
+
 .signature {
   position: relative;
   padding: 1rem;

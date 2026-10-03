@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Word Scramble: Build a Rainbow</title>
+    <link rel="icon" href="./favicon.svg" type="image/svg+xml" />
+    <link rel="preload" href="./fonts/fredoka-700.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body class="page level-page">
+    <header class="page-header">
+      <a class="round-button" href="./levels.html" aria-label="Back to the levels">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7" /></svg>
+      </a>
+      <h1 class="level-title">Level 7 · Word scramble</h1>
+      <button type="button" class="round-button header-end" data-restart aria-label="Start over">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7" /><path d="M3 4v5h5" /></svg>
+      </button>
+    </header>
+
+    <main class="build">
+      <!-- A picture of the word, as a clue. -->
+      <svg class="scramble-rainbow" viewBox="0 0 320 162" aria-hidden="true">
+        <path d="M10 160 A150 150 0 0 1 310 160 L288 160 A128 128 0 0 0 32 160 Z" fill="#E5383B" />
+        <path d="M32 160 A128 128 0 0 1 288 160 L266 160 A106 106 0 0 0 54 160 Z" fill="#F77F00" />
+        <path d="M54 160 A106 106 0 0 1 266 160 L244 160 A84 84 0 0 0 76 160 Z" fill="#FCBF49" />
+        <path d="M76 160 A84 84 0 0 1 244 160 L222 160 A62 62 0 0 0 98 160 Z" fill="#43AA8B" />
+        <path d="M98 160 A62 62 0 0 1 222 160 L200 160 A40 40 0 0 0 120 160 Z" fill="#277DA1" />
+        <path d="M120 160 A40 40 0 0 1 200 160 L178 160 A18 18 0 0 0 142 160 Z" fill="#7B4FA0" />
+      </svg>
+
+      <!-- Seven boxes for the letters. word-scramble-page.js fills them in
+           as the right letters are tapped. -->
+      <div class="letter-boxes" role="img" aria-label="0 of 7 letters in place">
+        <span class="letter-box"></span>
+        <span class="letter-box"></span>
+        <span class="letter-box"></span>
+        <span class="letter-box"></span>
+        <span class="letter-box"></span>
+        <span class="letter-box"></span>
+        <span class="letter-box"></span>
+      </div>
+
+      <div class="helper">
+        <span class="helper-face" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><circle cx="9" cy="10" r="1" /><circle cx="15" cy="10" r="1" /><path d="M8 14.5c1.2 1.6 2.4 2.2 4 2.2s2.8-.6 4-2.2" /></svg>
+        </span>
+        <p class="helper-text" aria-live="polite">Put the letters in order to spell RAINBOW.</p>
+      </div>
+
+      <!-- The scrambled letters. Added by word-scramble-page.js. -->
+      <div class="letter-tray"></div>
+
+      <section class="level-done" hidden>
+        <h2 tabindex="-1">You spelled RAINBOW!</h2>
+        <p class="fun-fact">Fun fact: rainbow is two words stuck together, rain and bow. A bow is a curved shape, just like a rainbow.</p>
+        <div class="buttons">
+          <button type="button" class="button button-levels" data-restart>Play again</button>
+          <a class="button button-play" href="./levels.html">More levels</a>
+        </div>
+      </section>
+    </main>
+
+    <footer class="signature">jsogge 2026</footer>
+
+    <script type="module">
+      import { start } from './game/word-scramble-page.js';
+      start();
+    </script>
+  </body>
+</html>
