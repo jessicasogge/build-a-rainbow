@@ -1,5 +1,6 @@
 // Draws the rainbow-building levels and handles the taps:
-//   Level 2, Color order (color-order.html): the next empty stripe is outlined.
+//   Level 2, Color order (color-order.html): red starts filled in, and the
+//     next empty stripe is outlined.
 //   Level 3, Memory rainbow (memory-rainbow.html, `memory: true`): the whole
 //     rainbow shows first, until Ready is tapped. Then it's cleared and built
 //     again with no outline showing which stripe is next.
@@ -62,7 +63,7 @@ export function start(doc = document, { random = Math.random, memory = false } =
   }
 
   function restart(event) {
-    game = newGame();
+    game = newGame(memory ? 0 : 1); // Color order starts with red in place
     tray.replaceChildren();
     swatches = shuffledColors(random).map((color) => {
       const swatch = doc.createElement('button');

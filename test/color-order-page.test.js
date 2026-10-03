@@ -19,30 +19,32 @@ beforeEach(() => {
 });
 
 describe('color order page', () => {
-  it('starts with six color buttons and an empty rainbow', () => {
+  it('starts with red filled in on top, and its button greyed out', () => {
     expect(document.querySelectorAll('.swatch')).toHaveLength(6);
-    expect(filledCount()).toBe(0);
-    expect($('.helper-text').textContent).toBe('Which color goes on top?');
-    expect($('.level-done').hidden).toBe(true);
-  });
-
-  it('fills the top stripe red and greys out the red button', () => {
-    swatch('red').click();
     expect(filledCount()).toBe(1);
     expect(document.querySelectorAll('.build-stripe')[0].getAttribute('fill')).toBe('#E5383B');
     expect(swatch('red').disabled).toBe(true);
-    expect($('.helper-text').textContent).toBe('Red! What comes next?');
+    expect($('.helper-text').textContent).toBe('Red goes on top. Which color comes next?');
+    expect($('.level-done').hidden).toBe(true);
+  });
+
+  it('fills the next stripe orange and greys out the orange button', () => {
+    swatch('orange').click();
+    expect(filledCount()).toBe(2);
+    expect(document.querySelectorAll('.build-stripe')[1].getAttribute('fill')).toBe('#F77F00');
+    expect(swatch('orange').disabled).toBe(true);
+    expect($('.helper-text').textContent).toBe('Orange! What comes next?');
   });
 
   it('wiggles a wrong pick and fills nothing', () => {
     swatch('green').click();
-    expect(filledCount()).toBe(0);
+    expect(filledCount()).toBe(1);
     expect(swatch('green').classList.contains('is-wrong')).toBe(true);
     expect($('.helper-text').textContent).toBe('Not that one yet. Try another color!');
   });
 
   it('celebrates when the rainbow is finished', () => {
-    for (const { id } of COLORS) swatch(id).click();
+    for (const { id } of COLORS.slice(1)) swatch(id).click();
     expect(filledCount()).toBe(6);
     expect($('.tray').hidden).toBe(true);
     expect($('.helper').hidden).toBe(true);
@@ -50,21 +52,22 @@ describe('color order page', () => {
     expect(document.activeElement).toBe($('.level-done h2'));
   });
 
-  it('starts over from Play again', () => {
-    for (const { id } of COLORS) swatch(id).click();
+  it('starts over from Play again, with red filled in again', () => {
+    for (const { id } of COLORS.slice(1)) swatch(id).click();
     $('.level-done [data-restart]').click();
-    expect(filledCount()).toBe(0);
-    expect(level.game.filled).toBe(0);
+    expect(filledCount()).toBe(1);
+    expect(level.game.filled).toBe(1);
     expect($('.tray').hidden).toBe(false);
     expect($('.helper').hidden).toBe(false);
     expect($('.level-done').hidden).toBe(true);
   });
 
   it('starts over from the header button partway through', () => {
-    swatch('red').click();
+    swatch('orange').click();
     $('header [data-restart]').click();
-    expect(filledCount()).toBe(0);
-    expect(swatch('red').disabled).toBe(false);
+    expect(filledCount()).toBe(1);
+    expect(swatch('orange').disabled).toBe(false);
+    expect(swatch('red').disabled).toBe(true);
   });
 
   it('has no speaker button', () => {
@@ -73,7 +76,7 @@ describe('color order page', () => {
 
   it('outlines the stripe that goes next, and has no Ready step', () => {
     expect(level.studying).toBe(false);
-    expect(document.querySelectorAll('.build-stripe')[0].classList.contains('is-next')).toBe(true);
+    expect(document.querySelectorAll('.build-stripe')[1].classList.contains('is-next')).toBe(true);
     expect($('#ready')).toBeNull();
   });
 

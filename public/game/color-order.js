@@ -30,8 +30,11 @@ export function shuffledColors(random = Math.random) {
   return order;
 }
 
-export function newGame() {
-  return { filled: 0 };
+// A new game. `filled` is how many stripes start already in place: Color
+// order starts with red done (1) to show how it works; Memory rainbow starts
+// empty (0).
+export function newGame(filled = 0) {
+  return { filled };
 }
 
 // How many stripes are in, and the color that goes next (null when done).
@@ -63,5 +66,7 @@ export function message(game, result) {
   if (result === 'done' || isDone(game)) return 'You did it! Every color is in place.';
   if (result === 'wrong') return 'Not that one yet. Try another color!';
   if (result === 'right') return `${COLORS[game.filled - 1].name}! What comes next?`;
-  return game.filled === 0 ? 'Which color goes on top?' : 'Which color comes next?';
+  if (game.filled === 0) return 'Which color goes on top?';
+  if (game.filled === 1) return 'Red goes on top. Which color comes next?';
+  return 'Which color comes next?';
 }

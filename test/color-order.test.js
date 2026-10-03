@@ -35,6 +35,13 @@ describe('pick', () => {
     expect(nextColor(newGame()).id).toBe('red');
   });
 
+  it('can start with red already in place, asking for orange', () => {
+    const game = newGame(1);
+    expect(game.filled).toBe(1);
+    expect(nextColor(game).id).toBe('orange');
+    expect(pick(game, 'red').result).toBe('used');
+  });
+
   it('fills a stripe when the next color is picked', () => {
     const { game, result } = pick(newGame(), 'red');
     expect(result).toBe('right');
@@ -76,6 +83,10 @@ describe('message', () => {
   it('names the color just added', () => {
     const { game, result } = pick(newGame(), 'red');
     expect(message(game, result)).toBe('Red! What comes next?');
+  });
+
+  it('says red is already on top when a game starts with it', () => {
+    expect(message(newGame(1))).toBe('Red goes on top. Which color comes next?');
   });
 
   it('is gentle about a wrong pick', () => {
