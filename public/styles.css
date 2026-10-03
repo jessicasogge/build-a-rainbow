@@ -891,6 +891,139 @@ button.round-button {
   outline-offset: 6px;
 }
 
+/* ---- Rainbow road ---- */
+
+.road-scene {
+  width: min(540px, 100%);
+  height: auto;
+}
+
+.grass {
+  fill: #a8dcb5;
+}
+
+.road {
+  cursor: pointer;
+  transform-box: fill-box;
+  transform-origin: center bottom;
+}
+
+.road-surface {
+  fill: none;
+  stroke-width: 56;
+  transition: stroke 0.3s;
+}
+
+/* The grey road in and the ring, with a grassy island in the middle. */
+.asphalt {
+  fill: none;
+  stroke: #7d8a99;
+  stroke-width: 56;
+}
+
+.ring-line {
+  fill: none;
+  stroke: rgb(255 255 255 / 0.8);
+  stroke-width: 4;
+  stroke-dasharray: 14 14;
+}
+
+.island {
+  fill: #7cc59a;
+  stroke: #ffffff;
+  stroke-width: 4;
+}
+
+.flower {
+  fill: var(--sun);
+  stroke: #ffffff;
+  stroke-width: 3;
+}
+
+/* A dashed white line down the middle of each road. */
+.road-line {
+  fill: none;
+  stroke: rgb(255 255 255 / 0.8);
+  stroke-width: 4;
+  stroke-dasharray: 14 14;
+  pointer-events: none;
+}
+
+/* The road's color name, in a white halo so it reads on grass. */
+.road-label {
+  font-family: Fredoka, system-ui, sans-serif;
+  font-size: 30px;
+  fill: var(--ink);
+  stroke: #ffffff;
+  stroke-width: 8px;
+  stroke-linejoin: round;
+  paint-order: stroke;
+}
+
+.road:focus {
+  outline: none;
+}
+
+.road:focus-visible .road-surface {
+  stroke-width: 68;
+}
+
+.road.is-wrong {
+  animation: wiggle 0.4s;
+}
+
+.car-body {
+  fill: #ffffff;
+  stroke: var(--ink);
+  stroke-width: 4;
+}
+
+.car-window {
+  fill: #8ecae6;
+}
+
+.car-wheel {
+  fill: var(--ink);
+}
+
+/* The finish: the roads fade back and the rainbow and pot of gold show. */
+.road-finish {
+  opacity: 0;
+  transition: opacity 0.6s;
+  pointer-events: none;
+}
+
+.pot circle {
+  fill: var(--sun);
+  stroke: #c98f00;
+  stroke-width: 2;
+}
+
+.pot-body {
+  fill: var(--ink);
+}
+
+.is-done .road-finish {
+  opacity: 1;
+}
+
+.is-done .road,
+.is-done .roundabout {
+  opacity: 0.25;
+  cursor: default;
+  transition: opacity 0.6s;
+}
+
+.is-done .car {
+  opacity: 0; /* parked out of sight; the pot of gold is the star */
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .road.is-wrong {
+    animation: none;
+  }
+}
+
 .signature {
   position: relative;
   padding: 1rem;
