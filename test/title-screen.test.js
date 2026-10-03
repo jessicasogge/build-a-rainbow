@@ -1,6 +1,6 @@
 // Checks the opening screen has what it needs.
 // @vitest-environment jsdom
-import { existsSync } from 'node:fs';
+import { existsSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { beforeEach, describe, expect, it } from 'vitest';
 import { COLORS } from '../public/game/colors.js';
@@ -45,5 +45,20 @@ describe('title screen', () => {
     expect(existsSync(file('favicon.svg'))).toBe(true);
     expect(existsSync(file('fonts/fredoka-700.woff2'))).toBe(true);
     expect(existsSync(file('fonts/nunito-700.woff2'))).toBe(true);
+  });
+
+  it('has a picture, title and description for link previews in texts and chats', () => {
+    const meta = (property) => document.querySelector(`meta[property="${property}"]`)?.getAttribute('content');
+    expect(meta('og:title')).toBe('Build a Rainbow');
+    expect(meta('og:description')).toBeTruthy();
+    expect(meta('og:url')).toBe('https://jessicasogge.github.io/build-a-rainbow/');
+    expect(meta('og:image')).toBe('https://jessicasogge.github.io/build-a-rainbow/share.png');
+    expect(document.querySelector('meta[name="twitter:card"]').getAttribute('content')).toBe('summary_large_image');
+  });
+
+  it('has the preview picture, a 1200 × 630 PNG', () => {
+    const png = readFileSync(file('share.png'));
+    expect(png.subarray(1, 4).toString()).toBe('PNG');
+    expect([png.readUInt32BE(16), png.readUInt32BE(20)]).toEqual([1200, 630]);
   });
 });
