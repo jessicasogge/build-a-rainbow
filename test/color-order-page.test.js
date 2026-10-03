@@ -8,7 +8,6 @@ import { start } from '../public/game/color-order-page.js';
 
 const html = readFileSync(join(process.cwd(), 'public/color-order.html'), 'utf8');
 
-let spoken;
 let level;
 const $ = (sel) => document.querySelector(sel);
 const swatch = (id) => $(`.swatch[data-color="${id}"]`);
@@ -16,8 +15,7 @@ const filledCount = () => document.querySelectorAll('.build-stripe.is-filled').l
 
 beforeEach(() => {
   document.documentElement.innerHTML = new DOMParser().parseFromString(html, 'text/html').documentElement.innerHTML;
-  spoken = [];
-  level = start(document, { speak: (text) => spoken.push(text) });
+  level = start(document);
 });
 
 describe('color order page', () => {
@@ -69,10 +67,8 @@ describe('color order page', () => {
     expect(swatch('red').disabled).toBe(false);
   });
 
-  it('reads the helper out loud', () => {
-    swatch('red').click();
-    $('#say').click();
-    expect(spoken).toEqual(['Red! What comes next?']);
+  it('has no speaker button', () => {
+    expect($('#say')).toBeNull();
   });
 
   it('has a way back to the levels', () => {

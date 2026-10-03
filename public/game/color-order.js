@@ -58,8 +58,7 @@ export function pick(game, id) {
   return { game: next, result: isDone(next) ? 'done' : 'right' };
 }
 
-// What the helper says. Short, so a new reader (or the read-aloud button)
-// can manage it.
+// What the helper says. Short, so a new reader can manage it.
 export function message(game, result) {
   if (result === 'done' || isDone(game)) return 'You did it! Every color is in place.';
   if (result === 'wrong') return 'Not that one yet. Try another color!';

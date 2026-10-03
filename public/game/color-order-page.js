@@ -2,13 +2,12 @@
 // The rules live in color-order.js.
 import { COLORS, isDone, message, newGame, nextColor, pick, shuffledColors } from './color-order.js';
 
-export function start(doc = document, { random = Math.random, speak = speakAloud } = {}) {
+export function start(doc = document, { random = Math.random } = {}) {
   const stripes = [...doc.querySelectorAll('.build-stripe')];
   const tray = doc.querySelector('.tray');
   const helperBox = doc.querySelector('.helper');
   const helper = doc.querySelector('.helper-text');
   const done = doc.querySelector('.level-done');
-  const sayButton = doc.querySelector('#say');
   const restartButtons = doc.querySelectorAll('[data-restart]');
 
   let game;
@@ -62,21 +61,9 @@ export function start(doc = document, { random = Math.random, speak = speakAloud
     draw();
   }
 
-  sayButton.addEventListener('click', () => speak(helper.textContent));
   restartButtons.forEach((button) => button.addEventListener('click', restart));
   restart();
 
   // For tests: the current game and what goes next.
   return { get game() { return game; }, next: () => nextColor(game) };
-}
-
-// Reads the helper's words out loud, for kids who are still learning to read.
-// Quietly does nothing in browsers without speech.
-function speakAloud(text) {
-  const synth = globalThis.speechSynthesis;
-  if (!synth || typeof SpeechSynthesisUtterance === 'undefined') return;
-  synth.cancel();
-  const words = new SpeechSynthesisUtterance(text);
-  words.rate = 0.9;
-  synth.speak(words);
 }
