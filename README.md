@@ -49,3 +49,8 @@ Shared by every level:
 ## Fonts
 
 Fredoka and Nunito, both under the SIL Open Font License. The license files are in [`public/fonts/`](public/fonts/).
+
+## Credits
+
+Made by Jessica Sogge.
+Idea and design by Caitlin Sogge.
