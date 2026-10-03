@@ -3,7 +3,7 @@
 import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { beforeEach, describe, expect, it } from 'vitest';
-import { COLORS } from '../public/game/color-order.js';
+import { COLORS } from '../public/game/colors.js';
 import { start } from '../public/game/fix-the-rainbow-page.js';
 
 const html = readFileSync(join(process.cwd(), 'public/fix-the-rainbow.html'), 'utf8');

@@ -9,16 +9,7 @@
     <link rel="stylesheet" href="./styles.css" />
   </head>
   <body class="page level-page">
-    <header class="page-header">
-      <a class="round-button" href="./levels.html" aria-label="Back to the levels">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7" /></svg>
-      </a>
-      <h1 class="level-title">Level 6 · Rainbow road</h1>
-      <p class="progress-pill">Turn 1 of 6</p>
-      <button type="button" class="round-button" data-restart aria-label="Start over">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7" /><path d="M3 4v5h5" /></svg>
-      </button>
-    </header>
+    <level-header number="6" name="Rainbow road" counter="Turn 1 of 6"></level-header>
 
     <main class="build">
       <!-- A roundabout. The road comes in from the bottom, and three exits
@@ -84,21 +75,11 @@
         </g>
       </svg>
 
-      <div class="helper">
-        <span class="helper-face" aria-hidden="true">
-          <svg viewBox="0 0 24 24"><circle cx="9" cy="10" r="1" /><circle cx="15" cy="10" r="1" /><path d="M8 14.5c1.2 1.6 2.4 2.2 4 2.2s2.8-.6 4-2.2" /></svg>
-        </span>
-        <p class="helper-text" aria-live="polite">Take the red road!</p>
-      </div>
+      <helper-bubble>Take the red road!</helper-bubble>
 
-      <section class="level-done" hidden>
-        <h2 tabindex="-1">You made it to the end of the rainbow!</h2>
-        <p class="fun-fact">Fun fact: you can never reach the end of a real rainbow. It moves when you move!</p>
-        <div class="buttons">
-          <button type="button" class="button button-levels" data-restart>Drive again</button>
-          <a class="button button-play" href="./levels.html">More levels</a>
-        </div>
-      </section>
+      <level-done heading="You made it to the end of the rainbow!" again="Drive again">
+        Fun fact: you can never reach the end of a real rainbow. It moves when you move!
+      </level-done>
     </main>
 
     <footer class="signature">jsogge 2026</footer>

@@ -4,7 +4,8 @@
 //
 // This file is only the rules. It doesn't touch the page, so the tests can
 // play it directly. mix-a-color-page.js draws it and handles the taps.
-import { COLORS } from './color-order.js';
+import { colorById } from './colors.js';
+import { shuffle } from './shuffle.js';
 
 export const MIXES = [
   { a: 'red', b: 'yellow', makes: 'orange' },
@@ -14,21 +15,6 @@ export const MIXES = [
 
 // The answer choices: every color a mix can make.
 export const CHOICES = MIXES.map((mix) => mix.makes);
-
-export function color(id) {
-  const found = COLORS.find((c) => c.id === id);
-  if (!found) throw new Error(`No color called ${id}`);
-  return found;
-}
-
-function shuffle(list, random) {
-  const out = [...list];
-  for (let i = out.length - 1; i > 0; i--) {
-    const j = Math.floor(random() * (i + 1));
-    [out[i], out[j]] = [out[j], out[i]];
-  }
-  return out;
-}
 
 // A new game: the three questions in a random order, each with its answer
 // choices in a random order. `random` is there so tests can pass their own.
@@ -58,7 +44,7 @@ export function isDone(game) {
 //   'wrong' – not that one; nothing changes
 //   'used'  – this question is already answered; nothing changes
 export function pick(game, id) {
-  color(id); // unknown colors are a mistake in the page, not a wrong answer
+  colorById(id); // unknown colors are a mistake in the page, not a wrong answer
   if (game.solved) return { game, result: 'used' };
   if (id !== question(game).makes) return { game, result: 'wrong' };
   const next = { ...game, solved: true };
@@ -75,6 +61,6 @@ export function nextQuestion(game) {
 export function message(game, result) {
   const q = question(game);
   if (result === 'wrong') return 'Not quite. Try another color!';
-  if (game.solved) return `${color(q.a).name} and ${color(q.b).name.toLowerCase()} make ${color(q.makes).name.toLowerCase()}!`;
+  if (game.solved) return `${colorById(q.a).name} and ${colorById(q.b).name.toLowerCase()} make ${colorById(q.makes).name.toLowerCase()}!`;
   return 'What color do they make?';
 }

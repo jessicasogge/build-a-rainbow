@@ -1,8 +1,9 @@
 // Checks the Pick a level page.
-import { readFileSync } from 'node:fs';
+// @vitest-environment jsdom
 import { describe, expect, it } from 'vitest';
+import { loadPage } from './load-page.js';
 
-const html = readFileSync(new URL('../public/levels.html', import.meta.url), 'utf8');
+const html = loadPage('levels.html');
 const cards = [...html.matchAll(/<(?:button type="button"|a) class="level-card"(?: href="[^"]*")? data-level="(\d)"( disabled)?>/g)];
 
 describe('pick a level page', () => {
@@ -56,9 +57,12 @@ describe('pick a level page', () => {
   });
 
   it('puts a little six-stripe rainbow on every card, hidden from screen readers', () => {
-    const minis = [...html.matchAll(/<svg class="mini-rainbow"[^>]*aria-hidden="true">([\s\S]*?)<\/svg>/g)];
+    const minis = [...document.querySelectorAll('svg.mini-rainbow')];
     expect(minis).toHaveLength(8);
-    for (const [, inner] of minis) expect(inner.match(/<path/g)).toHaveLength(6);
+    for (const svg of minis) {
+      expect(svg.getAttribute('aria-hidden')).toBe('true');
+      expect(svg.querySelectorAll('path')).toHaveLength(6);
+    }
   });
 
   it('shares the title screen stylesheet, tab icon and signature', () => {

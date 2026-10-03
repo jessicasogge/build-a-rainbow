@@ -1,5 +1,6 @@
 // Draws Level 4 (Sun and rain) on sun-and-rain.html and handles the taps.
 // The rules live in sun-and-rain.js.
+import './components.js'; // the shared page pieces (header, helper, ...)
 import { hasRainbow, message, newSky, toggle } from './sun-and-rain.js';
 
 export function start(doc = document) {

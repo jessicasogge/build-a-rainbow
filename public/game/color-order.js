@@ -3,31 +3,14 @@
 //
 // This file is only the rules. It doesn't touch the page, so the tests can
 // play it directly. color-order-page.js draws it and handles the taps.
-
-// The six stripes, outside to inside. Indigo is left out, the usual
-// simplification for young kids.
-export const COLORS = [
-  { id: 'red', name: 'Red', hex: '#E5383B' },
-  { id: 'orange', name: 'Orange', hex: '#F77F00' },
-  { id: 'yellow', name: 'Yellow', hex: '#FCBF49' },
-  { id: 'green', name: 'Green', hex: '#43AA8B' },
-  { id: 'blue', name: 'Blue', hex: '#277DA1' },
-  { id: 'purple', name: 'Purple', hex: '#7B4FA0' },
-];
+import { COLORS } from './colors.js';
+import { sameOrder, shuffleUntil } from './shuffle.js';
 
 // The colors in a random order for the tray, so the right answer isn't just
 // left to right. Never returns them already in rainbow order. `random` is
 // there so tests can pass their own.
 export function shuffledColors(random = Math.random) {
-  let order;
-  do {
-    order = [...COLORS];
-    for (let i = order.length - 1; i > 0; i--) {
-      const j = Math.floor(random() * (i + 1));
-      [order[i], order[j]] = [order[j], order[i]];
-    }
-  } while (order.every((color, i) => color.id === COLORS[i].id));
-  return order;
+  return shuffleUntil(COLORS, random, (order) => sameOrder(order, COLORS));
 }
 
 // A new game. `filled` is how many stripes start already in place: Color

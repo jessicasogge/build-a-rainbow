@@ -1,9 +1,16 @@
 // Checks the opening screen has what it needs.
-import { existsSync, readFileSync } from 'node:fs';
-import { describe, expect, it } from 'vitest';
+// @vitest-environment jsdom
+import { existsSync } from 'node:fs';
+import { join } from 'node:path';
+import { beforeEach, describe, expect, it } from 'vitest';
+import { COLORS } from '../public/game/colors.js';
+import { loadPage } from './load-page.js';
 
-const file = (name) => new URL(`../public/${name}`, import.meta.url);
-const html = readFileSync(file('index.html'), 'utf8');
+const file = (name) => join(process.cwd(), 'public', name);
+let html;
+beforeEach(() => {
+  html = loadPage('index.html');
+});
 
 describe('title screen', () => {
   it('has the game name', () => {
@@ -11,8 +18,10 @@ describe('title screen', () => {
   });
 
   it('draws six stripes, red on the outside to purple on the inside', () => {
-    const fills = [...html.matchAll(/class="stripe"[^>]*fill="(#[0-9A-F]{6})"/g)].map((m) => m[1]);
-    expect(fills).toEqual(['#E5383B', '#F77F00', '#FCBF49', '#43AA8B', '#277DA1', '#7B4FA0']);
+    const svg = document.querySelector('svg.rainbow');
+    expect(svg.getAttribute('aria-label')).toBe('A rainbow');
+    const fills = [...svg.querySelectorAll('path.stripe')].map((p) => p.getAttribute('fill'));
+    expect(fills).toEqual(COLORS.map((c) => c.hex));
   });
 
   it('has a Play button that opens the level picker', () => {

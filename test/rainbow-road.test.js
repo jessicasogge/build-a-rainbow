@@ -1,23 +1,23 @@
 // The rules of Level 6, Rainbow road.
 import { describe, expect, it } from 'vitest';
-import { COLORS } from '../public/game/color-order.js';
-import { ROADS_PER_FORK, fork, isDone, message, newTrip, pick } from '../public/game/rainbow-road.js';
+import { COLORS } from '../public/game/colors.js';
+import { ROADS_PER_TURN, turn, isDone, message, newTrip, pick } from '../public/game/rainbow-road.js';
 
 const ids = COLORS.map((c) => c.id);
-const right = (trip) => pick(trip, fork(trip).target);
-const wrongId = (trip) => fork(trip).roads.find((id) => id !== fork(trip).target);
+const right = (trip) => pick(trip, turn(trip).target);
+const wrongId = (trip) => turn(trip).roads.find((id) => id !== turn(trip).target);
 
 describe('newTrip', () => {
-  it('has one fork for each rainbow color', () => {
+  it('has one turn for each rainbow color', () => {
     const trip = newTrip();
-    expect(trip.forks.map((f) => f.target).sort()).toEqual([...ids].sort());
+    expect(trip.turns.map((f) => f.target).sort()).toEqual([...ids].sort());
     expect(trip.index).toBe(0);
   });
 
-  it('gives every fork three different roads, including the one to take', () => {
-    for (const f of newTrip().forks) {
-      expect(f.roads).toHaveLength(ROADS_PER_FORK);
-      expect(new Set(f.roads).size).toBe(ROADS_PER_FORK);
+  it('gives every turn three different roads, including the one to take', () => {
+    for (const f of newTrip().turns) {
+      expect(f.roads).toHaveLength(ROADS_PER_TURN);
+      expect(new Set(f.roads).size).toBe(ROADS_PER_TURN);
       expect(f.roads).toContain(f.target);
     }
   });
@@ -53,20 +53,20 @@ describe('pick', () => {
     }
     expect(results).toEqual(['right', 'right', 'right', 'right', 'right', 'done']);
     expect(isDone(trip)).toBe(true);
-    expect(fork(trip)).toBeNull();
+    expect(turn(trip)).toBeNull();
     expect(pick(trip, 'red').result).toBe('used');
   });
 
-  it('refuses a road that is not at this fork, or a color that does not exist', () => {
+  it('refuses a road that is not at this turn, or a color that does not exist', () => {
     const trip = newTrip();
-    const missing = ids.find((id) => !fork(trip).roads.includes(id));
+    const missing = ids.find((id) => !turn(trip).roads.includes(id));
     expect(() => pick(trip, missing)).toThrow();
     expect(() => pick(trip, 'pink')).toThrow();
   });
 });
 
 describe('message', () => {
-  const trip = { forks: [{ target: 'yellow', roads: ['blue', 'yellow', 'red'] }, { target: 'green', roads: ['green', 'red', 'blue'] }], index: 0 };
+  const trip = { turns: [{ target: 'yellow', roads: ['blue', 'yellow', 'red'] }, { target: 'green', roads: ['green', 'red', 'blue'] }], index: 0 };
 
   it('says which road to take', () => {
     expect(message(trip)).toBe('Take the yellow road!');

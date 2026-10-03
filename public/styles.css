@@ -197,13 +197,14 @@ body {
   fill: currentColor;
 }
 
-.button-levels {
+/* The white button, for the second choice: Play again next to More levels. */
+.button-secondary {
   background: #fff;
   box-shadow: 0 8px 0 var(--cloud-shadow);
   font-size: 2rem;
 }
 
-.button-levels:active {
+.button-secondary:active {
   box-shadow: 0 2px 0 var(--cloud-shadow);
 }
 
@@ -331,7 +332,17 @@ body {
   height: 34px;
 }
 
-/* ---- Color order (and shared level-page pieces) ---- */
+/* ---- Level pages (shared by every level) ---- */
+
+/* The shared page pieces from game/components.js (<level-header>,
+   <helper-bubble>, ...) are just wrappers: lay out what they hold as if
+   they weren't there. */
+level-header,
+helper-bubble,
+level-done,
+rainbow-stripes {
+  display: contents;
+}
 
 .level-page {
   padding-bottom: 0;
@@ -362,30 +373,35 @@ body {
   gap: 1.25rem;
 }
 
-.build-rainbow {
-  width: min(700px, 100%);
-  height: auto;
+button.round-button {
+  border: 0;
+  cursor: pointer;
 }
 
-/* An empty stripe is a dashed outline; the one that goes next is darker. */
-.build-stripe {
-  stroke: #7fa9cc;
-  stroke-width: 3;
-  stroke-dasharray: 10 8;
-  fill-opacity: 0.55;
-  transition: fill 0.3s, fill-opacity 0.3s;
+.progress-pill {
+  margin: 0 0 0 auto;
+  padding: 0.6rem 1.25rem;
+  border-radius: 999px;
+  background: #fff;
+  font-family: Fredoka, system-ui, sans-serif;
+  font-size: clamp(1rem, 2.2vw, 1.5rem);
+  white-space: nowrap;
 }
 
-.build-stripe.is-next {
-  stroke: var(--ink);
-}
+/* On phones, the question counter moves under the level name. */
+@media (max-width: 600px) {
+  .progress-pill {
+    order: 3;
+    margin: -0.5rem 0 0 calc(68px + 1.5rem);
+  }
 
-.build-stripe.is-filled {
-  stroke: none;
-  fill-opacity: 1;
-  animation: pop 0.35s ease-out;
-  transform-box: fill-box;
-  transform-origin: center bottom;
+  .level-page .page-header {
+    flex-wrap: wrap;
+  }
+
+  .level-page .level-title {
+    flex: 1 1 calc(100% - 68px * 2 - 1.5rem * 2 - 1px);
+  }
 }
 
 @keyframes pop {
@@ -498,13 +514,6 @@ body {
   outline-offset: 4px;
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .build-stripe.is-filled,
-  .swatch.is-wrong {
-    animation: none;
-  }
-}
-
 .level-done {
   display: flex;
   flex-direction: column;
@@ -531,22 +540,47 @@ body {
   font-size: 2rem;
 }
 
+@media (prefers-reduced-motion: reduce) {
+  .swatch.is-wrong {
+    animation: none;
+  }
+}
+
+/* ---- Color order and Memory rainbow ---- */
+
+.build-rainbow {
+  width: min(700px, 100%);
+  height: auto;
+}
+
+/* An empty stripe is a dashed outline; the one that goes next is darker. */
+.build-stripe {
+  stroke: #7fa9cc;
+  stroke-width: 3;
+  stroke-dasharray: 10 8;
+  fill-opacity: 0.55;
+  transition: fill 0.3s, fill-opacity 0.3s;
+}
+
+.build-stripe.is-next {
+  stroke: var(--ink);
+}
+
+.build-stripe.is-filled {
+  stroke: none;
+  fill-opacity: 1;
+  animation: pop 0.35s ease-out;
+  transform-box: fill-box;
+  transform-origin: center bottom;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .build-stripe.is-filled {
+    animation: none;
+  }
+}
+
 /* ---- Mix a color ---- */
-
-button.round-button {
-  border: 0;
-  cursor: pointer;
-}
-
-.progress-pill {
-  margin: 0 0 0 auto;
-  padding: 0.6rem 1.25rem;
-  border-radius: 999px;
-  background: #fff;
-  font-family: Fredoka, system-ui, sans-serif;
-  font-size: clamp(1rem, 2.2vw, 1.5rem);
-  white-space: nowrap;
-}
 
 .mix {
   display: flex;
@@ -619,22 +653,6 @@ button.round-button {
 .tray.tray-3 {
   grid-template-columns: repeat(3, minmax(0, 1fr)); /* 3 across on phones too */
   width: min(760px, 100%);
-}
-
-/* On phones, the question counter moves under the level name. */
-@media (max-width: 600px) {
-  .progress-pill {
-    order: 3;
-    margin: -0.5rem 0 0 calc(68px + 1.5rem);
-  }
-
-  .level-page .page-header {
-    flex-wrap: wrap;
-  }
-
-  .level-page .level-title {
-    flex: 1 1 calc(100% - 68px * 2 - 1.5rem * 2 - 1px);
-  }
 }
 
 #next svg {

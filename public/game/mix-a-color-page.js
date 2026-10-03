@@ -1,6 +1,9 @@
 // Draws Level 1 (Mix a color) on mix-a-color.html and handles the taps.
 // The rules live in mix-a-color.js.
-import { color, isDone, isLast, message, newGame, nextQuestion, pick, question } from './mix-a-color.js';
+import './components.js'; // the shared page pieces (header, helper, ...)
+import { colorById as color } from './colors.js';
+import { isDone, isLast, message, newGame, nextQuestion, pick, question } from './mix-a-color.js';
+import { wiggle } from './page-helpers.js';
 
 export function start(doc = document, { random = Math.random } = {}) {
   const blobA = doc.querySelector('[data-blob="a"]');
@@ -22,12 +25,6 @@ export function start(doc = document, { random = Math.random } = {}) {
     blob.querySelector('.blob-name').textContent = color(id).name;
   }
 
-  function shake(button) {
-    button.classList.remove('is-wrong');
-    void button.offsetWidth; // restart the animation if it's already running
-    button.classList.add('is-wrong');
-  }
-
   // Draws the answer buttons for the current question.
   function drawChoices() {
     tray.replaceChildren();
@@ -43,7 +40,7 @@ export function start(doc = document, { random = Math.random } = {}) {
       button.addEventListener('click', () => {
         const turn = pick(game, id);
         game = turn.game;
-        if (turn.result === 'wrong') shake(button);
+        if (turn.result === 'wrong') wiggle(button);
         draw(turn.result);
       });
       tray.append(button);

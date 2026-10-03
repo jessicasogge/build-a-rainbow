@@ -1,8 +1,8 @@
 // Draws Level 5 (Paint a rainbow) on paint-a-rainbow.html and handles the
 // taps. The rules live in paint-a-rainbow.js.
+import './components.js'; // the shared page pieces (header, helper, ...)
+import { ORDINALS, onTap } from './page-helpers.js';
 import { PAINTS, chooseBrush, isFinished, message, newPainting, paintColor, paintStripe } from './paint-a-rainbow.js';
-
-const ORDINALS = ['first', 'second', 'third', 'fourth', 'fifth', 'sixth'];
 
 export function start(doc = document) {
   const rainbow = doc.querySelector('.paint-rainbow');
@@ -61,14 +61,7 @@ export function start(doc = document) {
   }
 
   stripes.forEach((stripe, i) => {
-    stripe.addEventListener('click', () => paint(i));
-    // The stripes are drawn shapes, so Enter and Space paint them too.
-    stripe.addEventListener('keydown', (event) => {
-      if (event.key === 'Enter' || event.key === ' ') {
-        event.preventDefault();
-        paint(i);
-      }
-    });
+    onTap(stripe, () => paint(i));
   });
 
   doneButton.addEventListener('click', () => {

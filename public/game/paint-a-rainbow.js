@@ -4,12 +4,12 @@
 //
 // This file is only the rules. It doesn't touch the page, so the tests can
 // play it directly. paint-a-rainbow-page.js draws it and handles the taps.
-import { COLORS } from './color-order.js';
+import { COLORS, PINK } from './colors.js';
 
 // The six rainbow colors, plus a few extras for painting.
 export const PAINTS = [
   ...COLORS,
-  { id: 'pink', name: 'Pink', hex: '#F28AB2' },
+  PINK,
   { id: 'sky', name: 'Sky blue', hex: '#8ECAE6' },
   { id: 'brown', name: 'Brown', hex: '#8B5E3C' },
   { id: 'black', name: 'Black', hex: '#1B2A4A' },

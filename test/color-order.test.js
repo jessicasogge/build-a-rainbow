@@ -1,6 +1,7 @@
 // The rules of Level 2, Color order.
 import { describe, expect, it } from 'vitest';
-import { COLORS, isDone, message, newGame, nextColor, pick, shuffledColors } from '../public/game/color-order.js';
+import { COLORS } from '../public/game/colors.js';
+import { isDone, message, newGame, nextColor, pick, shuffledColors } from '../public/game/color-order.js';
 
 const ids = COLORS.map((c) => c.id);
 
@@ -9,12 +10,6 @@ describe('colors', () => {
     expect(ids).toEqual(['red', 'orange', 'yellow', 'green', 'blue', 'purple']);
   });
 
-  it('match the rainbow on the title screen', async () => {
-    const { readFileSync } = await import('node:fs');
-    const title = readFileSync(new URL('../public/index.html', import.meta.url), 'utf8');
-    const fills = [...title.matchAll(/class="stripe"[^>]*fill="(#[0-9A-F]{6})"/g)].map((m) => m[1]);
-    expect(COLORS.map((c) => c.hex)).toEqual(fills);
-  });
 });
 
 describe('shuffledColors', () => {

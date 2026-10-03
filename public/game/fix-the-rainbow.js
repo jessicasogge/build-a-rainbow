@@ -3,27 +3,13 @@
 //
 // This file is only the rules. It doesn't touch the page, so the tests can
 // play it directly. fix-the-rainbow-page.js draws it and handles the taps.
-import { COLORS } from './color-order.js';
-
-const RIGHT_ORDER = COLORS.map((c) => c.id);
-
-export function colorOf(id) {
-  const found = COLORS.find((c) => c.id === id);
-  if (!found) throw new Error(`No color called ${id}`);
-  return found;
-}
+import { COLOR_IDS as RIGHT_ORDER, colorById } from './colors.js';
+import { shuffleUntil } from './shuffle.js';
 
 // A jumbled rainbow: `order` lists the color in each stripe, outside first.
 // It's never already right. `random` is there so tests can pass their own.
 export function newRainbow(random = Math.random) {
-  let order;
-  do {
-    order = [...RIGHT_ORDER];
-    for (let i = order.length - 1; i > 0; i--) {
-      const j = Math.floor(random() * (i + 1));
-      [order[i], order[j]] = [order[j], order[i]];
-    }
-  } while (isFixed({ order }));
+  const order = shuffleUntil(RIGHT_ORDER, random, (o) => isFixed({ order: o }));
   return { order, selected: null };
 }
 
@@ -60,7 +46,7 @@ export function tapStripe(rainbow, i) {
 export function message(rainbow, result) {
   if (isFixed(rainbow)) return 'You fixed the rainbow!';
   if (rainbow.selected !== null) {
-    return `${colorOf(rainbow.order[rainbow.selected]).name}! Now tap the stripe to swap it with.`;
+    return `${colorById(rainbow.order[rainbow.selected]).name}! Now tap the stripe to swap it with.`;
   }
   if (result === 'swapped') {
     const n = inPlaceCount(rainbow);

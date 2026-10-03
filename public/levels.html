@@ -7,6 +7,7 @@
     <link rel="icon" href="./favicon.svg" type="image/svg+xml" />
     <link rel="preload" href="./fonts/fredoka-700.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="stylesheet" href="./styles.css" />
+    <script type="module" src="./game/components.js"></script>
   </head>
   <body class="page">
     <header class="page-header">
@@ -24,14 +25,7 @@
           <span class="level-name">Mix a color</span>
         </span>
         <span class="level-hint">Red and yellow make…?</span>
-        <svg class="mini-rainbow" viewBox="0 0 64 34" aria-hidden="true">
-          <path d="M2 33 A30 30 0 0 1 62 33 L58 33 A26 26 0 0 0 6 33 Z" fill="#E5383B" />
-          <path d="M6 33 A26 26 0 0 1 58 33 L54 33 A22 22 0 0 0 10 33 Z" fill="#F77F00" />
-          <path d="M10 33 A22 22 0 0 1 54 33 L50 33 A18 18 0 0 0 14 33 Z" fill="#FCBF49" />
-          <path d="M14 33 A18 18 0 0 1 50 33 L46 33 A14 14 0 0 0 18 33 Z" fill="#43AA8B" />
-          <path d="M18 33 A14 14 0 0 1 46 33 L42 33 A10 10 0 0 0 22 33 Z" fill="#277DA1" />
-          <path d="M22 33 A10 10 0 0 1 42 33 L38 33 A6 6 0 0 0 26 33 Z" fill="#7B4FA0" />
-        </svg>
+        <rainbow-stripes svg-class="mini-rainbow" viewbox="0 0 64 34" cx="32" base="33" outer="30" inner="6"></rainbow-stripes>
       </a>
 
       <a class="level-card" href="./color-order.html" data-level="2">
@@ -40,14 +34,7 @@
           <span class="level-name">Color order</span>
         </span>
         <span class="level-hint">Stack the stripes, red on top.</span>
-        <svg class="mini-rainbow" viewBox="0 0 64 34" aria-hidden="true">
-          <path d="M2 33 A30 30 0 0 1 62 33 L58 33 A26 26 0 0 0 6 33 Z" fill="#E5383B" />
-          <path d="M6 33 A26 26 0 0 1 58 33 L54 33 A22 22 0 0 0 10 33 Z" fill="#F77F00" />
-          <path d="M10 33 A22 22 0 0 1 54 33 L50 33 A18 18 0 0 0 14 33 Z" fill="#FCBF49" />
-          <path d="M14 33 A18 18 0 0 1 50 33 L46 33 A14 14 0 0 0 18 33 Z" fill="#43AA8B" />
-          <path d="M18 33 A14 14 0 0 1 46 33 L42 33 A10 10 0 0 0 22 33 Z" fill="#277DA1" />
-          <path d="M22 33 A10 10 0 0 1 42 33 L38 33 A6 6 0 0 0 26 33 Z" fill="#7B4FA0" />
-        </svg>
+        <rainbow-stripes svg-class="mini-rainbow" viewbox="0 0 64 34" cx="32" base="33" outer="30" inner="6"></rainbow-stripes>
       </a>
 
       <a class="level-card" href="./memory-rainbow.html" data-level="3">
@@ -56,14 +43,7 @@
           <span class="level-name">Memory rainbow</span>
         </span>
         <span class="level-hint">Build it with no hints.</span>
-        <svg class="mini-rainbow" viewBox="0 0 64 34" aria-hidden="true">
-          <path d="M2 33 A30 30 0 0 1 62 33 L58 33 A26 26 0 0 0 6 33 Z" fill="#E5383B" />
-          <path d="M6 33 A26 26 0 0 1 58 33 L54 33 A22 22 0 0 0 10 33 Z" fill="#F77F00" />
-          <path d="M10 33 A22 22 0 0 1 54 33 L50 33 A18 18 0 0 0 14 33 Z" fill="#FCBF49" />
-          <path d="M14 33 A18 18 0 0 1 50 33 L46 33 A14 14 0 0 0 18 33 Z" fill="#43AA8B" />
-          <path d="M18 33 A14 14 0 0 1 46 33 L42 33 A10 10 0 0 0 22 33 Z" fill="#277DA1" />
-          <path d="M22 33 A10 10 0 0 1 42 33 L38 33 A6 6 0 0 0 26 33 Z" fill="#7B4FA0" />
-        </svg>
+        <rainbow-stripes svg-class="mini-rainbow" viewbox="0 0 64 34" cx="32" base="33" outer="30" inner="6"></rainbow-stripes>
       </a>
 
       <a class="level-card" href="./sun-and-rain.html" data-level="4">
@@ -72,14 +52,7 @@
           <span class="level-name">Sun and rain</span>
         </span>
         <span class="level-hint">Make the weather for a rainbow.</span>
-        <svg class="mini-rainbow" viewBox="0 0 64 34" aria-hidden="true">
-          <path d="M2 33 A30 30 0 0 1 62 33 L58 33 A26 26 0 0 0 6 33 Z" fill="#E5383B" />
-          <path d="M6 33 A26 26 0 0 1 58 33 L54 33 A22 22 0 0 0 10 33 Z" fill="#F77F00" />
-          <path d="M10 33 A22 22 0 0 1 54 33 L50 33 A18 18 0 0 0 14 33 Z" fill="#FCBF49" />
-          <path d="M14 33 A18 18 0 0 1 50 33 L46 33 A14 14 0 0 0 18 33 Z" fill="#43AA8B" />
-          <path d="M18 33 A14 14 0 0 1 46 33 L42 33 A10 10 0 0 0 22 33 Z" fill="#277DA1" />
-          <path d="M22 33 A10 10 0 0 1 42 33 L38 33 A6 6 0 0 0 26 33 Z" fill="#7B4FA0" />
-        </svg>
+        <rainbow-stripes svg-class="mini-rainbow" viewbox="0 0 64 34" cx="32" base="33" outer="30" inner="6"></rainbow-stripes>
       </a>
 
       <a class="level-card" href="./paint-a-rainbow.html" data-level="5">
@@ -88,14 +61,7 @@
           <span class="level-name">Paint a rainbow</span>
         </span>
         <span class="level-hint">Any colors you want!</span>
-        <svg class="mini-rainbow" viewBox="0 0 64 34" aria-hidden="true">
-          <path d="M2 33 A30 30 0 0 1 62 33 L58 33 A26 26 0 0 0 6 33 Z" fill="#E5383B" />
-          <path d="M6 33 A26 26 0 0 1 58 33 L54 33 A22 22 0 0 0 10 33 Z" fill="#F77F00" />
-          <path d="M10 33 A22 22 0 0 1 54 33 L50 33 A18 18 0 0 0 14 33 Z" fill="#FCBF49" />
-          <path d="M14 33 A18 18 0 0 1 50 33 L46 33 A14 14 0 0 0 18 33 Z" fill="#43AA8B" />
-          <path d="M18 33 A14 14 0 0 1 46 33 L42 33 A10 10 0 0 0 22 33 Z" fill="#277DA1" />
-          <path d="M22 33 A10 10 0 0 1 42 33 L38 33 A6 6 0 0 0 26 33 Z" fill="#7B4FA0" />
-        </svg>
+        <rainbow-stripes svg-class="mini-rainbow" viewbox="0 0 64 34" cx="32" base="33" outer="30" inner="6"></rainbow-stripes>
       </a>
 
       <a class="level-card" href="./rainbow-road.html" data-level="6">
@@ -104,14 +70,7 @@
           <span class="level-name">Rainbow road</span>
         </span>
         <span class="level-hint">Follow the colors to the end.</span>
-        <svg class="mini-rainbow" viewBox="0 0 64 34" aria-hidden="true">
-          <path d="M2 33 A30 30 0 0 1 62 33 L58 33 A26 26 0 0 0 6 33 Z" fill="#E5383B" />
-          <path d="M6 33 A26 26 0 0 1 58 33 L54 33 A22 22 0 0 0 10 33 Z" fill="#F77F00" />
-          <path d="M10 33 A22 22 0 0 1 54 33 L50 33 A18 18 0 0 0 14 33 Z" fill="#FCBF49" />
-          <path d="M14 33 A18 18 0 0 1 50 33 L46 33 A14 14 0 0 0 18 33 Z" fill="#43AA8B" />
-          <path d="M18 33 A14 14 0 0 1 46 33 L42 33 A10 10 0 0 0 22 33 Z" fill="#277DA1" />
-          <path d="M22 33 A10 10 0 0 1 42 33 L38 33 A6 6 0 0 0 26 33 Z" fill="#7B4FA0" />
-        </svg>
+        <rainbow-stripes svg-class="mini-rainbow" viewbox="0 0 64 34" cx="32" base="33" outer="30" inner="6"></rainbow-stripes>
       </a>
 
       <a class="level-card" href="./word-scramble.html" data-level="7">
@@ -120,14 +79,7 @@
           <span class="level-name">Word scramble</span>
         </span>
         <span class="level-hint">Put the letters in order.</span>
-        <svg class="mini-rainbow" viewBox="0 0 64 34" aria-hidden="true">
-          <path d="M2 33 A30 30 0 0 1 62 33 L58 33 A26 26 0 0 0 6 33 Z" fill="#E5383B" />
-          <path d="M6 33 A26 26 0 0 1 58 33 L54 33 A22 22 0 0 0 10 33 Z" fill="#F77F00" />
-          <path d="M10 33 A22 22 0 0 1 54 33 L50 33 A18 18 0 0 0 14 33 Z" fill="#FCBF49" />
-          <path d="M14 33 A18 18 0 0 1 50 33 L46 33 A14 14 0 0 0 18 33 Z" fill="#43AA8B" />
-          <path d="M18 33 A14 14 0 0 1 46 33 L42 33 A10 10 0 0 0 22 33 Z" fill="#277DA1" />
-          <path d="M22 33 A10 10 0 0 1 42 33 L38 33 A6 6 0 0 0 26 33 Z" fill="#7B4FA0" />
-        </svg>
+        <rainbow-stripes svg-class="mini-rainbow" viewbox="0 0 64 34" cx="32" base="33" outer="30" inner="6"></rainbow-stripes>
       </a>
 
       <a class="level-card" href="./fix-the-rainbow.html" data-level="8">
@@ -136,14 +88,7 @@
           <span class="level-name">Fix the rainbow</span>
         </span>
         <span class="level-hint">Swap the stripes back.</span>
-        <svg class="mini-rainbow" viewBox="0 0 64 34" aria-hidden="true">
-          <path d="M2 33 A30 30 0 0 1 62 33 L58 33 A26 26 0 0 0 6 33 Z" fill="#E5383B" />
-          <path d="M6 33 A26 26 0 0 1 58 33 L54 33 A22 22 0 0 0 10 33 Z" fill="#F77F00" />
-          <path d="M10 33 A22 22 0 0 1 54 33 L50 33 A18 18 0 0 0 14 33 Z" fill="#FCBF49" />
-          <path d="M14 33 A18 18 0 0 1 50 33 L46 33 A14 14 0 0 0 18 33 Z" fill="#43AA8B" />
-          <path d="M18 33 A14 14 0 0 1 46 33 L42 33 A10 10 0 0 0 22 33 Z" fill="#277DA1" />
-          <path d="M22 33 A10 10 0 0 1 42 33 L38 33 A6 6 0 0 0 26 33 Z" fill="#7B4FA0" />
-        </svg>
+        <rainbow-stripes svg-class="mini-rainbow" viewbox="0 0 64 34" cx="32" base="33" outer="30" inner="6"></rainbow-stripes>
       </a>
     </main>
 

@@ -30,6 +30,22 @@ To run the tests:
 npm test
 ```
 
+## How the code is organized
+
+Each level is three files, plus a test for each part:
+
+- `public/<level>.html`: the page.
+- `public/game/<level>.js`: just the rules. It doesn't touch the page, so the tests can play it directly.
+- `public/game/<level>-page.js`: draws the level and handles the taps.
+
+Shared by every level:
+
+- `public/game/colors.js`: the six rainbow colors.
+- `public/game/shuffle.js`: the shuffle every level uses to mix things up.
+- `public/game/page-helpers.js`: the wrong-answer wiggle and tapping drawn shapes.
+- `public/game/components.js`: the pieces every page repeats, written once: `<level-header>`, `<helper-bubble>`, `<level-done>` and `<rainbow-stripes>`.
+- `public/styles.css`: one stylesheet, in sections: the title screen, the level picker, what all levels share, then one section per level.
+
 ## Fonts
 
 Fredoka and Nunito, both under the SIL Open Font License. The license files are in [`public/fonts/`](public/fonts/).
