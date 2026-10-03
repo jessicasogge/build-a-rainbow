@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Mix a Color: Build a Rainbow</title>
+    <link rel="icon" href="./favicon.svg" type="image/svg+xml" />
+    <link rel="preload" href="./fonts/fredoka-700.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body class="page level-page">
+    <header class="page-header">
+      <a class="round-button" href="./levels.html" aria-label="Back to the levels">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7" /></svg>
+      </a>
+      <h1 class="level-title">Level 2 · Mix a color</h1>
+      <p class="progress-pill">Question 1 of 3</p>
+      <button type="button" class="round-button" data-restart aria-label="Start over">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7" /><path d="M3 4v5h5" /></svg>
+      </button>
+    </header>
+
+    <main class="build">
+      <!-- Paint color + paint color = mystery color. mix-a-color-page.js
+           fills in the two colors and, once answered, the mystery one. -->
+      <div class="mix">
+        <div class="blob-box" data-blob="a">
+          <span class="blob blob-left"></span>
+          <span class="blob-name">Red</span>
+        </div>
+        <svg class="mix-sign" viewBox="0 0 24 24" role="img" aria-label="plus"><path d="M12 5v14M5 12h14" /></svg>
+        <div class="blob-box" data-blob="b">
+          <span class="blob blob-right"></span>
+          <span class="blob-name">Yellow</span>
+        </div>
+        <svg class="mix-sign" viewBox="0 0 24 24" role="img" aria-label="make"><path d="M5 9h14M5 15h14" /></svg>
+        <div class="blob-box blob-mystery" data-blob="mystery">
+          <span class="blob"><span class="blob-mark" aria-hidden="true">?</span></span>
+          <span class="blob-name" aria-live="polite">Mystery</span>
+        </div>
+      </div>
+
+      <div class="helper">
+        <span class="helper-face" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><circle cx="9" cy="10" r="1" /><circle cx="15" cy="10" r="1" /><path d="M8 14.5c1.2 1.6 2.4 2.2 4 2.2s2.8-.6 4-2.2" /></svg>
+        </span>
+        <p class="helper-text" aria-live="polite">What color do they make?</p>
+      </div>
+
+      <!-- The answer buttons, in a shuffled order. Added by mix-a-color-page.js. -->
+      <div class="tray tray-3"></div>
+
+      <button type="button" class="button button-play" id="next" hidden>
+        Next
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4l13 8-13 8z" /></svg>
+      </button>
+
+      <section class="level-done" hidden>
+        <h2 tabindex="-1">You mixed every color!</h2>
+        <p class="fun-fact">Fun fact: red, yellow and blue are primary colors. Mixing two of them makes orange, green or purple.</p>
+        <div class="buttons">
+          <button type="button" class="button button-levels" data-restart>Play again</button>
+          <a class="button button-play" href="./levels.html">More levels</a>
+        </div>
+      </section>
+    </main>
+
+    <footer class="signature">jsogge 2026</footer>
+
+    <script type="module">
+      import { start } from './game/mix-a-color-page.js';
+      start();
+    </script>
+  </body>
+</html>

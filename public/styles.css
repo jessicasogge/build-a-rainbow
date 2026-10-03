@@ -28,6 +28,11 @@
   box-sizing: border-box;
 }
 
+/* Anything the game hides stays hidden, whatever its display style. */
+[hidden] {
+  display: none !important;
+}
+
 body {
   margin: 0;
   min-height: 100vh;
@@ -281,7 +286,7 @@ body {
   color: var(--ink);
   font: inherit;
   text-align: left;
-  text-decoration: none; /* level 1's card is a link */
+  text-decoration: none; /* built levels' cards are links */
   cursor: pointer;
   transition: transform 0.08s, box-shadow 0.08s;
 }
@@ -508,12 +513,6 @@ body {
   text-align: center;
 }
 
-.tray[hidden],
-.helper[hidden],
-.level-done[hidden] {
-  display: none;
-}
-
 .level-done h2 {
   margin: 0;
   font-family: Fredoka, system-ui, sans-serif;
@@ -530,6 +529,124 @@ body {
 
 .level-done .button {
   font-size: 2rem;
+}
+
+/* ---- Level 2: Mix a color ---- */
+
+button.round-button {
+  border: 0;
+  cursor: pointer;
+}
+
+.progress-pill {
+  margin: 0 0 0 auto;
+  padding: 0.6rem 1.25rem;
+  border-radius: 999px;
+  background: #fff;
+  font-family: Fredoka, system-ui, sans-serif;
+  font-size: clamp(1rem, 2.2vw, 1.5rem);
+  white-space: nowrap;
+}
+
+.mix {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(0.5rem, 3vw, 2.25rem);
+  width: 100%;
+  margin: clamp(0.5rem, 3vh, 2.5rem) 0;
+}
+
+.blob-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+/* Paint blobs: a little lumpy, not perfect circles. */
+.blob {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: clamp(80px, 17vw, 200px);
+  aspect-ratio: 1;
+  border-radius: 50%;
+}
+
+.blob-left {
+  border-radius: 46% 54% 50% 50% / 55% 45% 55% 45%;
+}
+
+.blob-right {
+  border-radius: 52% 48% 45% 55% / 48% 55% 45% 52%;
+}
+
+.blob-mystery .blob {
+  border: 5px dashed var(--ink);
+  background: rgb(255 255 255 / 0.6);
+  transition: background 0.3s;
+}
+
+.blob-mystery.is-solved .blob {
+  border-color: transparent;
+  border-radius: 50% 50% 46% 54% / 52% 48% 52% 48%;
+  animation: pop 0.35s ease-out;
+}
+
+.blob-mark {
+  font-family: Fredoka, system-ui, sans-serif;
+  font-size: clamp(3rem, 9vw, 7rem);
+  line-height: 1;
+}
+
+.blob-name {
+  font-family: Fredoka, system-ui, sans-serif;
+  font-size: clamp(1.25rem, 3vw, 2.1rem);
+}
+
+.mix-sign {
+  flex-shrink: 0;
+  width: clamp(32px, 5vw, 64px);
+  height: clamp(32px, 5vw, 64px);
+  fill: none;
+  stroke: var(--ink);
+  stroke-width: 3.2;
+  stroke-linecap: round;
+}
+
+.tray-3,
+.tray.tray-3 {
+  grid-template-columns: repeat(3, minmax(0, 1fr)); /* 3 across on phones too */
+  width: min(760px, 100%);
+}
+
+/* On phones, the question counter moves under the level name. */
+@media (max-width: 600px) {
+  .progress-pill {
+    order: 3;
+    margin: -0.5rem 0 0 calc(68px + 1.5rem);
+  }
+
+  .level-page .page-header {
+    flex-wrap: wrap;
+  }
+
+  .level-page .level-title {
+    flex: 1 1 calc(100% - 68px * 2 - 1.5rem * 2 - 1px);
+  }
+}
+
+#next svg {
+  width: 30px;
+  height: 30px;
+  fill: currentColor;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .blob-mystery.is-solved .blob {
+    animation: none;
+  }
 }
 
 .signature {
