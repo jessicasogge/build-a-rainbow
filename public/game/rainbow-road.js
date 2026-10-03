@@ -1,7 +1,7 @@
-// Level 6, Rainbow road: drive a little car along a road that splits at
-// each fork. The helper says which color road to take; tap it to drive on.
-// There are six forks, one for each rainbow color, and the trip ends at a
-// pot of gold at the end of the rainbow.
+// Level 6, Rainbow road: drive a little car through a roundabout with three
+// colored exits. The helper says which color road to take; tap it to drive
+// on. There are six turns (called forks in the code), one for each rainbow
+// color, and the trip ends at a pot of gold at the end of the rainbow.
 //
 // This file is only the rules. It doesn't touch the page, so the tests can
 // play it directly. rainbow-road-page.js draws it and handles the taps.

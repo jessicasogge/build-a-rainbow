@@ -14,31 +14,44 @@
         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7" /></svg>
       </a>
       <h1 class="level-title">Level 6 · Rainbow road</h1>
-      <p class="progress-pill">Fork 1 of 6</p>
+      <p class="progress-pill">Turn 1 of 6</p>
       <button type="button" class="round-button" data-restart aria-label="Start over">
         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7" /><path d="M3 4v5h5" /></svg>
       </button>
     </header>
 
     <main class="build">
-      <!-- A fork in the road: three roads, each a different color, colored
-           and labeled by rainbow-road-page.js. Tap one to drive up it. -->
+      <!-- A roundabout. The road comes in from the bottom, and three exits
+           leave the ring: left, top and right. rainbow-road-page.js colors
+           and labels the exits and drives the car around the ring and out
+           the exit that's tapped. -->
       <svg class="road-scene" viewBox="0 0 600 460">
         <rect class="grass" width="600" height="460" rx="32" />
-        <g class="road" role="button" tabindex="0">
-          <path class="road-surface" d="M300 460 Q300 270 100 110" stroke="#ffffff" />
-          <path class="road-line" d="M300 460 Q300 270 100 110" />
-          <text class="road-label" x="100" y="72" text-anchor="middle"></text>
+        <g class="road" role="button" tabindex="0" data-exit="left">
+          <path class="road-surface" d="M215 250 H-20" stroke="#ffffff" />
+          <path class="road-line" d="M187 250 H0" />
+          <text class="road-label" x="92" y="261" text-anchor="middle"></text>
         </g>
-        <g class="road" role="button" tabindex="0">
-          <path class="road-surface" d="M300 460 L300 85" stroke="#ffffff" />
-          <path class="road-line" d="M300 460 L300 85" />
-          <text class="road-label" x="300" y="47" text-anchor="middle"></text>
+        <g class="road" role="button" tabindex="0" data-exit="top">
+          <path class="road-surface" d="M300 165 V-20" stroke="#ffffff" />
+          <path class="road-line" d="M300 137 V0" />
+          <text class="road-label" x="300" y="74" text-anchor="middle"></text>
         </g>
-        <g class="road" role="button" tabindex="0">
-          <path class="road-surface" d="M300 460 Q300 270 500 110" stroke="#ffffff" />
-          <path class="road-line" d="M300 460 Q300 270 500 110" />
-          <text class="road-label" x="500" y="72" text-anchor="middle"></text>
+        <g class="road" role="button" tabindex="0" data-exit="right">
+          <path class="road-surface" d="M385 250 H620" stroke="#ffffff" />
+          <path class="road-line" d="M413 250 H600" />
+          <text class="road-label" x="508" y="261" text-anchor="middle"></text>
+        </g>
+        <!-- The road in, the ring, and the grassy island in the middle. -->
+        <g class="roundabout" aria-hidden="true">
+          <path class="asphalt" d="M300 480 V330" />
+          <circle class="asphalt" cx="300" cy="250" r="85" />
+          <circle class="ring-line" cx="300" cy="250" r="85" />
+          <path class="road-line" d="M300 460 V363" />
+          <circle class="island" cx="300" cy="250" r="54" />
+          <circle class="flower" cx="284" cy="238" r="7" />
+          <circle class="flower" cx="316" cy="246" r="7" />
+          <circle class="flower" cx="296" cy="268" r="7" />
         </g>
         <!-- The end of the trip: a rainbow with a pot of gold. -->
         <g class="road-finish" aria-hidden="true">
@@ -58,15 +71,16 @@
             <rect class="pot-body" x="244" y="286" width="112" height="16" rx="8" />
           </g>
         </g>
-        <!-- The car, seen from above, pointing up the road. -->
-        <g class="car" aria-hidden="true">
-          <rect class="car-wheel" x="270" y="378" width="10" height="20" rx="4" />
-          <rect class="car-wheel" x="320" y="378" width="10" height="20" rx="4" />
-          <rect class="car-wheel" x="270" y="420" width="10" height="20" rx="4" />
-          <rect class="car-wheel" x="320" y="420" width="10" height="20" rx="4" />
-          <rect class="car-body" x="276" y="370" width="48" height="78" rx="16" />
-          <rect class="car-window" x="284" y="384" width="32" height="18" rx="6" />
-          <rect class="car-window" x="284" y="424" width="32" height="12" rx="5" />
+        <!-- The car, seen from above, drawn pointing up around (0, 0).
+             rainbow-road-page.js moves and turns it with its transform. -->
+        <g class="car" aria-hidden="true" transform="translate(300 420)">
+          <rect class="car-wheel" x="-30" y="-31" width="10" height="20" rx="4" />
+          <rect class="car-wheel" x="20" y="-31" width="10" height="20" rx="4" />
+          <rect class="car-wheel" x="-30" y="11" width="10" height="20" rx="4" />
+          <rect class="car-wheel" x="20" y="11" width="10" height="20" rx="4" />
+          <rect class="car-body" x="-24" y="-39" width="48" height="78" rx="16" />
+          <rect class="car-window" x="-16" y="-25" width="32" height="18" rx="6" />
+          <rect class="car-window" x="-16" y="15" width="32" height="12" rx="5" />
         </g>
       </svg>
 

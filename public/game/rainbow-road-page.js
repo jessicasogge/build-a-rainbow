@@ -1,20 +1,45 @@
 // Draws Level 6 (Rainbow road) on rainbow-road.html and handles the taps.
-// The rules live in rainbow-road.js.
+// The rules live in rainbow-road.js; where the car drives on the roundabout
+// lives in rainbow-road-route.js.
 import { COLORS } from './color-order.js';
 import { colorName, fork, isDone, message, newTrip, pick } from './rainbow-road.js';
+import { START, carTransform, poseAt, route, turnToward } from './rainbow-road-route.js';
 
-// Where each of the three roads ends at the top of the picture, for the car
-// to drive to. Matches the road shapes in rainbow-road.html.
-const ROAD_ENDS = [
-  { x: -200, y: -300 },
-  { x: 0, y: -330 },
-  { x: 200, y: -300 },
-];
-const DRIVE_MS = 700;
+const SPEED = 0.5; // picture units per millisecond
+const TURN_RATE = 0.5; // the most the car turns, in degrees per millisecond
 
 const hex = (id) => COLORS.find((c) => c.id === id).hex;
+const PARKED = { ...START, heading: 0 };
 
-export function start(doc = document, { random = Math.random, wait = (fn) => setTimeout(fn, DRIVE_MS) } = {}) {
+// Drives the car along a route one animation frame at a time, calling
+// `show` with each pose, then `done` at the end. The car's heading follows
+// the road but turns at a limited rate, so it swings smoothly into and out of
+// the ring. With reduced motion on, it skips straight to the end.
+function animateDrive(r, show, done) {
+  const reduce = globalThis.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
+  if (reduce) {
+    show(poseAt(r, r.length));
+    setTimeout(done, 250);
+    return;
+  }
+  let heading = 0;
+  let begun = null;
+  let last = null;
+  const frame = (now) => {
+    begun ??= now;
+    const step = last === null ? 0 : now - last;
+    last = now;
+    const distance = (now - begun) * SPEED;
+    const pose = poseAt(r, distance);
+    heading = turnToward(heading, pose.heading, TURN_RATE * step);
+    show({ ...pose, heading });
+    if (distance >= r.length) done();
+    else requestAnimationFrame(frame);
+  };
+  requestAnimationFrame(frame);
+}
+
+export function start(doc = document, { random = Math.random, animate = animateDrive } = {}) {
   const scene = doc.querySelector('.road-scene');
   const roads = [...doc.querySelectorAll('.road')];
   const car = doc.querySelector('.car');
@@ -26,6 +51,7 @@ export function start(doc = document, { random = Math.random, wait = (fn) => set
 
   let trip;
   let driving = false;
+  let tripNumber = 0; // so a drive from before Start over can't finish later
 
   function drawFork() {
     const f = fork(trip);
@@ -37,7 +63,7 @@ export function start(doc = document, { random = Math.random, wait = (fn) => set
       road.setAttribute('aria-label', `${colorName(id)} road`);
       road.classList.remove('is-wrong');
     });
-    progress.textContent = `Fork ${trip.index + 1} of ${trip.forks.length}`;
+    progress.textContent = `Turn ${trip.index + 1} of ${trip.forks.length}`;
   }
 
   function draw(result, picked) {
@@ -49,7 +75,7 @@ export function start(doc = document, { random = Math.random, wait = (fn) => set
     done.hidden = !finished;
     for (const road of roads) road.setAttribute('tabindex', finished ? '-1' : '0');
     if (finished) {
-      progress.textContent = `Fork ${trip.forks.length} of ${trip.forks.length}`;
+      progress.textContent = `Turn ${trip.forks.length} of ${trip.forks.length}`;
       done.querySelector('h2').focus();
     }
   }
@@ -60,15 +86,22 @@ export function start(doc = document, { random = Math.random, wait = (fn) => set
     road.classList.add('is-wrong');
   }
 
-  // The car drives up the road it took, then comes back to the bottom for
-  // the next fork.
-  function drive(i, then) {
+  function park() {
+    car.setAttribute('transform', carTransform(PARKED));
+  }
+
+  // The car drives up into the roundabout, around the ring and out of the
+  // exit it took, then pulls up at the bottom again for the next one.
+  function drive(exitIndex, then) {
+    const thisTrip = tripNumber;
+    const stale = () => thisTrip !== tripNumber;
     driving = true;
     car.classList.add('is-driving');
-    car.style.transform = `translate(${ROAD_ENDS[i].x}px, ${ROAD_ENDS[i].y}px)`;
-    wait(() => {
+    const show = (pose) => { if (!stale()) car.setAttribute('transform', carTransform(pose)); };
+    animate(route(exitIndex), show, () => {
+      if (stale()) return;
       car.classList.remove('is-driving');
-      car.style.transform = '';
+      park();
       driving = false;
       then();
     });
@@ -99,10 +132,11 @@ export function start(doc = document, { random = Math.random, wait = (fn) => set
   });
 
   function restart() {
+    tripNumber += 1;
     trip = newTrip(random);
     driving = false;
     car.classList.remove('is-driving');
-    car.style.transform = '';
+    park();
     draw();
   }
 

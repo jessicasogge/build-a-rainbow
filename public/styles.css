@@ -910,9 +910,34 @@ button.round-button {
 
 .road-surface {
   fill: none;
-  stroke-width: 64;
-  stroke-linecap: round;
+  stroke-width: 56;
   transition: stroke 0.3s;
+}
+
+/* The grey road in and the ring, with a grassy island in the middle. */
+.asphalt {
+  fill: none;
+  stroke: #7d8a99;
+  stroke-width: 56;
+}
+
+.ring-line {
+  fill: none;
+  stroke: rgb(255 255 255 / 0.8);
+  stroke-width: 4;
+  stroke-dasharray: 14 14;
+}
+
+.island {
+  fill: #7cc59a;
+  stroke: #ffffff;
+  stroke-width: 4;
+}
+
+.flower {
+  fill: var(--sun);
+  stroke: #ffffff;
+  stroke-width: 3;
 }
 
 /* A dashed white line down the middle of each road. */
@@ -940,7 +965,7 @@ button.round-button {
 }
 
 .road:focus-visible .road-surface {
-  stroke-width: 76;
+  stroke-width: 68;
 }
 
 .road.is-wrong {
@@ -959,10 +984,6 @@ button.round-button {
 
 .car-wheel {
   fill: var(--ink);
-}
-
-.car.is-driving {
-  transition: transform 0.7s ease-in;
 }
 
 /* The finish: the roads fade back and the rainbow and pot of gold show. */
@@ -986,7 +1007,8 @@ button.round-button {
   opacity: 1;
 }
 
-.is-done .road {
+.is-done .road,
+.is-done .roundabout {
   opacity: 0.25;
   cursor: default;
   transition: opacity 0.6s;
@@ -999,10 +1021,6 @@ button.round-button {
 @media (prefers-reduced-motion: reduce) {
   .road.is-wrong {
     animation: none;
-  }
-
-  .car.is-driving {
-    transition: none;
   }
 }
 

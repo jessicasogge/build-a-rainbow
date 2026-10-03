@@ -9,7 +9,7 @@ There's an opening screen, a level picker, and six levels:
 3. **Memory rainbow:** look at the whole rainbow, tap Ready, then build it again from memory, with no outline showing which stripe is next.
 4. **Sun and rain:** turn the sun, rain, snow and clouds on and off until there's a rainbow. It needs sunshine and raindrops at the same time, with no snow and no thick clouds hiding the sun.
 5. **Paint a rainbow:** pick from ten paints and tap any stripe to paint it, in any colors you like. Once every stripe is painted, tap Done.
-6. **Rainbow road:** drive a little car through six forks in the road. At each one, tap the road in the color the helper names. The trip ends at a pot of gold at the end of the rainbow.
+6. **Rainbow road:** drive a little car through a roundabout six times. Each time, tap the exit in the color the helper names, and the car drives around the ring and out that way. The trip ends at a pot of gold at the end of the rainbow.
 
 ## Running it locally
 
