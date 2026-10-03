@@ -14,12 +14,12 @@ describe('pick a level page', () => {
     expect(html).toMatch(/<a class="round-button" href="\.\/index\.html" aria-label="Back[^"]*">/);
   });
 
-  it('lists seven levels in order', () => {
-    expect(cards.map((m) => m[1])).toEqual(['1', '2', '3', '4', '5', '6', '7']);
+  it('lists eight levels in order', () => {
+    expect(cards.map((m) => m[1])).toEqual(['1', '2', '3', '4', '5', '6', '7', '8']);
   });
 
   it('has every level open, none locked', () => {
-    expect(cards.map((m) => Boolean(m[2]))).toEqual([false, false, false, false, false, false, false]);
+    expect(cards.map((m) => Boolean(m[2]))).toEqual([false, false, false, false, false, false, false, false]);
     expect(html).not.toContain('unlock');
   });
 
@@ -51,9 +51,13 @@ describe('pick a level page', () => {
     expect(html).toContain('<a class="level-card" href="./word-scramble.html" data-level="7">');
   });
 
+  it('opens Fix the rainbow from the level 8 card', () => {
+    expect(html).toContain('<a class="level-card" href="./fix-the-rainbow.html" data-level="8">');
+  });
+
   it('puts a little six-stripe rainbow on every card, hidden from screen readers', () => {
     const minis = [...html.matchAll(/<svg class="mini-rainbow"[^>]*aria-hidden="true">([\s\S]*?)<\/svg>/g)];
-    expect(minis).toHaveLength(7);
+    expect(minis).toHaveLength(8);
     for (const [, inner] of minis) expect(inner.match(/<path/g)).toHaveLength(6);
   });
 

@@ -2,7 +2,7 @@
 
 A browser game for young elementary-age kids: put the colors in order and build a rainbow, one stripe at a time. Works on computers, tablets and phones too.
 
-There's an opening screen, a level picker, and seven levels:
+There's an opening screen, a level picker, and eight levels:
 
 1. **Mix a color:** two paint colors are shown; pick the color they make. Three questions, one for each pair of primary colors (red + yellow, yellow + blue, red + blue).
 2. **Color order:** tap the colors in rainbow order, red first, to fill in each stripe. A wrong pick wiggles and the helper says to try another color.
@@ -11,6 +11,7 @@ There's an opening screen, a level picker, and seven levels:
 5. **Paint a rainbow:** pick from ten paints and tap any stripe to paint it, in any colors you like. Once every stripe is painted, tap Done.
 6. **Rainbow road:** drive a little car through a roundabout six times. Each time, tap the exit in the color the helper names, and the car drives around the ring and out that way. The trip ends at a pot of gold at the end of the rainbow.
 7. **Word scramble:** the letters of RAINBOW come mixed up. Tap them in order to spell the word; each right letter drops into the next box with a rainbow-colored border.
+8. **Fix the rainbow:** the stripes come jumbled. Tap one stripe, then another, to swap them, until every color is back in its place.
 
 ## Running it locally
 
