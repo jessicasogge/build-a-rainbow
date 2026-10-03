@@ -1,6 +1,6 @@
 # Build a Rainbow 🌈
 
-A browser game for elementary-age kids: put the colors in order and build a rainbow, one stripe at a time. Made for tablets, and works on computers and phones too.
+A browser game for young elementary-age kids: put the colors in order and build a rainbow, one stripe at a time. Works on computers, tablets and phones too.
 
 So far there's the opening screen, the level picker, and levels 1 and 2:
 
