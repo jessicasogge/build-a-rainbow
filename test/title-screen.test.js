@@ -16,7 +16,7 @@ describe('title screen', () => {
   });
 
   it('has a Play button that starts level 1', () => {
-    expect(html).toMatch(/<a class="button button-play" id="play" href="\.\/color-order\.html">/);
+    expect(html).toMatch(/<a class="button button-play" id="play" href="\.\/mix-a-color\.html">/);
   });
 
   it('has a Levels button that opens the level picker', () => {

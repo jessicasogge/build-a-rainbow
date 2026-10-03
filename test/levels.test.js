@@ -23,12 +23,12 @@ describe('pick a level page', () => {
     expect(html).not.toContain('unlock');
   });
 
-  it('opens Color order from the level 1 card', () => {
-    expect(html).toContain('<a class="level-card" href="./color-order.html" data-level="1">');
+  it('opens Mix a color from the level 1 card', () => {
+    expect(html).toContain('<a class="level-card" href="./mix-a-color.html" data-level="1">');
   });
 
-  it('opens Mix a color from the level 2 card', () => {
-    expect(html).toContain('<a class="level-card" href="./mix-a-color.html" data-level="2">');
+  it('opens Color order from the level 2 card', () => {
+    expect(html).toContain('<a class="level-card" href="./color-order.html" data-level="2">');
   });
 
   it('puts a little six-stripe rainbow on every card, hidden from screen readers', () => {

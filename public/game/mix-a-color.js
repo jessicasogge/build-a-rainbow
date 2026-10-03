@@ -1,4 +1,4 @@
-// Level 2, Mix a color: two paint colors are shown, and you pick the color
+// Level 1, Mix a color: two paint colors are shown, and you pick the color
 // they make. There are three questions, one for each pair of primary colors:
 //   red + yellow = orange, yellow + blue = green, red + blue = purple.
 //

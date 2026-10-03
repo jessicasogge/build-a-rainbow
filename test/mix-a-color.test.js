@@ -1,4 +1,4 @@
-// The rules of Level 2, Mix a color.
+// The rules of Level 1, Mix a color.
 import { describe, expect, it } from 'vitest';
 import { CHOICES, MIXES, isDone, message, newGame, nextQuestion, pick, question } from '../public/game/mix-a-color.js';
 

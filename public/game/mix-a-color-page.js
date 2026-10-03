@@ -1,4 +1,4 @@
-// Draws Level 2 (Mix a color) on mix-a-color.html and handles the taps.
+// Draws Level 1 (Mix a color) on mix-a-color.html and handles the taps.
 // The rules live in mix-a-color.js.
 import { color, isDone, isLast, message, newGame, nextQuestion, pick, question } from './mix-a-color.js';
 

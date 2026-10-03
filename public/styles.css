@@ -331,7 +331,7 @@ body {
   height: 34px;
 }
 
-/* ---- Level 1: Color order ---- */
+/* ---- Color order (and shared level-page pieces) ---- */
 
 .level-page {
   padding-bottom: 0;
@@ -531,7 +531,7 @@ body {
   font-size: 2rem;
 }
 
-/* ---- Level 2: Mix a color ---- */
+/* ---- Mix a color ---- */
 
 button.round-button {
   border: 0;
