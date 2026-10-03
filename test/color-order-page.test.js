@@ -71,6 +71,12 @@ describe('color order page', () => {
     expect($('#say')).toBeNull();
   });
 
+  it('outlines the stripe that goes next, and has no Ready step', () => {
+    expect(level.studying).toBe(false);
+    expect(document.querySelectorAll('.build-stripe')[0].classList.contains('is-next')).toBe(true);
+    expect($('#ready')).toBeNull();
+  });
+
   it('has a way back to the levels', () => {
     expect($('header a.round-button').getAttribute('href')).toBe('./levels.html');
   });

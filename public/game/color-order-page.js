@@ -1,22 +1,46 @@
-// Draws Level 2 (Color order) on color-order.html and handles the taps.
-// The rules live in color-order.js.
+// Draws the rainbow-building levels and handles the taps:
+//   Level 2, Color order (color-order.html): the next empty stripe is outlined.
+//   Level 3, Memory rainbow (memory-rainbow.html, `memory: true`): the whole
+//     rainbow shows first, until Ready is tapped. Then it's cleared and built
+//     again with no outline showing which stripe is next.
+// The rules for both live in color-order.js.
 import { COLORS, isDone, message, newGame, nextColor, pick, shuffledColors } from './color-order.js';
 
-export function start(doc = document, { random = Math.random } = {}) {
+export const STUDY_MESSAGE = 'Look at the rainbow! Tap Ready when you remember it.';
+
+export function start(doc = document, { random = Math.random, memory = false } = {}) {
   const stripes = [...doc.querySelectorAll('.build-stripe')];
   const tray = doc.querySelector('.tray');
   const helperBox = doc.querySelector('.helper');
   const helper = doc.querySelector('.helper-text');
   const done = doc.querySelector('.level-done');
   const restartButtons = doc.querySelectorAll('[data-restart]');
+  const readyButton = doc.querySelector('#ready'); // Memory rainbow only
 
   let game;
   let swatches = [];
+  let studying = false;
+
+  // Memory rainbow's first step: the finished rainbow, to look at.
+  function drawStudy(focus) {
+    stripes.forEach((stripe, i) => {
+      stripe.classList.add('is-filled');
+      stripe.classList.remove('is-next');
+      stripe.setAttribute('fill', COLORS[i].hex);
+    });
+    helper.textContent = STUDY_MESSAGE;
+    helperBox.hidden = false;
+    tray.hidden = true;
+    done.hidden = true;
+    readyButton.hidden = false;
+    if (focus) readyButton.focus(); // after a restart, not on first load
+  }
 
   function draw(result) {
+    if (readyButton) readyButton.hidden = true;
     stripes.forEach((stripe, i) => {
       stripe.classList.toggle('is-filled', i < game.filled);
-      stripe.classList.toggle('is-next', i === game.filled);
+      stripe.classList.toggle('is-next', !memory && i === game.filled);
       stripe.setAttribute('fill', i < game.filled ? COLORS[i].hex : '#ffffff');
     });
     for (const swatch of swatches) {
@@ -37,7 +61,7 @@ export function start(doc = document, { random = Math.random } = {}) {
     swatch.classList.add('is-wrong');
   }
 
-  function restart() {
+  function restart(event) {
     game = newGame();
     tray.replaceChildren();
     swatches = shuffledColors(random).map((color) => {
@@ -50,6 +74,7 @@ export function start(doc = document, { random = Math.random } = {}) {
       dot.style.background = color.hex;
       swatch.append(dot, color.name);
       swatch.addEventListener('click', () => {
+        if (studying) return;
         const turn = pick(game, color.id);
         game = turn.game;
         if (turn.result === 'wrong') shake(swatch);
@@ -58,12 +83,25 @@ export function start(doc = document, { random = Math.random } = {}) {
       tray.append(swatch);
       return swatch;
     });
-    draw();
+    studying = memory;
+    if (studying) drawStudy(Boolean(event));
+    else draw();
   }
 
+  if (readyButton) {
+    readyButton.addEventListener('click', () => {
+      studying = false;
+      draw();
+    });
+  }
   restartButtons.forEach((button) => button.addEventListener('click', restart));
   restart();
 
-  // For tests: the current game and what goes next.
-  return { get game() { return game; }, next: () => nextColor(game) };
+  // For tests: the current game, what goes next, and whether it's the
+  // look-at-the-rainbow step.
+  return {
+    get game() { return game; },
+    get studying() { return studying; },
+    next: () => nextColor(game),
+  };
 }
