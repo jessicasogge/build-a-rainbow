@@ -24,6 +24,10 @@ describe('title screen', () => {
     expect(fills).toEqual(COLORS.map((c) => c.hex));
   });
 
+  it('says what the game is about', () => {
+    expect(document.querySelector('.tagline').textContent).toBe('Mix, build and play with rainbow colors!');
+  });
+
   it('has a Play button that opens the level picker', () => {
     expect(html).toMatch(/<a class="button button-play" id="play" href="\.\/levels\.html">/);
   });
