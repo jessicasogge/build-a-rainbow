@@ -328,9 +328,9 @@ body {
   font-size: 1.5rem;
 }
 
-.mini-rainbow {
-  width: 64px;
-  height: 34px;
+.level-picture {
+  width: 118px;
+  height: 75px;
 }
 
 /* ---- Level pages (shared by every level) ---- */
@@ -341,7 +341,8 @@ body {
 level-header,
 helper-bubble,
 level-done,
-rainbow-stripes {
+rainbow-stripes,
+level-picture {
   display: contents;
 }
 

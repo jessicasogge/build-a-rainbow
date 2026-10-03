@@ -17,7 +17,8 @@
       <h1 class="page-title">Pick a level</h1>
     </header>
 
-    <!-- The little rainbow on each card is just decoration. -->
+    <!-- Each card has a small picture of its level (from game/components.js),
+         so the cards look different even to kids who can't read yet. -->
     <main class="level-grid">
       <a class="level-card" href="./mix-a-color.html" data-level="1">
         <span class="level-top">
@@ -25,7 +26,7 @@
           <span class="level-name">Mix a color</span>
         </span>
         <span class="level-hint">Red and yellow make…?</span>
-        <rainbow-stripes svg-class="mini-rainbow" viewbox="0 0 64 34" cx="32" base="33" outer="30" inner="6"></rainbow-stripes>
+        <level-picture level="mix-a-color"></level-picture>
       </a>
 
       <a class="level-card" href="./color-order.html" data-level="2">
@@ -34,7 +35,7 @@
           <span class="level-name">Color order</span>
         </span>
         <span class="level-hint">Stack the stripes, red on top.</span>
-        <rainbow-stripes svg-class="mini-rainbow" viewbox="0 0 64 34" cx="32" base="33" outer="30" inner="6"></rainbow-stripes>
+        <level-picture level="color-order"></level-picture>
       </a>
 
       <a class="level-card" href="./memory-rainbow.html" data-level="3">
@@ -43,7 +44,7 @@
           <span class="level-name">Memory rainbow</span>
         </span>
         <span class="level-hint">Build it with no hints.</span>
-        <rainbow-stripes svg-class="mini-rainbow" viewbox="0 0 64 34" cx="32" base="33" outer="30" inner="6"></rainbow-stripes>
+        <level-picture level="memory-rainbow"></level-picture>
       </a>
 
       <a class="level-card" href="./sun-and-rain.html" data-level="4">
@@ -52,7 +53,7 @@
           <span class="level-name">Sun and rain</span>
         </span>
         <span class="level-hint">Make the weather for a rainbow.</span>
-        <rainbow-stripes svg-class="mini-rainbow" viewbox="0 0 64 34" cx="32" base="33" outer="30" inner="6"></rainbow-stripes>
+        <level-picture level="sun-and-rain"></level-picture>
       </a>
 
       <a class="level-card" href="./paint-a-rainbow.html" data-level="5">
@@ -61,7 +62,7 @@
           <span class="level-name">Paint a rainbow</span>
         </span>
         <span class="level-hint">Any colors you want!</span>
-        <rainbow-stripes svg-class="mini-rainbow" viewbox="0 0 64 34" cx="32" base="33" outer="30" inner="6"></rainbow-stripes>
+        <level-picture level="paint-a-rainbow"></level-picture>
       </a>
 
       <a class="level-card" href="./rainbow-road.html" data-level="6">
@@ -70,7 +71,7 @@
           <span class="level-name">Rainbow road</span>
         </span>
         <span class="level-hint">Follow the colors to the end.</span>
-        <rainbow-stripes svg-class="mini-rainbow" viewbox="0 0 64 34" cx="32" base="33" outer="30" inner="6"></rainbow-stripes>
+        <level-picture level="rainbow-road"></level-picture>
       </a>
 
       <a class="level-card" href="./word-scramble.html" data-level="7">
@@ -79,7 +80,7 @@
           <span class="level-name">Word scramble</span>
         </span>
         <span class="level-hint">Put the letters in order.</span>
-        <rainbow-stripes svg-class="mini-rainbow" viewbox="0 0 64 34" cx="32" base="33" outer="30" inner="6"></rainbow-stripes>
+        <level-picture level="word-scramble"></level-picture>
       </a>
 
       <a class="level-card" href="./fix-the-rainbow.html" data-level="8">
@@ -88,7 +89,7 @@
           <span class="level-name">Fix the rainbow</span>
         </span>
         <span class="level-hint">Swap the stripes back.</span>
-        <rainbow-stripes svg-class="mini-rainbow" viewbox="0 0 64 34" cx="32" base="33" outer="30" inner="6"></rainbow-stripes>
+        <level-picture level="fix-the-rainbow"></level-picture>
       </a>
     </main>
 

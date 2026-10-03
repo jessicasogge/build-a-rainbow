@@ -93,6 +93,18 @@ describe('<rainbow-stripes>', () => {
   });
 });
 
+describe('<level-picture>', () => {
+  const LEVELS = ['mix-a-color', 'color-order', 'memory-rainbow', 'sun-and-rain', 'paint-a-rainbow', 'rainbow-road', 'word-scramble', 'fix-the-rainbow'];
+
+  it.each(LEVELS)('draws a picture for %s', (level) => {
+    const el = render(`<level-picture level="${level}"></level-picture>`);
+    const svg = el.querySelector('svg.level-picture');
+    expect(svg.getAttribute('viewBox')).toBe('0 0 88 56');
+    expect(svg.getAttribute('aria-hidden')).toBe('true');
+    expect(svg.children.length).toBeGreaterThan(0);
+  });
+});
+
 describe('stripePath', () => {
   // The exact shapes that used to be typed out by hand in the pages.
   const BIG = [

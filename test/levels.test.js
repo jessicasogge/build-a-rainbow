@@ -56,13 +56,15 @@ describe('pick a level page', () => {
     expect(html).toContain('<a class="level-card" href="./fix-the-rainbow.html" data-level="8">');
   });
 
-  it('puts a little six-stripe rainbow on every card, hidden from screen readers', () => {
-    const minis = [...document.querySelectorAll('svg.mini-rainbow')];
-    expect(minis).toHaveLength(8);
-    for (const svg of minis) {
+  it('gives every card its own picture, hidden from screen readers', () => {
+    const pictures = [...document.querySelectorAll('.level-card svg.level-picture')];
+    expect(pictures).toHaveLength(8);
+    for (const svg of pictures) {
       expect(svg.getAttribute('aria-hidden')).toBe('true');
-      expect(svg.querySelectorAll('path')).toHaveLength(6);
+      expect(svg.children.length).toBeGreaterThan(0);
     }
+    // Each card's picture is its own.
+    expect(new Set(pictures.map((svg) => svg.innerHTML)).size).toBe(8);
   });
 
   it('shares the title screen stylesheet, tab icon and signature', () => {
