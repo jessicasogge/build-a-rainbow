@@ -134,7 +134,7 @@ body {
 }
 
 .logo {
-  margin: -2.5rem 0 0;
+  margin: -1rem 0 0; /* tucked up a little toward the rainbow, with a small gap */
   font-family: Fredoka, system-ui, sans-serif;
   font-weight: 700;
   font-size: clamp(3rem, 9vw, 6rem);
