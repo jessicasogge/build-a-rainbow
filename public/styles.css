@@ -161,7 +161,7 @@ body {
   color: var(--ink);
   font-family: Fredoka, system-ui, sans-serif;
   font-weight: 700;
-  text-decoration: none; /* Levels is a link */
+  text-decoration: none; /* some buttons are links */
   cursor: pointer;
   transition: transform 0.08s, box-shadow 0.08s;
 }
@@ -281,6 +281,7 @@ body {
   color: var(--ink);
   font: inherit;
   text-align: left;
+  text-decoration: none; /* level 1's card is a link */
   cursor: pointer;
   transition: transform 0.08s, box-shadow 0.08s;
 }
@@ -323,6 +324,212 @@ body {
 .mini-rainbow {
   width: 64px;
   height: 34px;
+}
+
+/* ---- Level 1: Color order ---- */
+
+.level-page {
+  padding-bottom: 0;
+}
+
+.level-page .page-header {
+  margin-bottom: 1rem;
+}
+
+.level-title {
+  margin: 0;
+  font-family: Fredoka, system-ui, sans-serif;
+  font-weight: 700;
+  font-size: clamp(1.5rem, 3.5vw, 2rem);
+}
+
+.header-end {
+  margin-left: auto;
+  border: 0;
+  cursor: pointer;
+}
+
+.build {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.build-rainbow {
+  width: min(700px, 100%);
+  height: auto;
+}
+
+/* An empty stripe is a dashed outline; the one that goes next is darker. */
+.build-stripe {
+  stroke: #7fa9cc;
+  stroke-width: 3;
+  stroke-dasharray: 10 8;
+  fill-opacity: 0.55;
+  transition: fill 0.3s, fill-opacity 0.3s;
+}
+
+.build-stripe.is-next {
+  stroke: var(--ink);
+}
+
+.build-stripe.is-filled {
+  stroke: none;
+  fill-opacity: 1;
+  animation: pop 0.35s ease-out;
+  transform-box: fill-box;
+  transform-origin: center bottom;
+}
+
+@keyframes pop {
+  50% {
+    transform: scale(1.04);
+  }
+}
+
+.helper {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  max-width: 100%; /* hugs the words, so no empty space at the end */
+  padding: 0.75rem 1.75rem 0.75rem 1rem;
+  border-radius: 28px;
+  background: #fff;
+}
+
+.helper-face {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: var(--sun);
+}
+
+.helper-face svg {
+  width: 40px;
+  height: 40px;
+  fill: none;
+  stroke: var(--ink);
+  stroke-width: 1.8;
+  stroke-linecap: round;
+}
+
+.helper-face circle {
+  fill: var(--ink);
+}
+
+.helper-text {
+  margin: 0;
+  font-family: Fredoka, system-ui, sans-serif;
+  font-size: clamp(1.4rem, 3vw, 2rem);
+  line-height: 1.15;
+}
+
+.tray {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 1rem;
+  width: min(1080px, 100%);
+}
+
+@media (max-width: 760px) {
+  .tray {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.swatch {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  min-height: 132px;
+  padding: 0.5rem;
+  border: 0;
+  border-radius: 26px;
+  background: #fff;
+  box-shadow: 0 7px 0 var(--cloud-shadow);
+  color: var(--ink);
+  font-family: Fredoka, system-ui, sans-serif;
+  font-size: 1.6rem;
+  cursor: pointer;
+  transition: transform 0.08s, box-shadow 0.08s, opacity 0.2s;
+}
+
+.swatch:active:not(:disabled) {
+  transform: translateY(5px);
+  box-shadow: 0 2px 0 var(--cloud-shadow);
+}
+
+.swatch:disabled {
+  opacity: 0.3;
+  cursor: default;
+}
+
+.swatch-dot {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+}
+
+.swatch.is-wrong {
+  animation: wiggle 0.4s;
+}
+
+@keyframes wiggle {
+  20%, 60% { transform: translateX(-8px); }
+  40%, 80% { transform: translateX(8px); }
+}
+
+.swatch:focus-visible,
+.header-end:focus-visible {
+  outline: 4px solid var(--ink);
+  outline-offset: 4px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .build-stripe.is-filled,
+  .swatch.is-wrong {
+    animation: none;
+  }
+}
+
+.level-done {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  text-align: center;
+}
+
+.tray[hidden],
+.helper[hidden],
+.level-done[hidden] {
+  display: none;
+}
+
+.level-done h2 {
+  margin: 0;
+  font-family: Fredoka, system-ui, sans-serif;
+  font-size: clamp(2.25rem, 6vw, 3.5rem);
+  line-height: 1;
+  outline: none;
+}
+
+.fun-fact {
+  margin: 0;
+  max-width: 34ch;
+  font-size: 1.4rem;
+}
+
+.level-done .button {
+  font-size: 2rem;
 }
 
 .signature {

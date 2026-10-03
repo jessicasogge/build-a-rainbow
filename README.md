@@ -2,7 +2,11 @@
 
 A browser game for elementary-age kids: put the colors in order and build a rainbow, one stripe at a time. Made for tablets, and works on computers and phones too.
 
-So far there's the opening screen and the level picker. The levels themselves (building the rainbow, mixing colors) are still to come.
+So far there's the opening screen, the level picker, and level 1:
+
+- **Color order:** tap the colors in rainbow order, red first, to fill in each stripe. A wrong pick wiggles and the helper says to try another color.
+
+Levels 2 to 4 (Mix a color, Memory rainbow, Sun and rain) are still to come.
 
 ## Running it locally
 
