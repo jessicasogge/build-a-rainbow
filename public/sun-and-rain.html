@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Sun and Rain: Build a Rainbow</title>
+    <link rel="icon" href="./favicon.svg" type="image/svg+xml" />
+    <link rel="preload" href="./fonts/fredoka-700.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body class="page level-page">
+    <header class="page-header">
+      <a class="round-button" href="./levels.html" aria-label="Back to the levels">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7" /></svg>
+      </a>
+      <h1 class="level-title">Level 4 · Sun and rain</h1>
+      <button type="button" class="round-button header-end" data-restart aria-label="Start over">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7" /><path d="M3 4v5h5" /></svg>
+      </button>
+    </header>
+
+    <main class="build">
+      <!-- The sky. sun-and-rain-page.js adds .has-sun, .has-rain, .has-snow
+           and .has-rainbow to show each part; styles.css fades them in. -->
+      <svg class="sky-scene" viewBox="0 0 800 420" role="img" aria-label="A sky: cloudy.">
+        <rect class="sky" width="800" height="420" rx="32" />
+        <g class="sky-rainbow">
+          <path d="M100 420 A300 300 0 0 1 700 420 L664 420 A264 264 0 0 0 136 420 Z" fill="#E5383B" />
+          <path d="M136 420 A264 264 0 0 1 664 420 L628 420 A228 228 0 0 0 172 420 Z" fill="#F77F00" />
+          <path d="M172 420 A228 228 0 0 1 628 420 L592 420 A192 192 0 0 0 208 420 Z" fill="#FCBF49" />
+          <path d="M208 420 A192 192 0 0 1 592 420 L556 420 A156 156 0 0 0 244 420 Z" fill="#43AA8B" />
+          <path d="M244 420 A156 156 0 0 1 556 420 L520 420 A120 120 0 0 0 280 420 Z" fill="#277DA1" />
+          <path d="M280 420 A120 120 0 0 1 520 420 L484 420 A84 84 0 0 0 316 420 Z" fill="#7B4FA0" />
+        </g>
+        <g class="sky-sun">
+          <g class="sun-rays">
+            <path d="M130 25v22M130 173v22M45 110h22M193 110h22M70 50l15 15M175 155l15 15M70 170l15-15M175 65l15-15" />
+          </g>
+          <circle cx="130" cy="110" r="52" />
+        </g>
+        <path class="sky-ground" d="M0 370 Q200 330 400 365 T800 355 V388 A32 32 0 0 1 768 420 H32 A32 32 0 0 1 0 388 Z" />
+        <g class="sky-rain">
+          <line x1="495" y1="175" x2="489" y2="197" />
+          <line x1="525" y1="200" x2="519" y2="222" />
+          <line x1="555" y1="170" x2="549" y2="192" />
+          <line x1="585" y1="195" x2="579" y2="217" />
+          <line x1="615" y1="175" x2="609" y2="197" />
+          <line x1="645" y1="205" x2="639" y2="227" />
+          <line x1="510" y1="240" x2="504" y2="262" />
+          <line x1="570" y1="235" x2="564" y2="257" />
+          <line x1="630" y1="245" x2="624" y2="267" />
+          <line x1="540" y1="280" x2="534" y2="302" />
+          <line x1="600" y1="275" x2="594" y2="297" />
+        </g>
+        <g class="sky-snow">
+          <circle cx="500" cy="185" r="6" />
+          <circle cx="535" cy="215" r="6" />
+          <circle cx="570" cy="180" r="6" />
+          <circle cx="605" cy="210" r="6" />
+          <circle cx="640" cy="185" r="6" />
+          <circle cx="515" cy="255" r="6" />
+          <circle cx="585" cy="250" r="6" />
+          <circle cx="625" cy="265" r="6" />
+          <circle cx="550" cy="290" r="6" />
+        </g>
+        <g class="sky-cloud">
+          <circle cx="520" cy="125" r="42" />
+          <circle cx="575" cy="100" r="55" />
+          <circle cx="632" cy="122" r="44" />
+          <rect x="478" y="122" width="196" height="45" rx="22" />
+        </g>
+      </svg>
+
+      <div class="helper">
+        <span class="helper-face" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><circle cx="9" cy="10" r="1" /><circle cx="15" cy="10" r="1" /><path d="M8 14.5c1.2 1.6 2.4 2.2 4 2.2s2.8-.6 4-2.2" /></svg>
+        </span>
+        <p class="helper-text" aria-live="polite">Tap the weather to make a rainbow!</p>
+      </div>
+
+      <!-- Each button turns that weather on or off. -->
+      <div class="weather-controls">
+        <button type="button" class="weather-toggle" data-weather="sun" aria-pressed="false">
+          <svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="10" fill="#FFD23F" stroke="#C98F00" stroke-width="2" /><path d="M24 4v6M24 38v6M4 24h6M38 24h6M10 10l4 4M34 34l4 4M10 38l4-4M34 14l4-4" stroke="#C98F00" stroke-width="3" stroke-linecap="round" /></svg>
+          Sun
+        </button>
+        <button type="button" class="weather-toggle" data-weather="rain" aria-pressed="false">
+          <svg viewBox="0 0 48 48" aria-hidden="true"><path d="M14 30a8 8 0 0 1 0-16 11 11 0 0 1 21 2 7 7 0 0 1-1 14z" fill="#9AA8B8" /><path d="M17 35l-2 6M25 35l-2 6M33 35l-2 6" stroke="#277DA1" stroke-width="3" stroke-linecap="round" /></svg>
+          Rain
+        </button>
+        <button type="button" class="weather-toggle" data-weather="snow" aria-pressed="false">
+          <svg viewBox="0 0 48 48" aria-hidden="true"><path d="M14 30a8 8 0 0 1 0-16 11 11 0 0 1 21 2 7 7 0 0 1-1 14z" fill="#9AA8B8" /><circle cx="16" cy="38" r="3" fill="#7FA9CC" /><circle cx="25" cy="41" r="3" fill="#7FA9CC" /><circle cx="33" cy="37" r="3" fill="#7FA9CC" /></svg>
+          Snow
+        </button>
+      </div>
+
+      <section class="level-done" hidden>
+        <h2 tabindex="-1">You made a rainbow!</h2>
+        <p class="fun-fact">Fun fact: to see a rainbow, stand with the sun behind you and the rain in front of you.</p>
+        <div class="buttons">
+          <button type="button" class="button button-levels" data-restart>Play again</button>
+          <a class="button button-play" href="./levels.html">More levels</a>
+        </div>
+      </section>
+    </main>
+
+    <footer class="signature">jsogge 2026</footer>
+
+    <script type="module">
+      import { start } from './game/sun-and-rain-page.js';
+      start();
+    </script>
+  </body>
+</html>
