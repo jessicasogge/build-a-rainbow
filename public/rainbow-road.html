@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Rainbow Road: Build a Rainbow</title>
+    <link rel="icon" href="./favicon.svg" type="image/svg+xml" />
+    <link rel="preload" href="./fonts/fredoka-700.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body class="page level-page">
+    <header class="page-header">
+      <a class="round-button" href="./levels.html" aria-label="Back to the levels">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7" /></svg>
+      </a>
+      <h1 class="level-title">Level 6 · Rainbow road</h1>
+      <p class="progress-pill">Fork 1 of 6</p>
+      <button type="button" class="round-button" data-restart aria-label="Start over">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7" /><path d="M3 4v5h5" /></svg>
+      </button>
+    </header>
+
+    <main class="build">
+      <!-- A fork in the road: three roads, each a different color, colored
+           and labeled by rainbow-road-page.js. Tap one to drive up it. -->
+      <svg class="road-scene" viewBox="0 0 600 460">
+        <rect class="grass" width="600" height="460" rx="32" />
+        <g class="road" role="button" tabindex="0">
+          <path class="road-surface" d="M300 460 Q300 270 100 110" stroke="#ffffff" />
+          <path class="road-line" d="M300 460 Q300 270 100 110" />
+          <text class="road-label" x="100" y="72" text-anchor="middle"></text>
+        </g>
+        <g class="road" role="button" tabindex="0">
+          <path class="road-surface" d="M300 460 L300 85" stroke="#ffffff" />
+          <path class="road-line" d="M300 460 L300 85" />
+          <text class="road-label" x="300" y="47" text-anchor="middle"></text>
+        </g>
+        <g class="road" role="button" tabindex="0">
+          <path class="road-surface" d="M300 460 Q300 270 500 110" stroke="#ffffff" />
+          <path class="road-line" d="M300 460 Q300 270 500 110" />
+          <text class="road-label" x="500" y="72" text-anchor="middle"></text>
+        </g>
+        <!-- The end of the trip: a rainbow with a pot of gold. -->
+        <g class="road-finish" aria-hidden="true">
+          <path d="M100 330 A200 200 0 0 1 500 330 L476 330 A176 176 0 0 0 124 330 Z" fill="#E5383B" />
+          <path d="M124 330 A176 176 0 0 1 476 330 L452 330 A152 152 0 0 0 148 330 Z" fill="#F77F00" />
+          <path d="M148 330 A152 152 0 0 1 452 330 L428 330 A128 128 0 0 0 172 330 Z" fill="#FCBF49" />
+          <path d="M172 330 A128 128 0 0 1 428 330 L404 330 A104 104 0 0 0 196 330 Z" fill="#43AA8B" />
+          <path d="M196 330 A104 104 0 0 1 404 330 L380 330 A80 80 0 0 0 220 330 Z" fill="#277DA1" />
+          <path d="M220 330 A80 80 0 0 1 380 330 L356 330 A56 56 0 0 0 244 330 Z" fill="#7B4FA0" />
+          <g class="pot">
+            <circle cx="276" cy="282" r="13" />
+            <circle cx="300" cy="274" r="14" />
+            <circle cx="324" cy="282" r="13" />
+            <circle cx="288" cy="266" r="11" />
+            <circle cx="312" cy="266" r="11" />
+            <path class="pot-body" d="M252 292 H348 L340 350 Q300 372 260 350 Z" />
+            <rect class="pot-body" x="244" y="286" width="112" height="16" rx="8" />
+          </g>
+        </g>
+        <!-- The car, seen from above, pointing up the road. -->
+        <g class="car" aria-hidden="true">
+          <rect class="car-wheel" x="270" y="378" width="10" height="20" rx="4" />
+          <rect class="car-wheel" x="320" y="378" width="10" height="20" rx="4" />
+          <rect class="car-wheel" x="270" y="420" width="10" height="20" rx="4" />
+          <rect class="car-wheel" x="320" y="420" width="10" height="20" rx="4" />
+          <rect class="car-body" x="276" y="370" width="48" height="78" rx="16" />
+          <rect class="car-window" x="284" y="384" width="32" height="18" rx="6" />
+          <rect class="car-window" x="284" y="424" width="32" height="12" rx="5" />
+        </g>
+      </svg>
+
+      <div class="helper">
+        <span class="helper-face" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><circle cx="9" cy="10" r="1" /><circle cx="15" cy="10" r="1" /><path d="M8 14.5c1.2 1.6 2.4 2.2 4 2.2s2.8-.6 4-2.2" /></svg>
+        </span>
+        <p class="helper-text" aria-live="polite">Take the red road!</p>
+      </div>
+
+      <section class="level-done" hidden>
+        <h2 tabindex="-1">You made it to the end of the rainbow!</h2>
+        <p class="fun-fact">Fun fact: you can never reach the end of a real rainbow. It moves when you move!</p>
+        <div class="buttons">
+          <button type="button" class="button button-levels" data-restart>Drive again</button>
+          <a class="button button-play" href="./levels.html">More levels</a>
+        </div>
+      </section>
+    </main>
+
+    <footer class="signature">jsogge 2026</footer>
+
+    <script type="module">
+      import { start } from './game/rainbow-road-page.js';
+      start();
+    </script>
+  </body>
+</html>
