@@ -1,5 +1,7 @@
 // Draws Level 7 (Word scramble) on word-scramble.html and handles the taps.
 // The rules live in word-scramble.js.
+import './components.js'; // the shared page pieces (header, helper, ...)
+import { wiggle } from './page-helpers.js';
 import { BOX_COLORS, WORD, isDone, message, newPuzzle, pick } from './word-scramble.js';
 
 export function start(doc = document, { random = Math.random } = {}) {
@@ -30,12 +32,6 @@ export function start(doc = document, { random = Math.random } = {}) {
     done.hidden = !finished;
     doc.querySelector('.letter-boxes').setAttribute('aria-label', finished ? 'RAINBOW' : `${puzzle.placed} of ${WORD.length} letters in place`);
     if (finished) done.querySelector('h2').focus();
-  }
-
-  function wiggle(tile) {
-    tile.classList.remove('is-wrong');
-    void tile.offsetWidth; // restart the animation if it's already running
-    tile.classList.add('is-wrong');
   }
 
   function restart() {

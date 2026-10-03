@@ -3,8 +3,8 @@
 import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { beforeEach, describe, expect, it } from 'vitest';
-import { COLORS } from '../public/game/color-order.js';
-import { fork } from '../public/game/rainbow-road.js';
+import { COLORS } from '../public/game/colors.js';
+import { turn } from '../public/game/rainbow-road.js';
 import { start } from '../public/game/rainbow-road-page.js';
 import { poseAt } from '../public/game/rainbow-road-route.js';
 
@@ -16,7 +16,7 @@ const $ = (sel) => document.querySelector(sel);
 const roads = () => [...document.querySelectorAll('.road')];
 const road = (id) => roads().find((r) => r.dataset.color === id);
 const tap = (el) => el.dispatchEvent(new MouseEvent('click', { bubbles: true }));
-const target = () => fork(level.trip).target;
+const target = () => turn(level.trip).target;
 const wrong = () => roads().map((r) => r.dataset.color).find((id) => id !== target());
 const arrive = () => { const fn = pending; pending = null; fn(); };
 const driveRight = () => { tap(road(target())); arrive(); };
@@ -91,7 +91,7 @@ describe('rainbow road page', () => {
     expect($('.progress-pill').textContent).toBe('Turn 2 of 6');
   });
 
-  it('reaches the pot of gold after six forks', () => {
+  it('reaches the pot of gold after six turns', () => {
     for (let i = 0; i < 6; i++) driveRight();
     expect($('.road-scene').classList.contains('is-done')).toBe(true);
     expect($('.level-done').hidden).toBe(false);

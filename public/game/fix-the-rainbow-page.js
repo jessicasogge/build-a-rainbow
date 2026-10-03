@@ -1,8 +1,9 @@
 // Draws Level 8 (Fix the rainbow) on fix-the-rainbow.html and handles the
 // taps. The rules live in fix-the-rainbow.js.
-import { colorOf, isFixed, message, newRainbow, tapStripe } from './fix-the-rainbow.js';
-
-const ORDINALS = ['first', 'second', 'third', 'fourth', 'fifth', 'sixth'];
+import './components.js'; // the shared page pieces (header, helper, ...)
+import { colorById } from './colors.js';
+import { isFixed, message, newRainbow, tapStripe } from './fix-the-rainbow.js';
+import { ORDINALS, onTap } from './page-helpers.js';
 
 export function start(doc = document, { random = Math.random } = {}) {
   const picture = doc.querySelector('.fix-rainbow');
@@ -18,7 +19,7 @@ export function start(doc = document, { random = Math.random } = {}) {
   function draw(result) {
     const fixed = isFixed(rainbow);
     stripes.forEach((stripe, i) => {
-      const color = colorOf(rainbow.order[i]);
+      const color = colorById(rainbow.order[i]);
       stripe.setAttribute('fill', color.hex);
       stripe.classList.toggle('is-selected', rainbow.selected === i);
       stripe.setAttribute('aria-label', `${ORDINALS[i]} stripe, ${color.name.toLowerCase()}`);
@@ -43,14 +44,7 @@ export function start(doc = document, { random = Math.random } = {}) {
   }
 
   stripes.forEach((stripe, i) => {
-    stripe.addEventListener('click', () => tap(i));
-    // The stripes are drawn shapes, so Enter and Space tap them too.
-    stripe.addEventListener('keydown', (event) => {
-      if (event.key === 'Enter' || event.key === ' ') {
-        event.preventDefault();
-        tap(i);
-      }
-    });
+    onTap(stripe, () => tap(i));
   });
 
   function restart() {

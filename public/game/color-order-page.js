@@ -1,10 +1,14 @@
 // Draws the rainbow-building levels and handles the taps:
-//   Level 2, Color order (color-order.html): the next empty stripe is outlined.
+//   Level 2, Color order (color-order.html): red starts filled in, and the
+//     next empty stripe is outlined.
 //   Level 3, Memory rainbow (memory-rainbow.html, `memory: true`): the whole
 //     rainbow shows first, until Ready is tapped. Then it's cleared and built
 //     again with no outline showing which stripe is next.
 // The rules for both live in color-order.js.
-import { COLORS, isDone, message, newGame, nextColor, pick, shuffledColors } from './color-order.js';
+import './components.js'; // the shared page pieces (header, helper, ...)
+import { COLORS } from './colors.js';
+import { isDone, message, newGame, nextColor, pick, shuffledColors } from './color-order.js';
+import { wiggle } from './page-helpers.js';
 
 export const STUDY_MESSAGE = 'Look at the rainbow! Tap Ready when you remember it.';
 
@@ -55,14 +59,8 @@ export function start(doc = document, { random = Math.random, memory = false } =
     if (finished) done.querySelector('h2').focus();
   }
 
-  function shake(swatch) {
-    swatch.classList.remove('is-wrong');
-    void swatch.offsetWidth; // restart the animation if it's already running
-    swatch.classList.add('is-wrong');
-  }
-
   function restart(event) {
-    game = newGame();
+    game = newGame(memory ? 0 : 1); // Color order starts with red in place
     tray.replaceChildren();
     swatches = shuffledColors(random).map((color) => {
       const swatch = doc.createElement('button');
@@ -77,7 +75,7 @@ export function start(doc = document, { random = Math.random, memory = false } =
         if (studying) return;
         const turn = pick(game, color.id);
         game = turn.game;
-        if (turn.result === 'wrong') shake(swatch);
+        if (turn.result === 'wrong') wiggle(swatch);
         draw(turn.result);
       });
       tray.append(swatch);

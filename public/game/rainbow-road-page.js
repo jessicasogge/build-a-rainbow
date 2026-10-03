@@ -1,14 +1,15 @@
 // Draws Level 6 (Rainbow road) on rainbow-road.html and handles the taps.
 // The rules live in rainbow-road.js; where the car drives on the roundabout
 // lives in rainbow-road-route.js.
-import { COLORS } from './color-order.js';
-import { colorName, fork, isDone, message, newTrip, pick } from './rainbow-road.js';
+import './components.js'; // the shared page pieces (header, helper, ...)
+import { colorById } from './colors.js';
+import { onTap, wiggle } from './page-helpers.js';
+import { isDone, message, newTrip, pick, turn } from './rainbow-road.js';
 import { START, carTransform, poseAt, route, turnToward } from './rainbow-road-route.js';
 
 const SPEED = 0.5; // picture units per millisecond
 const TURN_RATE = 0.5; // the most the car turns, in degrees per millisecond
 
-const hex = (id) => COLORS.find((c) => c.id === id).hex;
 const PARKED = { ...START, heading: 0 };
 
 // Drives the car along a route one animation frame at a time, calling
@@ -53,37 +54,31 @@ export function start(doc = document, { random = Math.random, animate = animateD
   let driving = false;
   let tripNumber = 0; // so a drive from before Start over can't finish later
 
-  function drawFork() {
-    const f = fork(trip);
+  function drawTurn() {
+    const t = turn(trip);
     roads.forEach((road, i) => {
-      const id = f.roads[i];
-      road.dataset.color = id;
-      road.querySelector('.road-surface').setAttribute('stroke', hex(id));
-      road.querySelector('.road-label').textContent = colorName(id);
-      road.setAttribute('aria-label', `${colorName(id)} road`);
+      const color = colorById(t.roads[i]);
+      road.dataset.color = color.id;
+      road.querySelector('.road-surface').setAttribute('stroke', color.hex);
+      road.querySelector('.road-label').textContent = color.name;
+      road.setAttribute('aria-label', `${color.name} road`);
       road.classList.remove('is-wrong');
     });
-    progress.textContent = `Turn ${trip.index + 1} of ${trip.forks.length}`;
+    progress.textContent = `Turn ${trip.index + 1} of ${trip.turns.length}`;
   }
 
   function draw(result, picked) {
     const finished = isDone(trip);
-    if (!finished && result !== 'wrong') drawFork(); // a wrong pick keeps the same fork
+    if (!finished && result !== 'wrong') drawTurn(); // a wrong pick keeps the same turn
     helper.textContent = message(trip, result, picked);
     scene.classList.toggle('is-done', finished);
     helperBox.hidden = finished;
     done.hidden = !finished;
     for (const road of roads) road.setAttribute('tabindex', finished ? '-1' : '0');
     if (finished) {
-      progress.textContent = `Turn ${trip.forks.length} of ${trip.forks.length}`;
+      progress.textContent = `Turn ${trip.turns.length} of ${trip.turns.length}`;
       done.querySelector('h2').focus();
     }
-  }
-
-  function wiggle(road) {
-    road.classList.remove('is-wrong');
-    void road.getBoundingClientRect(); // restart the animation if it's already running
-    road.classList.add('is-wrong');
   }
 
   function park() {
@@ -111,24 +106,17 @@ export function start(doc = document, { random = Math.random, animate = animateD
     const tap = () => {
       if (driving || isDone(trip)) return;
       const id = road.dataset.color;
-      const turn = pick(trip, id);
-      if (turn.result === 'wrong') {
+      const move = pick(trip, id);
+      if (move.result === 'wrong') {
         wiggle(road);
         draw('wrong', id);
         return;
       }
-      trip = turn.trip;
+      trip = move.trip;
       helper.textContent = 'Vroom!';
-      drive(i, () => draw(turn.result));
+      drive(i, () => draw(move.result));
     };
-    road.addEventListener('click', tap);
-    // The roads are drawn shapes, so Enter and Space pick them too.
-    road.addEventListener('keydown', (event) => {
-      if (event.key === 'Enter' || event.key === ' ') {
-        event.preventDefault();
-        tap();
-      }
-    });
+    onTap(road, tap);
   });
 
   function restart() {

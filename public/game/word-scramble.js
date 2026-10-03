@@ -3,26 +3,20 @@
 //
 // This file is only the rules. It doesn't touch the page, so the tests can
 // play it directly. word-scramble-page.js draws it and handles the taps.
+import { COLORS, PINK } from './colors.js';
+import { shuffleUntil } from './shuffle.js';
 
 export const WORD = 'RAINBOW';
 
 // Each box gets a rainbow color as its letter goes in: the six stripes, then
 // pink for the seventh letter.
-export const BOX_COLORS = ['#E5383B', '#F77F00', '#FCBF49', '#43AA8B', '#277DA1', '#7B4FA0', '#F28AB2'];
+export const BOX_COLORS = [...COLORS.map((c) => c.hex), PINK.hex];
 
 // The letters in a random order, never already spelling the word. RAINBOW has
 // no repeated letters, so each letter is its own tile. `random` is there so
 // tests can pass their own.
 export function scramble(random = Math.random) {
-  let letters;
-  do {
-    letters = [...WORD];
-    for (let i = letters.length - 1; i > 0; i--) {
-      const j = Math.floor(random() * (i + 1));
-      [letters[i], letters[j]] = [letters[j], letters[i]];
-    }
-  } while (letters.join('') === WORD);
-  return letters;
+  return shuffleUntil([...WORD], random, (letters) => letters.join('') === WORD);
 }
 
 export function newPuzzle(random = Math.random) {
