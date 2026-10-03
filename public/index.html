@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Build a Rainbow</title>
+    <meta name="description" content="A browser game for kids: put the colors in order and build a rainbow, one stripe at a time." />
+    <link rel="icon" href="./favicon.svg" type="image/svg+xml" />
+    <link rel="preload" href="./fonts/fredoka-700.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <!-- Sky decorations: the sun peeking in from the corner and two clouds -->
+    <div class="sun" aria-hidden="true"></div>
+    <div class="cloud cloud-left" aria-hidden="true"></div>
+    <div class="cloud cloud-right" aria-hidden="true"></div>
+
+    <main class="title-screen">
+      <!-- Six stripes, red on the outside to purple on the inside. Indigo is
+           left out, the usual simplification for young kids. -->
+      <svg class="rainbow" viewBox="0 0 640 340" role="img" aria-label="A rainbow">
+        <path class="stripe" d="M20 330 A300 300 0 0 1 620 330 L584 330 A264 264 0 0 0 56 330 Z" fill="#E5383B" />
+        <path class="stripe" d="M56 330 A264 264 0 0 1 584 330 L548 330 A228 228 0 0 0 92 330 Z" fill="#F77F00" />
+        <path class="stripe" d="M92 330 A228 228 0 0 1 548 330 L512 330 A192 192 0 0 0 128 330 Z" fill="#FCBF49" />
+        <path class="stripe" d="M128 330 A192 192 0 0 1 512 330 L476 330 A156 156 0 0 0 164 330 Z" fill="#43AA8B" />
+        <path class="stripe" d="M164 330 A156 156 0 0 1 476 330 L440 330 A120 120 0 0 0 200 330 Z" fill="#277DA1" />
+        <path class="stripe" d="M200 330 A120 120 0 0 1 440 330 L404 330 A84 84 0 0 0 236 330 Z" fill="#7B4FA0" />
+      </svg>
+
+      <h1 class="logo">Build a Rainbow</h1>
+      <p class="tagline">Put the colors in order, one stripe at a time.</p>
+
+      <!-- The game screens aren't built yet, so these don't go anywhere. -->
+      <div class="buttons">
+        <button type="button" class="button button-play" id="play">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4l13 8-13 8z" /></svg>
+          Play
+        </button>
+        <button type="button" class="button button-levels" id="levels">Levels</button>
+      </div>
+    </main>
+
+    <footer class="signature">jsogge 2026</footer>
+  </body>
+</html>
