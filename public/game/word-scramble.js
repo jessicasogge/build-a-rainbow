@@ -1,56 +1,79 @@
-// Level 7, Word scramble: the letters of RAINBOW come mixed up. Tap them in
-// order to spell the word; each right letter drops into the next box.
+// Level 7, Word scramble: the letters of a word come mixed up. Tap them in
+// order to spell it; each right letter drops into the next box. Spell
+// RAINBOW, then SUNSHINE.
 //
 // This file is only the rules. It doesn't touch the page, so the tests can
 // play it directly. word-scramble-page.js draws it and handles the taps.
 import { COLORS, PINK } from './colors.js';
 import { shuffleUntil } from './shuffle.js';
 
-export const WORD = 'RAINBOW';
+// The words, in order. `clue` is the picture shown above the boxes.
+export const WORDS = [
+  { word: 'RAINBOW', clue: 'rainbow' },
+  { word: 'SUNSHINE', clue: 'sun' },
+];
 
 // Each box gets a rainbow color as its letter goes in: the six stripes, then
-// pink for the seventh letter.
+// pink, then round again for longer words.
 export const BOX_COLORS = [...COLORS.map((c) => c.hex), PINK.hex];
+export const boxColor = (i) => BOX_COLORS[i % BOX_COLORS.length];
 
-// The letters in a random order, never already spelling the word. RAINBOW has
-// no repeated letters, so each letter is its own tile. `random` is there so
-// tests can pass their own.
-export function scramble(random = Math.random) {
-  return shuffleUntil([...WORD], random, (letters) => letters.join('') === WORD);
+// The letters of a word in a random order, never already spelling it. A word
+// can have the same letter twice (SUNSHINE has two S's and two N's), so each
+// tile is tracked by its place in the tray, not by its letter. `random` is
+// there so tests can pass their own.
+export function scramble(word, random = Math.random) {
+  return shuffleUntil([...word], random, (letters) => letters.join('') === word);
+}
+
+function startWord(wordIndex, random) {
+  return { wordIndex, tiles: scramble(WORDS[wordIndex].word, random), used: [], placed: 0 };
 }
 
 export function newPuzzle(random = Math.random) {
-  return { tiles: scramble(random), placed: 0 };
+  return startWord(0, random);
 }
 
-export function isDone(puzzle) {
-  return puzzle.placed >= WORD.length;
-}
+export const currentWord = (puzzle) => WORDS[puzzle.wordIndex].word;
+export const isWordDone = (puzzle) => puzzle.placed >= currentWord(puzzle).length;
+export const isLastWord = (puzzle) => puzzle.wordIndex === WORDS.length - 1;
+export const isDone = (puzzle) => isLastWord(puzzle) && isWordDone(puzzle);
 
 // The letter that goes in the next box (null when the word is spelled).
 export function nextLetter(puzzle) {
-  return WORD[puzzle.placed] ?? null;
+  return currentWord(puzzle)[puzzle.placed] ?? null;
 }
 
-// Tap a letter. Returns the new puzzle and what happened:
+// On to the next word, freshly scrambled.
+export function nextWord(puzzle, random = Math.random) {
+  if (!isWordDone(puzzle) || isLastWord(puzzle)) throw new Error('No next word yet');
+  return startWord(puzzle.wordIndex + 1, random);
+}
+
+// Tap the tile at `tileIndex` in the tray. Returns the new puzzle and what
+// happened:
 //   'right' – it's the next letter; it goes in the next box
-//   'done'  – right, and it was the last letter
+//   'word'  – right, and it finished a word, with another word to come
+//   'done'  – right, and it finished the last word
 //   'wrong' – not that letter yet; nothing changes
-//   'used'  – that letter is already in a box; nothing changes
-export function pick(puzzle, letter) {
-  const index = WORD.indexOf(letter);
-  if (index === -1) throw new Error(`${letter} isn't in ${WORD}`);
-  if (index < puzzle.placed || isDone(puzzle)) return { puzzle, result: 'used' };
-  if (index !== puzzle.placed) return { puzzle, result: 'wrong' };
-  const next = { ...puzzle, placed: puzzle.placed + 1 };
-  return { puzzle: next, result: isDone(next) ? 'done' : 'right' };
+//   'used'  – that tile is already in a box; nothing changes
+export function pick(puzzle, tileIndex) {
+  const letter = puzzle.tiles[tileIndex];
+  if (letter === undefined) throw new Error(`No tile ${tileIndex}`);
+  if (puzzle.used.includes(tileIndex) || isWordDone(puzzle)) return { puzzle, result: 'used' };
+  if (letter !== nextLetter(puzzle)) return { puzzle, result: 'wrong' };
+  const next = { ...puzzle, used: [...puzzle.used, tileIndex], placed: puzzle.placed + 1 };
+  if (!isWordDone(next)) return { puzzle: next, result: 'right' };
+  return { puzzle: next, result: isLastWord(next) ? 'done' : 'word' };
 }
 
 // What the helper says. Short, so a new reader can manage it.
 // `picked` is the letter that was just tapped, for a wrong pick.
 export function message(puzzle, result, picked) {
-  if (isDone(puzzle)) return 'You spelled RAINBOW!';
+  const word = currentWord(puzzle);
+  if (isDone(puzzle)) return `You spelled ${WORDS.map((w) => w.word).join(' and ')}!`;
+  if (isWordDone(puzzle)) return `You spelled ${word}! Tap Next for another word.`;
   if (result === 'wrong') return `Not ${picked} yet. Try another letter!`;
-  if (result === 'right') return `${WORD[puzzle.placed - 1]}! What comes next?`;
-  return 'Put the letters in order to spell RAINBOW.';
+  if (result === 'right') return `${word[puzzle.placed - 1]}! What comes next?`;
+  return `Put the letters in order to spell ${word}.`;
 }
