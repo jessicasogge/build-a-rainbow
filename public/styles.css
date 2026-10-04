@@ -1046,14 +1046,31 @@ button.round-button {
 
 /* ---- Word scramble ---- */
 
-.scramble-rainbow {
+.scramble-clue {
+  display: contents;
+}
+
+.scramble-rainbow,
+.scramble-sun {
   width: min(260px, 60%);
   height: auto;
 }
 
+.scramble-sun-rays {
+  fill: none;
+  stroke: #f2b705;
+  stroke-width: 10;
+  stroke-linecap: round;
+}
+
+.scramble-sun-face {
+  fill: var(--sun);
+}
+
+/* One box per letter; the page sets --letters to the word's length. */
 .letter-boxes {
   display: grid;
-  grid-template-columns: repeat(7, minmax(0, 1fr));
+  grid-template-columns: repeat(var(--letters, 7), minmax(0, 1fr));
   gap: clamp(0.35rem, 1.5vw, 0.9rem);
   width: min(700px, 100%);
 }
