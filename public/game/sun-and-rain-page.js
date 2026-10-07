@@ -16,7 +16,8 @@ export function start(doc = document) {
 
   function draw() {
     // The scene shows each kind of weather that's on, via classes on the
-    // picture: .has-sun, .has-rain, .has-snow, .has-clouds and .has-rainbow.
+    // picture: .has-sun, .has-rain, .has-snow, .has-clouds, .has-wind and
+    // .has-rainbow.
     for (const id of Object.keys(sky)) scene.classList.toggle(`has-${id}`, sky[id]);
     const rainbow = hasRainbow(sky);
     scene.classList.toggle('has-rainbow', rainbow);
@@ -58,6 +59,7 @@ function describe(sky, rainbow) {
   if (sky.rain) parts.push('it is raining');
   if (sky.snow) parts.push('it is snowing');
   if (sky.clouds) parts.push('thick clouds cover the sky');
+  if (sky.wind) parts.push('the wind is blowing');
   const weather = parts.length ? parts.join(', ') : 'grey, with one small cloud';
   return `A sky: ${weather}${rainbow ? ', and there is a rainbow' : ''}.`;
 }

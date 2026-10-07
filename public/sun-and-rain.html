@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Sun and Rain: Build a Rainbow</title>
-    <meta name="description" content="Turn the sun, rain, snow and clouds on and off until a rainbow appears. A free weather game for kids." />
+    <meta name="description" content="Turn the sun, rain, snow, clouds and wind on and off until a rainbow appears. A free weather game for kids." />
     <link rel="canonical" href="https://jessicasogge.github.io/build-a-rainbow/sun-and-rain.html" />
     <link rel="icon" href="./favicon.svg" type="image/svg+xml" />
     <link rel="preload" href="./fonts/fredoka-700.woff2" as="font" type="font/woff2" crossorigin />
@@ -15,8 +15,8 @@
 
     <main class="build">
       <!-- The sky. sun-and-rain-page.js adds .has-sun, .has-rain, .has-snow,
-           .has-clouds and .has-rainbow to show each part; styles.css fades
-           them in. -->
+           .has-clouds, .has-wind and .has-rainbow to show each part;
+           styles.css fades them in. -->
       <svg class="sky-scene" viewBox="0 0 800 420" role="img" aria-label="A sky: grey, with one small cloud.">
         <rect class="sky" width="800" height="420" rx="32" />
         <g class="sky-rainbow">
@@ -34,6 +34,12 @@
           <circle cx="130" cy="110" r="52" />
         </g>
         <path class="sky-ground" d="M0 370 Q200 330 400 365 T800 355 V388 A32 32 0 0 1 768 420 H32 A32 32 0 0 1 0 388 Z" />
+        <!-- Gusts of wind that whoosh across when Windy is on. -->
+        <g class="sky-wind">
+          <path d="M210 230 H360 q28 0 28 -22 t-24 -20" />
+          <path d="M250 275 H420 q26 0 26 20 t-22 18" />
+          <path d="M190 320 H330" />
+        </g>
         <g class="sky-rain">
           <line x1="495" y1="175" x2="489" y2="197" />
           <line x1="525" y1="200" x2="519" y2="222" />
@@ -100,6 +106,10 @@
         <button type="button" class="weather-toggle" data-weather="clouds" aria-pressed="false">
           <svg viewBox="0 0 48 48" aria-hidden="true"><path d="M12 26a7 7 0 0 1 0-14 10 10 0 0 1 19 2 6 6 0 0 1-1 12z" fill="#B7C2CE" /><path d="M18 38a8 8 0 0 1 0-16 11 11 0 0 1 21 2 7 7 0 0 1-1 14z" fill="#8492A3" /></svg>
           Cloudy
+        </button>
+        <button type="button" class="weather-toggle" data-weather="wind" aria-pressed="false">
+          <svg viewBox="0 0 48 48" aria-hidden="true"><path d="M6 18h22a6 6 0 1 0-6-6M6 26h30a6 6 0 1 1-6 6M6 34h12" fill="none" stroke="#7FA9CC" stroke-width="3.5" stroke-linecap="round" /></svg>
+          Windy
         </button>
       </div>
 

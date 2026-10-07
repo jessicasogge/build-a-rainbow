@@ -1,6 +1,7 @@
 // Level 4, Sun and rain: turn the weather on and off until there's a
 // rainbow. A rainbow needs sunshine and raindrops at the same time. Snow
-// doesn't make one, and thick clouds hide the sun.
+// doesn't make one, and thick clouds hide the sun. Wind blows the rain
+// sideways, but it can't stop a rainbow.
 //
 // This file is only the rules. It doesn't touch the page, so the tests can
 // play it directly. sun-and-rain-page.js draws it and handles the taps.
@@ -10,11 +11,12 @@ export const WEATHER = [
   { id: 'rain', name: 'Rain' },
   { id: 'snow', name: 'Snow' },
   { id: 'clouds', name: 'Cloudy' },
+  { id: 'wind', name: 'Windy' },
 ];
 
 // The sky starts plain grey: one small cloud, and nothing turned on.
 export function newSky() {
-  return { sun: false, rain: false, snow: false, clouds: false };
+  return { sun: false, rain: false, snow: false, clouds: false, wind: false };
 }
 
 // Turn one kind of weather on, or off if it's already on.
@@ -34,5 +36,6 @@ export function message(sky) {
   if (sky.clouds) return "Too many clouds! The sun can't shine through.";
   if (sky.sun) return 'Sunny! But a rainbow needs raindrops too.';
   if (sky.rain) return 'Rainy! But a rainbow needs sunshine too.';
+  if (sky.wind) return 'Whoosh! Wind is fun, but a rainbow needs sun and rain.';
   return 'Tap the weather to make a rainbow!';
 }
