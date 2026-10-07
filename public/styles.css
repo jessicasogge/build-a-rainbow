@@ -699,11 +699,13 @@ button.round-button {
   fill: #ffffff;
 }
 
-/* Sun, rain, snow and the rainbow are drawn but invisible until turned on. */
+/* Sun, rain, snow, wind and the rainbow are drawn but invisible until
+   turned on. */
 .sky-sun,
 .sky-rain,
 .sky-snow,
 .sky-clouds,
+.sky-wind,
 .sky-rainbow {
   opacity: 0;
   transition: opacity 0.4s, transform 0.4s;
@@ -765,6 +767,34 @@ button.round-button {
   to { transform: translateY(12px); }
 }
 
+/* Wind: gusts whoosh across, and the rain and snow blow sideways. */
+.sky-wind {
+  fill: none;
+  stroke: #ffffff;
+  stroke-width: 7;
+  stroke-linecap: round;
+}
+
+.has-wind .sky-wind {
+  opacity: 0.9;
+  animation: gust 1.6s ease-in-out infinite alternate;
+}
+
+.has-wind.has-rain .sky-rain,
+.has-wind.has-snow .sky-snow {
+  animation-name: blow;
+}
+
+@keyframes gust {
+  from { transform: translateX(-24px); }
+  to { transform: translateX(24px); }
+}
+
+@keyframes blow {
+  from { transform: translate(18px, -12px); }
+  to { transform: translate(-18px, 12px); }
+}
+
 .has-rainbow .sky-rainbow {
   opacity: 1;
   transition-duration: 1.2s;
@@ -772,21 +802,22 @@ button.round-button {
 
 @media (prefers-reduced-motion: reduce) {
   .has-rain .sky-rain,
-  .has-snow .sky-snow {
+  .has-snow .sky-snow,
+  .has-wind .sky-wind {
     animation: none;
   }
 }
 
 .weather-controls {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(5, minmax(0, 1fr));
   gap: 1rem;
-  width: min(820px, 100%);
+  width: min(900px, 100%);
 }
 
 @media (max-width: 600px) {
   .weather-controls {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
 
