@@ -1,11 +1,7 @@
-// Draws the rainbow-building levels and handles the taps:
-//   Level 2, Color order (color-order.html): red starts filled in, and the
-//     next empty stripe is outlined.
-//   Level 3, Memory rainbow (memory-rainbow.html, `memory: true`): the whole
-//     rainbow shows first, until Ready is tapped. Then it's cleared and built
-//     again with no outline showing which stripe is next.
-// The rules for both live in color-order.js.
-import './components.js'; // the shared page pieces (header, helper, ...)
+// Rainbow levels: color order outlines the next stripe;
+// memory shows the rainbow until Ready, then clears it with no hints.
+// Both use color-order.js.
+import './components.js';
 import { COLORS } from './colors.js';
 import { isDone, message, newGame, nextColor, pick, shuffledColors } from './color-order.js';
 import { wiggle } from './page-helpers.js';
@@ -14,6 +10,9 @@ export const STUDY_MESSAGE = 'Look at the rainbow! Tap Ready when you remember i
 
 export function start(doc = document, { random = Math.random, memory = false } = {}) {
   const stripes = [...doc.querySelectorAll('.build-stripe')];
+  if (stripes.length !== COLORS.length) {
+    throw new Error(`The rainbow has ${stripes.length} stripes but there are ${COLORS.length} colors`);
+  }
   const tray = doc.querySelector('.tray');
   const helperBox = doc.querySelector('.helper');
   const helper = doc.querySelector('.helper-text');
