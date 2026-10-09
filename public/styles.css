@@ -542,6 +542,34 @@ button.round-button {
   font-size: 2rem;
 }
 
+/* On a phone, Play again and More levels sit side by side, a bit smaller,
+   so More levels isn't pushed off the bottom of the screen. */
+@media (max-width: 600px) {
+  .level-done {
+    gap: 0.75rem;
+  }
+
+  .fun-fact {
+    font-size: 1.15rem;
+  }
+
+  .level-done .buttons {
+    flex-wrap: nowrap;
+    gap: 0.75rem;
+    width: 100%;
+    max-width: 420px;
+  }
+
+  .level-done .button {
+    flex: 1 1 0;
+    justify-content: center;
+    min-height: 64px;
+    padding: 0 0.75rem;
+    font-size: clamp(1.15rem, 5.5vw, 1.5rem);
+    white-space: nowrap;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .swatch.is-wrong {
     animation: none;
