@@ -1,21 +1,14 @@
-// Level 2, Color order: tap the colors in rainbow order, red first, and each
-// one fills in the next stripe.
-//
-// This file is only the rules. It doesn't touch the page, so the tests can
-// play it directly. color-order-page.js draws it and handles the taps.
+// Level 2: tap rainbow colors, red first, to fill stripes.
+// Testable rules only; color-order-page.js handles drawing and taps.
 import { COLORS } from './colors.js';
 import { sameOrder, shuffleUntil } from './shuffle.js';
 
-// The colors in a random order for the tray, so the right answer isn't just
-// left to right. Never returns them already in rainbow order. `random` is
-// there so tests can pass their own.
+// Shuffle tray colors, never into rainbow order; inject `random` for tests.
 export function shuffledColors(random = Math.random) {
   return shuffleUntil(COLORS, random, (order) => sameOrder(order, COLORS));
 }
 
-// A new game. `filled` is how many stripes start already in place: Color
-// order starts with red done (1) to show how it works; Memory rainbow starts
-// empty (0).
+// New game: `filled` starts at 1 (red) for Color order, 0 for Memory rainbow.
 export function newGame(filled = 0) {
   return { filled };
 }
