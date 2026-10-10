@@ -12,12 +12,8 @@ const TURN_RATE = 0.5; // the most the car turns, in degrees per millisecond
 
 const PARKED = { ...START, heading: 0 };
 
-// Drives the car along a route one animation frame at a time, calling
-// `show` with each pose, then `done` at the end. The car's heading follows
-// the road but turns at a limited rate, so it swings smoothly into and out of
-// the ring. With reduced motion on (an iPhone's Reduce Motion setting, say),
-// the car doesn't move: it shows up partway down the road it took for a
-// moment, then `done` parks it again.
+// Animate the route with smooth turns; call `show` per pose, then `done`.
+// Reduced motion: briefly show a static pose partway along, then park.
 export const STILL_MS = 900;
 export function animateDrive(r, show, done) {
   const reduce = globalThis.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
