@@ -1,10 +1,6 @@
-// Level 4, Sun and rain: turn the weather on and off until there's a
-// rainbow. A rainbow needs sunshine and raindrops at the same time. Snow
-// doesn't make one, and thick clouds hide the sun. Wind blows the rain
-// sideways, but it can't stop a rainbow.
-//
-// This file is only the rules. It doesn't touch the page, so the tests can
-// play it directly. sun-and-rain-page.js draws it and handles the taps.
+// Level 4: toggle weather for a rainbow—sun + rain, no thick clouds.
+// Snow won't help; wind won't stop it.
+// Testable rules only; sun-and-rain-page.js handles drawing and taps.
 
 export const WEATHER = [
   { id: 'sun', name: 'Sun' },

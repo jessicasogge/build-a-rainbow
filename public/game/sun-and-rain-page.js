@@ -15,9 +15,7 @@ export function start(doc = document) {
   let sky;
 
   function draw() {
-    // The scene shows each kind of weather that's on, via classes on the
-    // picture: .has-sun, .has-rain, .has-snow, .has-clouds, .has-wind and
-    // .has-rainbow.
+    // Picture classes toggle weather: .has-{sun,rain,snow,clouds,wind,rainbow}.
     for (const id of Object.keys(sky)) scene.classList.toggle(`has-${id}`, sky[id]);
     const rainbow = hasRainbow(sky);
     scene.classList.toggle('has-rainbow', rainbow);

@@ -1,9 +1,5 @@
-// Level 7, Word scramble: the letters of a word come mixed up. Tap them in
-// order to spell it; each right letter drops into the next box. Spell
-// RAINBOW, then SUNSHINE.
-//
-// This file is only the rules. It doesn't touch the page, so the tests can
-// play it directly. word-scramble-page.js draws it and handles the taps.
+// Level 7: tap scrambled letters to spell RAINBOW, then SUNSHINE.
+// Testable rules only; word-scramble-page.js handles drawing and taps.
 import { COLORS, PINK } from './colors.js';
 import { shuffleUntil } from './shuffle.js';
 
@@ -13,15 +9,12 @@ export const WORDS = [
   { word: 'SUNSHINE', clue: 'sun' },
 ];
 
-// Each box gets a rainbow color as its letter goes in: the six stripes, then
-// pink, then round again for longer words.
+// Filled boxes cycle through six rainbow colors, then pink.
 export const BOX_COLORS = [...COLORS.map((c) => c.hex), PINK.hex];
 export const boxColor = (i) => BOX_COLORS[i % BOX_COLORS.length];
 
-// The letters of a word in a random order, never already spelling it. A word
-// can have the same letter twice (SUNSHINE has two S's and two N's), so each
-// tile is tracked by its place in the tray, not by its letter. `random` is
-// there so tests can pass their own.
+// Shuffle letters, never into word order; track tiles by tray index for repeats.
+// Inject `random` for tests.
 export function scramble(word, random = Math.random) {
   return shuffleUntil([...word], random, (letters) => letters.join('') === word);
 }
