@@ -4,18 +4,19 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Word Scramble: Build a Rainbow</title>
-    <meta name="description" content="Put the scrambled letters of RAINBOW, then SUNSHINE, back in order. A free spelling game for kids." />
+    <meta name="description" content="Put the scrambled letters of RAINBOW, SUNSHINE and CLOUDS back in order. A free spelling game for kids." />
     <link rel="canonical" href="https://jessicasogge.github.io/build-a-rainbow/word-scramble.html" />
     <link rel="icon" href="./favicon.svg" type="image/svg+xml" />
     <link rel="preload" href="./fonts/fredoka-700.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="stylesheet" href="./styles.css" />
   </head>
   <body class="page level-page">
-    <level-header number="7" name="Word scramble" counter="Word 1 of 2"></level-header>
+    <level-header number="7" name="Word scramble" counter="Word 1 of 3"></level-header>
 
     <main class="build">
-      <!-- A picture of the word, as a clue: a rainbow for RAINBOW and a sun
-           for SUNSHINE. word-scramble-page.js shows the one for the word. -->
+      <!-- A picture of the word, as a clue: a rainbow for RAINBOW, a sun for
+           SUNSHINE and clouds for CLOUDS. word-scramble-page.js shows the
+           one for the word. -->
       <span data-clue="rainbow" class="scramble-clue">
         <rainbow-stripes svg-class="scramble-rainbow" viewbox="0 0 320 162" cx="160" base="160" outer="150" inner="18"></rainbow-stripes>
       </span>
@@ -24,6 +25,28 @@
           <path d="M160 6v22M160 134v22M86 81h22M212 81h22M108 29l15 15M197 118l15 15M212 29l-15 15M123 118l-15 15" />
         </g>
         <circle class="scramble-sun-face" cx="160" cy="81" r="44" />
+      </svg>
+      <svg data-clue="clouds" class="scramble-clouds" viewBox="0 0 320 162" aria-hidden="true" hidden>
+        <g class="scramble-cloud-back">
+          <circle cx="206" cy="58" r="30" />
+          <circle cx="244" cy="44" r="38" />
+          <circle cx="282" cy="62" r="28" />
+          <rect x="176" y="58" width="134" height="32" rx="16" />
+        </g>
+        <!-- The front cloud is drawn twice: a grey outline underneath, then
+             white on top, so its circles read as one puffy cloud. -->
+        <g class="scramble-cloud-outline">
+          <circle cx="62" cy="104" r="34" />
+          <circle cx="112" cy="80" r="46" />
+          <circle cx="164" cy="100" r="36" />
+          <rect x="28" y="100" width="172" height="40" rx="20" />
+        </g>
+        <g class="scramble-cloud-front">
+          <circle cx="62" cy="104" r="34" />
+          <circle cx="112" cy="80" r="46" />
+          <circle cx="164" cy="100" r="36" />
+          <rect x="28" y="100" width="172" height="40" rx="20" />
+        </g>
       </svg>
 
       <!-- A box for each letter of the word. word-scramble-page.js makes
@@ -40,8 +63,8 @@
         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4l13 8-13 8z" /></svg>
       </button>
 
-      <level-done heading="You spelled RAINBOW and SUNSHINE!">
-        Fun fact: both words are made of two smaller words, rain + bow and sun + shine. And it takes sunshine and rain at the same time to make a rainbow!
+      <level-done heading="You spelled RAINBOW, SUNSHINE and CLOUDS!">
+        Fun fact: RAINBOW and SUNSHINE are each made of two smaller words, rain + bow and sun + shine. And it takes sunshine and rain at the same time to make a rainbow!
       </level-done>
     </main>
 

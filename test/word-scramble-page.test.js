@@ -26,7 +26,7 @@ beforeEach(() => {
 describe('word scramble page', () => {
   it('is level 7, starting on RAINBOW: seven empty boxes, seven scrambled letters and a rainbow', () => {
     expect($('.level-title').textContent).toBe('Level 7 · Word scramble');
-    expect($('.progress-pill').textContent).toBe('Word 1 of 2');
+    expect($('.progress-pill').textContent).toBe('Word 1 of 3');
     expect(boxes()).toHaveLength(7);
     expect(filled()).toBe(0);
     const letters = tiles().map((t) => t.textContent);
@@ -68,7 +68,7 @@ describe('word scramble page', () => {
   it('Next brings SUNSHINE: eight boxes, eight letters and a sun', () => {
     spell('RAINBOW');
     $('#next').click();
-    expect($('.progress-pill').textContent).toBe('Word 2 of 2');
+    expect($('.progress-pill').textContent).toBe('Word 2 of 3');
     expect(boxes()).toHaveLength(8);
     expect(filled()).toBe(0);
     expect($('.letter-boxes').style.getPropertyValue('--letters')).toBe('8');
@@ -80,14 +80,30 @@ describe('word scramble page', () => {
     expect($('.helper-text').textContent).toBe('Put the letters in order to spell SUNSHINE.');
   });
 
-  it('celebrates when SUNSHINE is spelled too', () => {
+  it('Next after SUNSHINE brings CLOUDS: six boxes, six letters and clouds', () => {
     spell('RAINBOW');
     $('#next').click();
     spell('SUNSHINE');
-    expect(boxes().map((b) => b.textContent).join('')).toBe('SUNSHINE');
+    expect($('.level-done').hidden).toBe(true);
+    expect($('#next').hidden).toBe(false);
+    $('#next').click();
+    expect($('.progress-pill').textContent).toBe('Word 3 of 3');
+    expect(boxes()).toHaveLength(6);
+    expect([...tiles().map((t) => t.textContent)].sort()).toEqual([...'CLOUDS'].sort());
+    expect(clueShown()).toEqual(['clouds']);
+    expect($('.helper-text').textContent).toBe('Put the letters in order to spell CLOUDS.');
+  });
+
+  it('celebrates when CLOUDS is spelled too', () => {
+    spell('RAINBOW');
+    $('#next').click();
+    spell('SUNSHINE');
+    $('#next').click();
+    spell('CLOUDS');
+    expect(boxes().map((b) => b.textContent).join('')).toBe('CLOUDS');
     expect($('.level-done').hidden).toBe(false);
     expect($('#next').hidden).toBe(true);
-    expect($('.letter-boxes').getAttribute('aria-label')).toBe('SUNSHINE');
+    expect($('.letter-boxes').getAttribute('aria-label')).toBe('CLOUDS');
     expect(document.activeElement).toBe($('.level-done h2'));
   });
 
@@ -95,12 +111,14 @@ describe('word scramble page', () => {
     spell('RAINBOW');
     $('#next').click();
     spell('SUNSHINE');
+    $('#next').click();
+    spell('CLOUDS');
     $('.level-done [data-restart]').click();
     expect(level.puzzle.wordIndex).toBe(0);
     expect(boxes()).toHaveLength(7);
     expect(filled()).toBe(0);
     expect(clueShown()).toEqual(['rainbow']);
-    expect($('.progress-pill').textContent).toBe('Word 1 of 2');
+    expect($('.progress-pill').textContent).toBe('Word 1 of 3');
     expect($('.level-done').hidden).toBe(true);
   });
 

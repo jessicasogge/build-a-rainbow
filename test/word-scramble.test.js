@@ -20,8 +20,9 @@ function spell(puzzle) {
 const tileOf = (puzzle, letter) => puzzle.tiles.findIndex((l, j) => l === letter && !puzzle.used.includes(j));
 
 describe('the words', () => {
-  it('are RAINBOW, then SUNSHINE', () => {
-    expect(WORDS.map((w) => w.word)).toEqual(['RAINBOW', 'SUNSHINE']);
+  it('are RAINBOW, SUNSHINE, then CLOUDS', () => {
+    expect(WORDS.map((w) => w.word)).toEqual(['RAINBOW', 'SUNSHINE', 'CLOUDS']);
+    expect(WORDS.map((w) => w.clue)).toEqual(['rainbow', 'sun', 'clouds']);
   });
 
   it('give every box a rainbow color, going round again for longer words', () => {
@@ -100,8 +101,20 @@ describe('pick', () => {
     expect(pick(puzzle, firstS).result).toBe('wrong'); // U comes next
   });
 
-  it('is done after the last letter of SUNSHINE', () => {
+  it('has another word to come after SUNSHINE', () => {
     const { puzzle, result } = spell(nextWord(spell(newPuzzle()).puzzle));
+    expect(result).toBe('word');
+    expect(isDone(puzzle)).toBe(false);
+  });
+
+  it('moves on to CLOUDS after SUNSHINE', () => {
+    const puzzle = nextWord(spell(nextWord(spell(newPuzzle()).puzzle)).puzzle);
+    expect(currentWord(puzzle)).toBe('CLOUDS');
+    expect([...puzzle.tiles].sort()).toEqual([...'CLOUDS'].sort());
+  });
+
+  it('is done after the last letter of CLOUDS', () => {
+    const { puzzle, result } = spell(nextWord(spell(nextWord(spell(newPuzzle()).puzzle)).puzzle));
     expect(result).toBe('done');
     expect(isDone(puzzle)).toBe(true);
   });
@@ -135,8 +148,8 @@ describe('message', () => {
     expect(message(nextWord(spell(newPuzzle()).puzzle))).toBe('Put the letters in order to spell SUNSHINE.');
   });
 
-  it('celebrates both words at the end', () => {
-    const { puzzle, result } = spell(nextWord(spell(newPuzzle()).puzzle));
-    expect(message(puzzle, result)).toBe('You spelled RAINBOW and SUNSHINE!');
+  it('celebrates all three words at the end', () => {
+    const { puzzle, result } = spell(nextWord(spell(nextWord(spell(newPuzzle()).puzzle)).puzzle));
+    expect(message(puzzle, result)).toBe('You spelled RAINBOW, SUNSHINE and CLOUDS!');
   });
 });
