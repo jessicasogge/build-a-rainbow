@@ -1110,7 +1110,8 @@ button.round-button {
 }
 
 .scramble-rainbow,
-.scramble-sun {
+.scramble-sun,
+.scramble-clouds {
   width: min(260px, 60%);
   height: auto;
 }
@@ -1124,6 +1125,20 @@ button.round-button {
 
 .scramble-sun-face {
   fill: var(--sun);
+}
+
+.scramble-cloud-back {
+  fill: #e3eaf1;
+}
+
+.scramble-cloud-outline {
+  fill: #9aa8b8;
+  stroke: #9aa8b8;
+  stroke-width: 8;
+}
+
+.scramble-cloud-front {
+  fill: #ffffff;
 }
 
 /* One box per letter; the page sets --letters to the word's length. */

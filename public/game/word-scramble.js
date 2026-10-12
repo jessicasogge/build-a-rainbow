@@ -1,4 +1,4 @@
-// Level 7: tap scrambled letters to spell RAINBOW, then SUNSHINE.
+// Level 7: tap scrambled letters to spell RAINBOW, SUNSHINE, then CLOUDS.
 // Testable rules only; word-scramble-page.js handles drawing and taps.
 import { COLORS, PINK } from './colors.js';
 import { shuffleUntil } from './shuffle.js';
@@ -7,6 +7,7 @@ import { shuffleUntil } from './shuffle.js';
 export const WORDS = [
   { word: 'RAINBOW', clue: 'rainbow' },
   { word: 'SUNSHINE', clue: 'sun' },
+  { word: 'CLOUDS', clue: 'clouds' },
 ];
 
 // Filled boxes cycle through six rainbow colors, then pink.
@@ -64,9 +65,15 @@ export function pick(puzzle, tileIndex) {
 // `picked` is the letter that was just tapped, for a wrong pick.
 export function message(puzzle, result, picked) {
   const word = currentWord(puzzle);
-  if (isDone(puzzle)) return `You spelled ${WORDS.map((w) => w.word).join(' and ')}!`;
+  if (isDone(puzzle)) return `You spelled ${listWords()}!`;
   if (isWordDone(puzzle)) return `You spelled ${word}! Tap Next for another word.`;
   if (result === 'wrong') return `Not ${picked} yet. Try another letter!`;
   if (result === 'right') return `${word[puzzle.placed - 1]}! What comes next?`;
   return `Put the letters in order to spell ${word}.`;
+}
+
+// All the words, as "RAINBOW, SUNSHINE and CLOUDS".
+function listWords() {
+  const words = WORDS.map((w) => w.word);
+  return `${words.slice(0, -1).join(', ')} and ${words.at(-1)}`;
 }
