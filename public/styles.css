@@ -665,17 +665,16 @@ button.round-button {
   backface-visibility: hidden;
 }
 
-/* The back: dark navy, not one of the six colors, with a big white
-   question mark. */
+/* The back: pale sky with a little rainbow on two clouds. It shows every
+   color, so it can't be mistaken for a face-up card. */
 .card-back {
-  background: var(--ink);
+  background: linear-gradient(#e8f6ff, #cdeaff);
   border: 4px solid #ffffff;
 }
 
-.card-back::after {
-  content: '?';
-  color: #ffffff;
-  font-size: 2.4em;
+.card-back svg {
+  width: 96%;
+  height: auto;
 }
 
 .card-face {
