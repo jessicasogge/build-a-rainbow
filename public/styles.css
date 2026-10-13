@@ -576,7 +576,7 @@ button.round-button {
   }
 }
 
-/* ---- Color order and Memory rainbow ---- */
+/* ---- Color order ---- */
 
 .build-rainbow {
   width: min(700px, 100%);
@@ -606,6 +606,116 @@ button.round-button {
 
 @media (prefers-reduced-motion: reduce) {
   .build-stripe.is-filled {
+    animation: none;
+  }
+}
+
+/* ---- Memory rainbow ---- */
+
+/* Twelve cards in four columns, on phones too, so they all fit at once. */
+.memory-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: clamp(0.5rem, 2vw, 1.1rem);
+  width: min(620px, 100%);
+}
+
+.memory-rainbow {
+  width: min(480px, 100%);
+  height: auto;
+}
+
+/* Each card is a button; the page sets --card-color to its color. Its
+   inside turns over to show the face when the card is .is-up. */
+.memory-card {
+  aspect-ratio: 3 / 4;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--ink);
+  font-family: Fredoka, system-ui, sans-serif;
+  font-size: clamp(0.85rem, 3.6vw, 1.4rem);
+  cursor: pointer;
+  perspective: 600px;
+}
+
+.card-inner {
+  position: relative;
+  display: block;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 0.35s;
+}
+
+.memory-card.is-up .card-inner {
+  transform: rotateY(180deg);
+}
+
+.card-back,
+.card-face {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4em;
+  border-radius: clamp(12px, 3vw, 22px);
+  box-shadow: 0 6px 0 var(--cloud-shadow);
+  backface-visibility: hidden;
+}
+
+/* The back: pale sky with a little rainbow on two clouds. It shows every
+   color, so it can't be mistaken for a face-up card. */
+.card-back {
+  background: linear-gradient(#e8f6ff, #cdeaff);
+  border: 4px solid #ffffff;
+}
+
+.card-back svg {
+  width: 96%;
+  height: auto;
+}
+
+.card-face {
+  background: #ffffff;
+  transform: rotateY(180deg);
+}
+
+.card-dot {
+  width: 56%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: var(--card-color);
+}
+
+/* A found pair gets an outline in its color. */
+.memory-card.is-matched {
+  cursor: default;
+  animation: pop 0.35s ease-out 0.3s;
+}
+
+.memory-card.is-matched .card-face {
+  box-shadow: inset 0 0 0 5px var(--card-color), 0 6px 0 var(--cloud-shadow);
+}
+
+.memory-card.is-wrong {
+  animation: wiggle 0.4s;
+}
+
+.memory-card:focus-visible {
+  outline: 4px solid var(--ink);
+  outline-offset: 4px;
+  border-radius: 22px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card-inner {
+    transition: none;
+  }
+
+  .memory-card.is-wrong,
+  .memory-card.is-matched {
     animation: none;
   }
 }
