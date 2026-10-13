@@ -2,87 +2,106 @@
 // @vitest-environment jsdom
 import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
-import { beforeEach, describe, expect, it } from 'vitest';
-import { COLORS } from '../public/game/colors.js';
-import { STUDY_MESSAGE, start } from '../public/game/color-order-page.js';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+import { COLOR_IDS } from '../public/game/colors.js';
+import { HIDE_AFTER, start } from '../public/game/memory-rainbow-page.js';
 
 const html = readFileSync(join(process.cwd(), 'public/memory-rainbow.html'), 'utf8');
 
 let level;
 const $ = (sel) => document.querySelector(sel);
-const swatch = (id) => $(`.swatch[data-color="${id}"]`);
-const stripes = () => [...document.querySelectorAll('.build-stripe')];
-const filledCount = () => stripes().filter((s) => s.classList.contains('is-filled')).length;
+const cards = () => [...document.querySelectorAll('.memory-card')];
+const ofColor = (color) => cards().filter((c) => c.dataset.color === color);
+const notColor = (color) => cards().find((c) => c.dataset.color !== color);
+const upCount = () => cards().filter((c) => c.classList.contains('is-up')).length;
+const findPair = (color) => ofColor(color).forEach((c) => c.click());
 
 beforeEach(() => {
+  vi.useFakeTimers();
   document.documentElement.innerHTML = new DOMParser().parseFromString(html, 'text/html').documentElement.innerHTML;
-  // The page itself starts the level with { memory: true }; do the same here.
-  level = start(document, { memory: true });
+  level = start(document);
+});
+
+afterEach(() => {
+  vi.useRealTimers();
 });
 
 describe('memory rainbow page', () => {
-  it('is level 3', () => {
+  it('is level 3, with twelve cards face down', () => {
     expect($('.level-title').textContent).toBe('Level 3 · Memory rainbow');
-    expect(html).toContain("start(document, { memory: true });");
-  });
-
-  it('starts by showing the whole rainbow, with a Ready button and no color buttons', () => {
-    expect(level.studying).toBe(true);
-    expect(filledCount()).toBe(6);
-    expect(stripes().map((s) => s.getAttribute('fill'))).toEqual(COLORS.map((c) => c.hex));
-    expect($('.helper-text').textContent).toBe(STUDY_MESSAGE);
-    expect($('#ready').hidden).toBe(false);
-    expect($('.tray').hidden).toBe(true);
-  });
-
-  it('clears the rainbow when Ready is tapped', () => {
-    $('#ready').click();
-    expect(level.studying).toBe(false);
-    expect(filledCount()).toBe(0);
-    expect($('#ready').hidden).toBe(true);
-    expect($('.tray').hidden).toBe(false);
-    expect($('.helper-text').textContent).toBe('Which color goes on top?');
-  });
-
-  it('gives no hint about which stripe is next', () => {
-    $('#ready').click();
-    expect(document.querySelectorAll('.build-stripe.is-next')).toHaveLength(0);
-    swatch('red').click();
-    expect(document.querySelectorAll('.build-stripe.is-next')).toHaveLength(0);
-  });
-
-  it('builds the rainbow from memory, wiggling wrong picks', () => {
-    $('#ready').click();
-    swatch('blue').click();
-    expect(filledCount()).toBe(0);
-    expect(swatch('blue').classList.contains('is-wrong')).toBe(true);
-    swatch('red').click();
-    expect(filledCount()).toBe(1);
-  });
-
-  it('celebrates when the rainbow is rebuilt', () => {
-    $('#ready').click();
-    for (const { id } of COLORS) swatch(id).click();
-    expect($('.level-done').hidden).toBe(false);
-    expect($('.level-done h2').textContent).toBe('You remembered the whole rainbow!');
-    expect($('.tray').hidden).toBe(true);
-  });
-
-  it('goes back to looking at the rainbow on Play again', () => {
-    $('#ready').click();
-    for (const { id } of COLORS) swatch(id).click();
-    $('.level-done [data-restart]').click();
-    expect(level.studying).toBe(true);
-    expect(filledCount()).toBe(6);
-    expect($('#ready').hidden).toBe(false);
+    expect($('.progress-pill').textContent).toBe('0 of 6 pairs');
+    expect(cards()).toHaveLength(12);
+    expect(upCount()).toBe(0);
+    expect(cards()[0].getAttribute('aria-label')).toBe('Card 1, face down');
+    expect($('.helper-text').textContent).toBe('Turn over two cards to find a matching pair.');
     expect($('.level-done').hidden).toBe(true);
   });
 
-  it('goes back to looking at the rainbow on Start over, partway through', () => {
-    $('#ready').click();
-    swatch('red').click();
-    $('header [data-restart]').click();
-    expect(level.studying).toBe(true);
-    expect($('#ready').hidden).toBe(false);
+  it('turns a card over when it is tapped', () => {
+    const [red] = ofColor('red');
+    red.click();
+    expect(red.classList.contains('is-up')).toBe(true);
+    expect(red.getAttribute('aria-label')).toMatch(/, red$/);
+    expect($('.helper-text').textContent).toBe('Red! Where is the other one?');
+  });
+
+  it('keeps a pair face up and counts it', () => {
+    findPair('red');
+    for (const card of ofColor('red')) {
+      expect(card.classList.contains('is-matched')).toBe(true);
+      expect(card.disabled).toBe(true);
+    }
+    expect($('.progress-pill').textContent).toBe('1 of 6 pairs');
+    expect($('.helper-text').textContent).toBe('Two red cards. A match!');
+  });
+
+  it('turns two cards that do not match back over after a moment', () => {
+    const [red] = ofColor('red');
+    const other = notColor('red');
+    red.click();
+    other.click();
+    expect(upCount()).toBe(2);
+    expect(other.classList.contains('is-wrong')).toBe(true);
+    expect($('.helper-text').textContent).toMatch(/^Red and .+ don't match\. Try again!$/);
+    vi.advanceTimersByTime(HIDE_AFTER);
+    expect(upCount()).toBe(0);
+  });
+
+  it('lets a quick player tap the next card without waiting', () => {
+    const [red] = ofColor('red');
+    const other = notColor('red');
+    red.click();
+    other.click();
+    const third = cards().find((c) => c !== red && c !== other);
+    third.click();
+    expect(upCount()).toBe(1);
+    expect(third.classList.contains('is-up')).toBe(true);
+    vi.advanceTimersByTime(HIDE_AFTER);
+    expect(third.classList.contains('is-up')).toBe(true); // the old timer doesn't hide it
+  });
+
+  it('celebrates when every pair is found', () => {
+    COLOR_IDS.forEach(findPair);
+    expect($('.progress-pill').textContent).toBe('6 of 6 pairs');
+    expect($('.level-done').hidden).toBe(false);
+    expect($('.helper').hidden).toBe(true);
+    expect($('.memory-grid').hidden).toBe(true);
+    expect($('rainbow-stripes').hidden).toBe(false);
+    expect(document.activeElement).toBe($('.level-done h2'));
+  });
+
+  it('deals a fresh set of cards on Play again', () => {
+    COLOR_IDS.forEach(findPair);
+    $('.level-done [data-restart]').click();
+    expect(level.game.matched).toEqual([]);
+    expect(upCount()).toBe(0);
+    expect($('.progress-pill').textContent).toBe('0 of 6 pairs');
+    expect($('.memory-grid').hidden).toBe(false);
+    expect($('rainbow-stripes').hidden).toBe(true);
+    expect($('.level-done').hidden).toBe(true);
+  });
+
+  it('has a way back to the levels', () => {
+    expect($('header a.round-button').getAttribute('href')).toBe('./levels.html');
   });
 });

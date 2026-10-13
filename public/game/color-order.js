@@ -8,7 +8,7 @@ export function shuffledColors(random = Math.random) {
   return shuffleUntil(COLORS, random, (order) => sameOrder(order, COLORS));
 }
 
-// New game: `filled` starts at 1 (red) for Color order, 0 for Memory rainbow.
+// New game with `filled` stripes already in. The level starts with red in (1).
 export function newGame(filled = 0) {
   return { filled };
 }

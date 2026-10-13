@@ -4,29 +4,26 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Memory Rainbow: Build a Rainbow</title>
-    <meta name="description" content="Look at the rainbow, then build it again from memory. A free memory game for kids." />
+    <meta name="description" content="Turn over the cards two at a time to find every pair of rainbow colors. A free memory game for kids." />
     <link rel="canonical" href="https://jessicasogge.github.io/build-a-rainbow/memory-rainbow.html" />
     <link rel="icon" href="./favicon.svg" type="image/svg+xml" />
     <link rel="preload" href="./fonts/fredoka-700.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="stylesheet" href="./styles.css" />
   </head>
   <body class="page level-page">
-    <level-header number="3" name="Memory rainbow"></level-header>
+    <level-header number="3" name="Memory rainbow" counter="0 of 6 pairs"></level-header>
 
     <main class="build">
-      <!-- First the whole rainbow shows, to remember. After Ready, the stripes
-           empty and color-order-page.js fills them back in as they're picked,
-           with no outline showing which one is next. -->
-      <rainbow-stripes svg-class="build-rainbow" stripe-class="build-stripe" blank></rainbow-stripes>
+      <helper-bubble>Turn over two cards to find a matching pair.</helper-bubble>
 
-      <helper-bubble>Look at the rainbow! Tap Ready when you remember it.</helper-bubble>
+      <!-- Twelve cards, two of each color, face down. Added by
+           memory-rainbow-page.js, which turns them over as they're tapped. -->
+      <div class="memory-grid"></div>
 
-      <button type="button" class="button button-play" id="ready">Ready!</button>
+      <!-- Takes the cards' place once every pair is found. -->
+      <rainbow-stripes svg-class="memory-rainbow" hidden></rainbow-stripes>
 
-      <!-- The color buttons, in a shuffled order. Added by color-order-page.js. -->
-      <div class="tray"></div>
-
-      <level-done heading="You remembered the whole rainbow!">
+      <level-done heading="You found every pair!">
         Fun fact: sometimes there's a second, fainter rainbow above the first, with its colors in the opposite order.
       </level-done>
     </main>
@@ -34,8 +31,8 @@
     <footer class="signature">jsogge 2026</footer>
 
     <script type="module">
-      import { start } from './game/color-order-page.js';
-      start(document, { memory: true });
+      import { start } from './game/memory-rainbow-page.js';
+      start();
     </script>
   </body>
 </html>

@@ -122,11 +122,14 @@ const PICTURES = {
     <path d="M44 14.8 A20 20 0 0 1 44 45.2 A20 20 0 0 1 44 14.8 Z" fill="${ORANGE}" />`,
   // A rainbow being built: red and orange in, the rest still outlines.
   'color-order': tinyRainbow((i) => (i < 2 ? COLORS[i].hex : '#ffffff'), ' stroke="#7FA9CC" stroke-width="1.5"'),
-  // A rainbow to remember, with a thought-bubble question mark.
+  // Memory cards: a matching pair of reds turned over, one still face down.
   'memory-rainbow': `
-    ${tinyRainbow((i) => COLORS[i].hex)}
-    <circle cx="74" cy="13" r="11" fill="#ffffff" stroke="${ink}" stroke-width="2.5" />
-    <text x="74" y="18.5" text-anchor="middle" font-family="Fredoka, system-ui, sans-serif" font-weight="700" font-size="16" fill="${ink}">?</text>`,
+    <rect x="4" y="8" width="24" height="34" rx="5" fill="#ffffff" stroke="${ink}" stroke-width="2" transform="rotate(-6 16 25)" />
+    <circle cx="16" cy="25" r="7" fill="${RED}" transform="rotate(-6 16 25)" />
+    <rect x="32" y="12" width="24" height="34" rx="5" fill="#ffffff" stroke="${ink}" stroke-width="2" />
+    <circle cx="44" cy="29" r="7" fill="${RED}" />
+    <rect x="60" y="8" width="24" height="34" rx="5" fill="${ink}" stroke="${ink}" stroke-width="2" transform="rotate(6 72 25)" />
+    <text x="72" y="31" text-anchor="middle" font-family="Fredoka, system-ui, sans-serif" font-weight="700" font-size="16" fill="#ffffff" transform="rotate(6 72 25)">?</text>`,
   // The sun peeking out behind a rain cloud.
   'sun-and-rain': `
     <g stroke="#F2B705" stroke-width="3.5" stroke-linecap="round">
