@@ -30,6 +30,8 @@ To run the tests:
 npm test
 ```
 
+GitHub runs the tests on every pull request, and again before each deploy to the live site. If any test fails, the site isn't updated.
+
 ## How the code is organized
 
 Each level is three files, plus a test for each part:
