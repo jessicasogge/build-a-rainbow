@@ -1,32 +1,11 @@
-// Shared pieces of the pages, written once here instead of copied into every
-// HTML file. Each one is a small custom HTML element that, when the page
-// loads, fills itself in with the same markup the pages used to repeat by
-// hand, so the styles and the level code work on it unchanged.
+// Shared page components, rendered once and filled in on load.
 //
-//   <level-header number="2" name="Color order" counter="Turn 1 of 6">
-//     The Back button, the level's title, an optional counter, and Start over.
-//
-//   <helper-bubble>What color do they make?</helper-bubble>
-//     The smiling helper and what it says first.
-//
-//   <level-done heading="You did it!" again="Play again" next="More levels">
-//     Fun fact: ...
-//   </level-done>
-//     The panel shown when a level is finished: heading, fun fact, and the
-//     Play again and More levels buttons.
-//
-//   <rainbow-stripes svg-class="build-rainbow" stripe-class="build-stripe" blank>
-//     The rainbow picture, six stripes drawn from one shape. Options:
-//       svg-class, stripe-class  classes for the picture and each stripe
-//       blank                    white stripes, for a level to color in
-//       tappable                 stripes are buttons (for tapping)
-//       label="A rainbow"        a description for screen readers
-//       highlight                adds Fix the rainbow's outline shape
-//       viewbox, cx, base, outer, inner  the size and shape (see stripePath)
-//
-//   <level-picture level="mix-a-color">
-//     The small picture on a level's card in the level picker, so each card
-//     looks different at a glance, even to kids who can't read yet.
+// <level-header number name counter>: Back, title, optional counter, Start over.
+// <helper-bubble>: helper with its opening message.
+// <level-done heading again next>: finished panel with fun fact and buttons.
+// <rainbow-stripes>: six-stripe rainbow; options set classes, blank/tappable/
+//   highlight modes, screen-reader label, and geometry (see stripePath).
+// <level-picture level>: card thumbnail for the level picker.
 import { COLORS } from './colors.js';
 
 // The path for one stripe of a rainbow centered at `cx` on the line `base`,

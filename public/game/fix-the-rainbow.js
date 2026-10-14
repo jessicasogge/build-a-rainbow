@@ -1,8 +1,5 @@
-// Level 8, Fix the rainbow: the stripes come jumbled. Tap one stripe, then
-// another, to swap them, until every color is back in its place.
-//
-// This file is only the rules. It doesn't touch the page, so the tests can
-// play it directly. fix-the-rainbow-page.js draws it and handles the taps.
+// Level 8: swap jumbled stripes by tapping pairs until the rainbow is fixed.
+// Testable rules only; fix-the-rainbow-page.js handles drawing and taps.
 import { COLOR_IDS as RIGHT_ORDER, colorById } from './colors.js';
 import { shuffleUntil } from './shuffle.js';
 
