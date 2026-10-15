@@ -1,18 +1,13 @@
-// Level 3, Memory rainbow: twelve cards lie face down, two of each rainbow
-// color. Turn over two at a time to find the pairs. A pair stays face up;
-// two that don't match turn back over.
-//
-// This file is only the rules. It doesn't touch the page, so the tests can
-// play it directly. memory-rainbow-page.js draws it and handles the taps.
+// Level 3: match six rainbow pairs from face-down cards.
+// Matches stay up; mismatches flip back.
+// Testable rules only; memory-rainbow-page.js handles drawing and taps.
 import { COLOR_IDS, colorById } from './colors.js';
 import { shuffle } from './shuffle.js';
 
 export const PAIRS = COLOR_IDS.length;
 
-// A new game: the cards in a random order, all face down. `cards` lists the
-// color on each card; `up` is the cards turned over and not yet matched (at
-// most two); `matched` is the cards in found pairs. `random` is there so tests
-// can pass their own.
+// Memory: shuffled, face-down cards. `up` holds unmatched face-up cards;
+// `matched` holds found pairs. Inject `random` for tests.
 export function newGame(random = Math.random) {
   return { cards: shuffle([...COLOR_IDS, ...COLOR_IDS], random), up: [], matched: [] };
 }

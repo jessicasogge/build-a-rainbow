@@ -1,15 +1,13 @@
-// Shared page components, rendered once and filled in on load.
+// Shared page components, filled in on load.
 //
 // <level-header number name counter>: Back, title, optional counter, Start over.
-// <helper-bubble>: helper with its opening message.
+// <helper-bubble>: helper's opening message.
 // <level-done heading again next>: finished panel with fun fact and buttons.
-// <rainbow-stripes>: six-stripe rainbow; options set classes, blank/tappable/
-//   highlight modes, screen-reader label, and geometry (see stripePath).
-// <level-picture level>: card thumbnail for the level picker.
+// <rainbow-stripes>: six-stripe rainbow; classes, modes, label, geometry.
+// <level-picture level>: level-picker card thumbnail.
 import { COLORS } from './colors.js';
 
-// The path for one stripe of a rainbow centered at `cx` on the line `base`,
-// running from radius `outer` (outside of the red stripe) in to `inner`.
+// One rainbow stripe's path: arc from `outer` to `inner` around `cx` on `base`.
 export function stripePath(i, { cx = 320, base = 330, outer = 300, inner = 84 } = {}) {
   const step = (outer - inner) / COLORS.length;
   const r = outer - step * i;
@@ -19,8 +17,7 @@ export function stripePath(i, { cx = 320, base = 330, outer = 300, inner = 84 } 
 
 const escape = (text) => String(text).replace(/[&<>"]/g, (ch) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[ch]);
 
-// Defines an element that renders `html(element)` into itself once, when it's
-// first put on the page.
+// Custom element that renders `html(element)` into itself on first connect.
 function define(name, html) {
   if (!globalThis.customElements || customElements.get(name)) return;
   customElements.define(
@@ -81,13 +78,9 @@ define('rainbow-stripes', (el) => {
   return `<svg class="${escape(el.getAttribute('svg-class') ?? '')}" viewBox="${escape(el.getAttribute('viewbox') ?? '0 0 640 340')}" ${svgAttrs}>${stripes}${highlight}</svg>`;
 });
 
-// The level picker's card pictures, drawn in an 88 × 56 box. Each one shows
-// what you do in that level.
 const ink = '#1B2A4A';
 const [RED, ORANGE, YELLOW, GREEN, BLUE, PURPLE] = COLORS.map((c) => c.hex);
 
-// A small rainbow centered at (44, 50), for the pictures that use one.
-// `fill(i)` picks each stripe's fill; `extra` adds attributes to every stripe.
 const tinyRainbow = (fill, extra = '') =>
   COLORS.map(
     (_, i) => `<path d="${stripePath(i, { cx: 44, base: 50, outer: 36, inner: 12 })}" fill="${fill(i)}"${extra} />`,
