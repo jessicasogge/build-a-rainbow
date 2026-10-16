@@ -720,6 +720,129 @@ button.round-button {
   }
 }
 
+/* ---- Color sort ---- */
+
+/* The thing to sort, big enough to grab. It follows the finger while
+   dragged, and pops in when it's new. */
+.sort-stage {
+  display: flex;
+  justify-content: center;
+}
+
+.sort-thing {
+  width: clamp(120px, 30vw, 180px);
+  aspect-ratio: 1;
+  cursor: grab;
+  touch-action: none; /* dragging it doesn't scroll the page */
+  user-select: none;
+}
+
+.sort-thing svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  animation: pop-in 0.35s ease-out;
+}
+
+.sort-thing.is-dragging {
+  position: relative;
+  z-index: 2;
+  cursor: grabbing;
+}
+
+.sort-thing.is-dragging svg {
+  transform: scale(1.1);
+  filter: drop-shadow(0 8px 6px rgb(27 42 74 / 0.25));
+}
+
+.sort-thing.is-wrong {
+  animation: wiggle 0.4s;
+}
+
+@keyframes pop-in {
+  from {
+    transform: scale(0.4);
+    opacity: 0;
+  }
+}
+
+/* Six baskets in a row; three and three on phones. */
+.baskets {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 1rem;
+  width: min(1080px, 100%);
+}
+
+@media (max-width: 760px) {
+  .baskets {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.basket {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.5rem 0.5rem 0.75rem;
+  border: 4px solid transparent;
+  border-radius: 26px;
+  background: #fff;
+  box-shadow: 0 7px 0 var(--cloud-shadow);
+  color: var(--ink);
+  font-family: Fredoka, system-ui, sans-serif;
+  font-size: clamp(1.1rem, 2.4vw, 1.5rem);
+  cursor: pointer;
+  transition: transform 0.08s, box-shadow 0.08s;
+}
+
+.basket-picture {
+  width: min(96px, 80%);
+}
+
+.basket-picture svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.basket-thing {
+  animation: pop-in 0.35s ease-out;
+  transform-box: fill-box;
+  transform-origin: center bottom;
+}
+
+/* The basket a thing is being dragged over, or pressed. */
+.basket.is-over,
+.basket:active:not(:disabled) {
+  border-color: var(--ink);
+  transform: translateY(5px);
+  box-shadow: 0 2px 0 var(--cloud-shadow);
+}
+
+.basket:disabled {
+  cursor: default;
+}
+
+.basket.is-wrong {
+  animation: wiggle 0.4s;
+}
+
+.basket:focus-visible {
+  outline: 4px solid var(--ink);
+  outline-offset: 4px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sort-thing svg,
+  .sort-thing.is-wrong,
+  .basket-thing,
+  .basket.is-wrong {
+    animation: none;
+  }
+}
+
 /* ---- Mix a color ---- */
 
 .mix {
