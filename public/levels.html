@@ -9,9 +9,8 @@
     <link rel="icon" href="./favicon.svg" type="image/svg+xml" />
     <link rel="preload" href="./fonts/fredoka-700.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="stylesheet" href="./styles.css" />
-    <script type="module" src="./game/components.js"></script>
   </head>
-  <body class="page">
+  <body class="page level-picker">
     <header class="page-header">
       <a class="round-button" href="./index.html" aria-label="Back to the title screen">
         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7" /></svg>
@@ -23,7 +22,9 @@
          green, blue, indigo, violet, then pink. Each shade is dark enough for
          the white number to be easy to read.
          Each card has a small picture of its level (from game/components.js),
-         so the cards look different even to kids who can't read yet. -->
+         so the cards look different even to kids who can't read yet.
+         game/levels-page.js shows as many cards as fit the screen, from 4 on
+         a small phone to 8 on a computer, a page at a time. -->
     <main class="level-grid">
       <a class="level-card" href="./mix-a-color.html" data-level="1">
         <span class="level-top">
@@ -107,7 +108,21 @@
       </a>
     </main>
 
+    <!-- Turns the pages of levels. Hidden when they all fit on one. -->
+    <nav class="pager" aria-label="Pages of levels">
+      <button type="button" class="pager-button" data-page="prev">
+        <span aria-hidden="true">←</span> Back
+      </button>
+      <button type="button" class="pager-button" data-page="next">
+        More levels <span aria-hidden="true">→</span>
+      </button>
+    </nav>
+
     <footer class="signature">jsogge 2026</footer>
+    <script type="module">
+      import { start } from './game/levels-page.js';
+      start();
+    </script>
     <script data-goatcounter="https://petripals.goatcounter.com/count"
       async src="https://gc.zgo.at/count.js">
     </script>

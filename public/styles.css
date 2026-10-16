@@ -266,12 +266,42 @@ body {
   stroke-linejoin: round;
 }
 
+/* One to four columns, by screen width. levels-page.js reads --cols and
+   fits as many rows as the screen has room for. */
 .level-grid {
+  --cols: 1;
   flex: 1;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 360px), 1fr));
-  gap: 2rem;
+  grid-template-columns: repeat(var(--cols), minmax(0, 1fr));
+  gap: 1rem;
   align-content: start;
+}
+
+@media (min-width: 600px) {
+  .level-grid {
+    --cols: 2;
+    gap: 2rem;
+  }
+}
+
+@media (min-width: 900px) {
+  .level-grid {
+    --cols: 3;
+  }
+}
+
+@media (min-width: 1200px) {
+  .level-grid {
+    --cols: 4;
+  }
+}
+
+/* Once levels-page.js has measured the screen, a page has --rows rows,
+   each --row tall, so the cards fill the room there is. A last page with
+   fewer cards keeps its empty rows, so the buttons below don't move. */
+.level-grid[style*='--row'] {
+  flex: 0 0 auto;
+  grid-template-rows: repeat(var(--rows), var(--row));
 }
 
 .level-card {
@@ -331,6 +361,208 @@ body {
 .level-picture {
   width: 118px;
   height: 75px;
+}
+
+/* On phones each card is one short row: number, name and hint, picture.
+   Four fit on a small screen. */
+@media (max-width: 599px) {
+  .level-card {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    grid-template-areas:
+      'number name picture'
+      'number hint picture';
+    align-items: center;
+    gap: 0.1rem 0.75rem;
+    min-height: 0;
+    padding: 0.75rem 1rem;
+    border-radius: 24px;
+  }
+
+  .level-top {
+    display: contents;
+  }
+
+  .level-number {
+    grid-area: number;
+    width: 48px;
+    height: 48px;
+    font-size: 1.75rem;
+  }
+
+  .level-name {
+    grid-area: name;
+    align-self: end;
+    font-size: 1.35rem;
+  }
+
+  .level-hint {
+    grid-area: hint;
+    align-self: start;
+    font-size: 1rem;
+  }
+
+  .level-picture {
+    grid-area: picture;
+    width: 64px;
+    height: 41px;
+  }
+}
+
+/* On bigger screens a card is two short rows: number and name, then the
+   hint and picture. Short enough for two rows of four on a laptop. */
+@media (min-width: 600px) {
+  .level-card {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    grid-template-areas:
+      'number name name'
+      'hint hint picture';
+    align-items: center;
+    align-content: center;
+    gap: 0.5rem 1rem;
+    min-height: 0;
+    padding: 1rem 1.25rem;
+    border-radius: 28px;
+  }
+
+  .level-top {
+    display: contents;
+  }
+
+  .level-number {
+    grid-area: number;
+    width: 60px;
+    height: 60px;
+    font-size: 2.1rem;
+  }
+
+  .level-name {
+    grid-area: name;
+    font-size: clamp(1.4rem, 1.8vw, 1.8rem);
+  }
+
+  .level-hint {
+    grid-area: hint;
+    font-size: 1.15rem;
+  }
+
+  .level-picture {
+    grid-area: picture;
+    width: 80px;
+    height: 51px;
+  }
+}
+
+/* Bigger cards, when the rows have room for them (levels-page.js sets
+   data-roomy): number and name on top, a big picture of the level in the
+   middle, and the hint underneath. */
+@media (min-width: 600px) {
+  .level-grid[data-roomy] .level-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 0.75rem;
+    padding: 1.5rem 1.75rem;
+    border-radius: 32px;
+    text-align: center;
+  }
+
+  .level-grid[data-roomy] .level-top {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    text-align: left;
+  }
+
+  .level-grid[data-roomy] .level-number {
+    width: 72px;
+    height: 72px;
+    font-size: 2.5rem;
+  }
+
+  .level-grid[data-roomy] .level-name {
+    font-size: clamp(1.75rem, 2.2vw, 2.4rem);
+  }
+
+  .level-grid[data-roomy] .level-picture {
+    flex: 1 1 0;
+    align-self: center;
+    width: 100%;
+    max-width: min(85%, 440px);
+    height: auto;
+    min-height: 0;
+  }
+
+  .level-grid[data-roomy] .level-hint {
+    font-size: clamp(1.15rem, 1.4vw, 1.45rem);
+  }
+}
+
+/* Back and More levels, under the level cards: outlined pills. */
+.pager {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  padding: 1.5rem 0 0.5rem;
+}
+
+.pager-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-height: 60px;
+  padding: 0 1.75rem;
+  border: 3px solid var(--ink);
+  border-radius: 999px;
+  background: #fff;
+  color: var(--ink);
+  font-family: Fredoka, system-ui, sans-serif;
+  font-size: 1.4rem;
+  cursor: pointer;
+  transition: transform 0.08s, background 0.15s;
+}
+
+.pager-button:hover {
+  background: #e8f6ff;
+}
+
+.pager-button:active {
+  transform: translateY(2px);
+}
+
+.pager-button:focus-visible {
+  outline: 4px solid var(--ink);
+  outline-offset: 3px;
+}
+
+/* On phones and short screens, less room around the header and the page
+   arrows leaves more for the cards. */
+@media (max-width: 599px), (max-height: 760px) {
+  .level-picker {
+    padding-top: 1rem;
+  }
+
+  .level-picker .page-header {
+    margin-bottom: 1rem;
+  }
+
+  .pager {
+    padding: 0.75rem 0 0;
+  }
+
+  .pager-button {
+    min-height: 52px;
+    padding: 0 1.25rem;
+    font-size: 1.2rem;
+  }
+}
+
+/* Swiping sideways on the cards turns the page, so leave that to us. */
+.level-grid {
+  touch-action: pan-y;
 }
 
 /* ---- Level pages (shared by every level) ---- */
