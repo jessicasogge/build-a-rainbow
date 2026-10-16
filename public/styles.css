@@ -296,6 +296,13 @@ body {
   }
 }
 
+/* Once levels-page.js has measured the screen, every row is the height it
+   set in --row, so the cards fill the room there is. */
+.level-grid[style*='--row'] {
+  flex: 0 0 auto;
+  grid-auto-rows: var(--row);
+}
+
 .level-card {
   display: flex;
   flex-direction: column;
@@ -411,6 +418,7 @@ body {
       'number name name'
       'hint hint picture';
     align-items: center;
+    align-content: center;
     gap: 0.5rem 1rem;
     min-height: 0;
     padding: 1rem 1.25rem;
@@ -442,6 +450,52 @@ body {
     grid-area: picture;
     width: 80px;
     height: 51px;
+  }
+}
+
+/* Bigger cards, when the rows have room for them (levels-page.js sets
+   data-roomy): number and name on top, a big picture of the level in the
+   middle, and the hint underneath. */
+@media (min-width: 600px) {
+  .level-grid[data-roomy] .level-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 0.75rem;
+    padding: 1.5rem 1.75rem;
+    border-radius: 32px;
+    text-align: center;
+  }
+
+  .level-grid[data-roomy] .level-top {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    text-align: left;
+  }
+
+  .level-grid[data-roomy] .level-number {
+    width: 72px;
+    height: 72px;
+    font-size: 2.5rem;
+  }
+
+  .level-grid[data-roomy] .level-name {
+    font-size: clamp(1.75rem, 2.2vw, 2.4rem);
+  }
+
+  .level-grid[data-roomy] .level-picture {
+    flex: 1 1 0;
+    align-self: center;
+    width: 100%;
+    max-width: min(85%, 440px);
+    height: auto;
+    min-height: 0;
+  }
+
+  .level-grid[data-roomy] .level-hint {
+    font-size: clamp(1.15rem, 1.4vw, 1.45rem);
   }
 }
 

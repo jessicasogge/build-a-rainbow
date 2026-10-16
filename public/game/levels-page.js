@@ -8,9 +8,11 @@ import { MAX_PER_PAGE, cardsOn, clampPage, pageCount, pageOf, perPage } from './
 // Remembers the page across visits to a level, for this tab only.
 const STORE_KEY = 'build-a-rainbow:levels-first-card';
 const SWIPE = 60; // how far a finger moves sideways to turn the page, in px
+const ROOMY = 260; // rows at least this tall get the bigger cards, in px
 
 // How many columns the grid has (styles.css sets --cols for the screen
-// width) and how many rows of cards fit on the screen below the header.
+// width), how many rows of cards fit on the screen below the header, and how
+// much room there is for them. Measured with the cards at their smallest.
 function measure(doc, grid, pager) {
   const win = doc.defaultView;
   const cols = Number(win.getComputedStyle(grid).getPropertyValue('--cols')) || 1;
@@ -21,7 +23,7 @@ function measure(doc, grid, pager) {
   const footer = doc.querySelector('.signature')?.offsetHeight ?? 0;
   const room = win.innerHeight - top - pager.offsetHeight - footer;
   const rows = card ? Math.floor((room + gap) / (card + gap)) : 1;
-  return { cols, rows };
+  return { cols, rows, card, room, gap };
 }
 
 function remembered(win) {
@@ -86,11 +88,23 @@ export function start(doc = document, { size: fixedSize } = {}) {
   // anchor card on it.
   function fit() {
     if (!fixedSize) {
-      // Show every card and the pager, so there's something real to measure.
+      // Show every card and the pager at their smallest, so there's
+      // something real to measure.
       cards.forEach((card) => { card.hidden = false; });
       pager.hidden = false;
-      const { cols, rows } = measure(doc, grid, pager);
+      delete grid.dataset.roomy;
+      grid.style.removeProperty('--row');
+      const { cols, rows, card, room, gap } = measure(doc, grid, pager);
       size = perPage(cols, rows);
+
+      // Share out the room between the rows a page has, so the cards fill
+      // the screen instead of bunching up at the top. With room to spare,
+      // the cards get bigger too.
+      const rowsShown = Math.ceil(size / cols);
+      const spare = 4; // so rounding never tips the page into scrolling
+      const row = Math.max(card, Math.floor((room - spare + gap) / rowsShown - gap));
+      if (card) grid.style.setProperty('--row', `${row}px`);
+      if (cols > 1 && row >= ROOMY) grid.dataset.roomy = '';
     }
     page = clampPage(pageOf(anchor, size), size, cards.length);
     draw();
