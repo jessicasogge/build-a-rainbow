@@ -141,6 +141,16 @@ const PICTURES = {
     <text x="${15.5 + i * 28}" y="${i === 1 ? 25.5 : 33.5}" text-anchor="middle" font-family="Fredoka, system-ui, sans-serif" font-weight="700" font-size="16" fill="${ink}" transform="rotate(${[-8, 4, -3][i]} ${15.5 + i * 28} ${i === 1 ? 18.5 : 26.5})">${letter}</text>`,
     )
     .join(''),
+  // A strawberry about to drop into the red basket.
+  'color-sort': `
+    <path d="M63 40C63 26 81 26 81 40" fill="none" stroke="${RED}" stroke-width="3" />
+    <path d="M60 42H84L80 54H64Z" fill="${RED}" />
+    <path d="M66 44V54M72 44V54M78 44V54M62 48H82" stroke="#ffffff" stroke-width="1.5" opacity="0.45" />
+    <rect x="58" y="38" width="28" height="6" rx="3" fill="#B52B2E" />
+    <path d="M18 30C12 26 8 20 8 14C9 9 14 8 18 10C22 8 27 9 28 14C28 20 24 26 18 30Z" fill="${RED}" />
+    <path d="M18 11L13 6L17 7L18 3L19 7L23 6Z" fill="${GREEN}" />
+    <path d="M30 16Q50 8 66 30" fill="none" stroke="${ink}" stroke-width="2.5" stroke-linecap="round" stroke-dasharray="4 4" />
+    <path d="M60 28L67 32L68 24" fill="none" stroke="${ink}" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />`,
   // A jumbled rainbow with swap arrows.
   'fix-the-rainbow': `
     ${tinyRainbow((i) => [GREEN, ORANGE, PURPLE, RED, BLUE, YELLOW][i])}

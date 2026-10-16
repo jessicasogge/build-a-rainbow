@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Color Sort: Build a Rainbow</title>
+    <meta name="description" content="Drag a strawberry, a frog, a banana and more into the basket of their color. A free color sorting game for kids." />
+    <link rel="canonical" href="https://jessicasogge.github.io/build-a-rainbow/color-sort.html" />
+    <link rel="icon" href="./favicon.svg" type="image/svg+xml" />
+    <link rel="preload" href="./fonts/fredoka-700.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body class="page level-page">
+    <level-header number="9" name="Color sort" counter="0 of 6"></level-header>
+
+    <main class="build">
+      <helper-bubble>Drag the thing into the basket of its color.</helper-bubble>
+
+      <!-- The thing to sort. color-sort-page.js draws it and drags it. -->
+      <div class="sort-stage">
+        <div class="sort-thing" role="img" aria-label=""></div>
+      </div>
+
+      <!-- One basket per color. Drop a thing on one, or tap it. -->
+      <div class="baskets">
+        <button type="button" class="basket" data-color="red">
+          <span class="basket-picture"></span>
+          Red
+        </button>
+        <button type="button" class="basket" data-color="orange">
+          <span class="basket-picture"></span>
+          Orange
+        </button>
+        <button type="button" class="basket" data-color="yellow">
+          <span class="basket-picture"></span>
+          Yellow
+        </button>
+        <button type="button" class="basket" data-color="green">
+          <span class="basket-picture"></span>
+          Green
+        </button>
+        <button type="button" class="basket" data-color="blue">
+          <span class="basket-picture"></span>
+          Blue
+        </button>
+        <button type="button" class="basket" data-color="purple">
+          <span class="basket-picture"></span>
+          Purple
+        </button>
+      </div>
+
+      <level-done heading="You sorted them all!" next="All levels">
+        Fun fact: the color orange is named after the fruit. Before oranges came to England, people there called the color yellow-red!
+      </level-done>
+    </main>
+
+    <footer class="signature">jsogge 2026</footer>
+
+    <script type="module">
+      import { start } from './game/color-sort-page.js';
+      start();
+    </script>
+    <script data-goatcounter="https://petripals.goatcounter.com/count"
+      async src="https://gc.zgo.at/count.js">
+    </script>
+  </body>
+</html>

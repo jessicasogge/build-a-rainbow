@@ -15,12 +15,12 @@ describe('pick a level page', () => {
     expect(html).toMatch(/<a class="round-button" href="\.\/index\.html" aria-label="Back[^"]*">/);
   });
 
-  it('lists eight levels in order', () => {
-    expect(cards.map((m) => m[1])).toEqual(['1', '2', '3', '4', '5', '6', '7', '8']);
+  it('lists nine levels in order', () => {
+    expect(cards.map((m) => m[1])).toEqual(['1', '2', '3', '4', '5', '6', '7', '8', '9']);
   });
 
   it('has every level open, none locked', () => {
-    expect(cards.map((m) => Boolean(m[2]))).toEqual([false, false, false, false, false, false, false, false]);
+    expect(cards.map((m) => Boolean(m[2]))).toEqual(Array(9).fill(false));
     expect(html).not.toContain('unlock');
   });
 
@@ -56,15 +56,19 @@ describe('pick a level page', () => {
     expect(html).toContain('<a class="level-card" href="./fix-the-rainbow.html" data-level="8">');
   });
 
+  it('opens Color sort from the level 9 card', () => {
+    expect(html).toContain('<a class="level-card" href="./color-sort.html" data-level="9">');
+  });
+
   it('gives every card its own picture, hidden from screen readers', () => {
     const pictures = [...document.querySelectorAll('.level-card svg.level-picture')];
-    expect(pictures).toHaveLength(8);
+    expect(pictures).toHaveLength(9);
     for (const svg of pictures) {
       expect(svg.getAttribute('aria-hidden')).toBe('true');
       expect(svg.children.length).toBeGreaterThan(0);
     }
     // Each card's picture is its own.
-    expect(new Set(pictures.map((svg) => svg.innerHTML)).size).toBe(8);
+    expect(new Set(pictures.map((svg) => svg.innerHTML)).size).toBe(9);
   });
 
   it('shares the title screen stylesheet, tab icon and signature', () => {
