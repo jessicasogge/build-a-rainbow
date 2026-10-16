@@ -525,12 +525,17 @@ body {
   transition: transform 0.08s, background 0.15s;
 }
 
+/* The same sunny yellow as the More levels button at the end of a level. */
 .pager-more {
-  background: #fff6d6;
+  background: var(--yellow);
 }
 
-.pager-button:hover {
+.pager-button:not(.pager-more):hover {
   background: #e8f6ff;
+}
+
+.pager-more:hover {
+  background: #ffd45e;
 }
 
 .pager-button:active {
