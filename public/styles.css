@@ -296,11 +296,12 @@ body {
   }
 }
 
-/* Once levels-page.js has measured the screen, every row is the height it
-   set in --row, so the cards fill the room there is. */
+/* Once levels-page.js has measured the screen, a page has --rows rows,
+   each --row tall, so the cards fill the room there is. A last page with
+   fewer cards keeps its empty rows, so the buttons below don't move. */
 .level-grid[style*='--row'] {
   flex: 0 0 auto;
-  grid-auto-rows: var(--row);
+  grid-template-rows: repeat(var(--rows), var(--row));
 }
 
 .level-card {
@@ -499,63 +500,46 @@ body {
   }
 }
 
-/* The page arrows and dots under the level cards. */
+/* Back and More levels, under the level cards: outlined pills. */
 .pager {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 1.5rem;
+  gap: 1rem;
   padding: 1.5rem 0 0.5rem;
 }
 
-.pager .round-button {
-  cursor: pointer;
-}
-
-.pager .round-button:disabled {
-  opacity: 0.35;
-  cursor: default;
-  transform: none;
-  box-shadow: 0 5px 0 var(--cloud-shadow);
-}
-
-.pager-dots {
-  display: flex;
-  gap: 0.5rem;
-}
-
-/* Each dot is a big enough button to tap; the dot itself is drawn inside. */
-.pager-dot {
-  display: flex;
+.pager-button {
+  display: inline-flex;
   align-items: center;
-  justify-content: center;
-  width: 36px;
-  height: 36px;
-  padding: 0;
-  border: 0;
-  border-radius: 50%;
-  background: none;
-  cursor: pointer;
-}
-
-.pager-dot::after {
-  content: '';
-  width: 16px;
-  height: 16px;
-  border-radius: 50%;
+  gap: 0.5rem;
+  min-height: 60px;
+  padding: 0 1.75rem;
+  border: 3px solid var(--ink);
+  border-radius: 999px;
   background: #fff;
-  box-shadow: 0 2px 0 var(--cloud-shadow);
-  transition: transform 0.15s, background 0.15s;
+  color: var(--ink);
+  font-family: Fredoka, system-ui, sans-serif;
+  font-size: 1.4rem;
+  cursor: pointer;
+  transition: transform 0.08s, background 0.15s;
 }
 
-.pager-dot[aria-current='page']::after {
-  background: var(--ink);
-  transform: scale(1.3);
+.pager-more {
+  background: #fff6d6;
 }
 
-.pager-dot:focus-visible {
+.pager-button:hover {
+  background: #e8f6ff;
+}
+
+.pager-button:active {
+  transform: translateY(2px);
+}
+
+.pager-button:focus-visible {
   outline: 4px solid var(--ink);
-  outline-offset: 2px;
+  outline-offset: 3px;
 }
 
 /* On phones and short screens, less room around the header and the page
@@ -573,9 +557,10 @@ body {
     padding: 0.75rem 0 0;
   }
 
-  .pager .round-button {
-    width: 56px;
-    height: 56px;
+  .pager-button {
+    min-height: 52px;
+    padding: 0 1.25rem;
+    font-size: 1.2rem;
   }
 }
 

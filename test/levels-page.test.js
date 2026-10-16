@@ -7,7 +7,8 @@ import { loadPage } from './load-page.js';
 let picker;
 const $ = (sel) => document.querySelector(sel);
 const shown = () => [...document.querySelectorAll('.level-card:not([hidden])')].map((c) => c.dataset.level);
-const dots = () => [...document.querySelectorAll('.pager-dot')];
+const back = () => $('[data-page="prev"]');
+const more = () => $('[data-page="next"]');
 const key = (name) => document.dispatchEvent(new KeyboardEvent('keydown', { key: name }));
 const pointer = (type, x) => $('.level-card:not([hidden])').dispatchEvent(new MouseEvent(type, { clientX: x, clientY: 100, bubbles: true }));
 
@@ -18,31 +19,25 @@ beforeEach(() => {
 });
 
 describe('level picker pages', () => {
-  it('shows the first four levels, with three page dots', () => {
+  it('shows the first four levels, with only More levels to go on', () => {
     expect(shown()).toEqual(['1', '2', '3', '4']);
     expect($('.pager').hidden).toBe(false);
-    expect(dots()).toHaveLength(3);
-    expect(dots()[0].getAttribute('aria-current')).toBe('page');
-    expect(dots()[2].getAttribute('aria-label')).toBe('Page 3 of 3');
-    expect($('[data-page="prev"]').disabled).toBe(true);
-    expect($('[data-page="next"]').disabled).toBe(false);
+    expect(more().textContent).toMatch(/^\s*More levels/);
+    expect(more().hidden).toBe(false);
+    expect(back().hidden).toBe(true);
   });
 
-  it('turns the page with the arrows', () => {
-    $('[data-page="next"]').click();
+  it('turns the page with More levels and Back', () => {
+    more().click();
     expect(shown()).toEqual(['5', '6', '7', '8']);
-    expect(dots()[1].getAttribute('aria-current')).toBe('page');
-    $('[data-page="next"]').click();
+    expect(back().hidden).toBe(false);
+    expect(back().textContent).toMatch(/Back\s*$/);
+    expect(more().hidden).toBe(false);
+    more().click();
     expect(shown()).toEqual(['9']);
-    expect($('[data-page="next"]').disabled).toBe(true);
-    $('[data-page="prev"]').click();
+    expect(more().hidden).toBe(true);
+    back().click();
     expect(shown()).toEqual(['5', '6', '7', '8']);
-  });
-
-  it('jumps to a page from its dot', () => {
-    dots()[2].click();
-    expect(picker.page).toBe(2);
-    expect(shown()).toEqual(['9']);
   });
 
   it('turns the page with the arrow keys, and stops at the ends', () => {
@@ -77,20 +72,20 @@ describe('level picker pages', () => {
   });
 
   it('comes back to the same page after playing a level', () => {
-    $('[data-page="next"]').click();
+    more().click();
     loadPage('levels.html');
     picker = start(document, { size: 4 });
     expect(shown()).toEqual(['5', '6', '7', '8']);
   });
 
   it('keeps the same levels on screen when more fit on a page', () => {
-    $('[data-page="next"]').click(); // levels 5 to 8
+    more().click(); // levels 5 to 8
     loadPage('levels.html');
     picker = start(document, { size: 8 });
     expect(shown()).toEqual(['1', '2', '3', '4', '5', '6', '7', '8']);
   });
 
-  it('hides the arrows and dots when every level fits on one page', () => {
+  it('hides Back and More levels when every level fits on one page', () => {
     loadPage('levels.html');
     start(document, { size: 12 });
     expect(shown()).toHaveLength(9);

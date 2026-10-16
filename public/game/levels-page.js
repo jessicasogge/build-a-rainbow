@@ -1,6 +1,6 @@
 // Pages the level picker on levels.html: as many cards as fit the screen,
-// 4 on a small phone up to 8 on a computer, with arrows, page dots, swiping
-// and the arrow keys to move between pages. The rules live in
+// 4 on a small phone up to 8 on a computer, with Back and More levels
+// buttons, swiping and the arrow keys to move between pages. The rules live in
 // levels-paging.js.
 import './components.js'; // the card pictures
 import { MAX_PER_PAGE, cardsOn, clampPage, pageCount, pageOf, perPage } from './levels-paging.js';
@@ -49,7 +49,6 @@ export function start(doc = document, { size: fixedSize } = {}) {
   const pager = doc.querySelector('.pager');
   const prev = pager.querySelector('[data-page="prev"]');
   const next = pager.querySelector('[data-page="next"]');
-  const dots = pager.querySelector('.pager-dots');
 
   let size = fixedSize ?? MAX_PER_PAGE;
   let page = 0;
@@ -61,18 +60,10 @@ export function start(doc = document, { size: fixedSize } = {}) {
     const shown = cardsOn(page, size, cards.length);
     cards.forEach((card, i) => { card.hidden = !shown.includes(i); });
     const pages = pageCount(cards.length, size);
+    // Each button shows only when there's a page that way.
     pager.hidden = pages === 1;
-    prev.disabled = page === 0;
-    next.disabled = page === pages - 1;
-    dots.replaceChildren(...Array.from({ length: pages }, (_, i) => {
-      const dot = doc.createElement('button');
-      dot.type = 'button';
-      dot.className = 'pager-dot';
-      dot.setAttribute('aria-label', `Page ${i + 1} of ${pages}`);
-      if (i === page) dot.setAttribute('aria-current', 'page');
-      dot.addEventListener('click', () => goTo(i));
-      return dot;
-    }));
+    prev.hidden = page === 0;
+    next.hidden = page === pages - 1;
   }
 
   function goTo(target) {
@@ -94,6 +85,7 @@ export function start(doc = document, { size: fixedSize } = {}) {
       pager.hidden = false;
       delete grid.dataset.roomy;
       grid.style.removeProperty('--row');
+      grid.style.removeProperty('--rows');
       const { cols, rows, card, room, gap } = measure(doc, grid, pager);
       size = perPage(cols, rows);
 
@@ -103,7 +95,10 @@ export function start(doc = document, { size: fixedSize } = {}) {
       const rowsShown = Math.ceil(size / cols);
       const spare = 4; // so rounding never tips the page into scrolling
       const row = Math.max(card, Math.floor((room - spare + gap) / rowsShown - gap));
-      if (card) grid.style.setProperty('--row', `${row}px`);
+      if (card) {
+        grid.style.setProperty('--row', `${row}px`);
+        grid.style.setProperty('--rows', rowsShown);
+      }
       if (cols > 1 && row >= ROOMY) grid.dataset.roomy = '';
     }
     page = clampPage(pageOf(anchor, size), size, cards.length);
