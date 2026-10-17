@@ -4,7 +4,7 @@ import { describe, expect, it } from 'vitest';
 import { loadPage } from './load-page.js';
 
 const html = loadPage('levels.html');
-const cards = [...html.matchAll(/<(?:button type="button"|a) class="level-card"(?: href="[^"]*")? data-level="(\d)"( disabled)?>/g)];
+const cards = [...html.matchAll(/<(?:button type="button"|a) class="level-card"(?: href="[^"]*")? data-level="(\d+)"( disabled)?>/g)];
 
 describe('pick a level page', () => {
   it('has a title', () => {
@@ -15,12 +15,12 @@ describe('pick a level page', () => {
     expect(html).toMatch(/<a class="round-button" href="\.\/index\.html" aria-label="Back[^"]*">/);
   });
 
-  it('lists nine levels in order', () => {
-    expect(cards.map((m) => m[1])).toEqual(['1', '2', '3', '4', '5', '6', '7', '8', '9']);
+  it('lists ten levels in order', () => {
+    expect(cards.map((m) => m[1])).toEqual(['1', '2', '3', '4', '5', '6', '7', '8', '9', '10']);
   });
 
   it('has every level open, none locked', () => {
-    expect(cards.map((m) => Boolean(m[2]))).toEqual(Array(9).fill(false));
+    expect(cards.map((m) => Boolean(m[2]))).toEqual(Array(10).fill(false));
     expect(html).not.toContain('unlock');
   });
 
@@ -60,15 +60,19 @@ describe('pick a level page', () => {
     expect(html).toContain('<a class="level-card" href="./color-sort.html" data-level="9">');
   });
 
+  it('opens What comes next? from the level 10 card', () => {
+    expect(html).toContain('<a class="level-card" href="./patterns.html" data-level="10">');
+  });
+
   it('gives every card its own picture, hidden from screen readers', () => {
     const pictures = [...document.querySelectorAll('.level-card svg.level-picture')];
-    expect(pictures).toHaveLength(9);
+    expect(pictures).toHaveLength(10);
     for (const svg of pictures) {
       expect(svg.getAttribute('aria-hidden')).toBe('true');
       expect(svg.children.length).toBeGreaterThan(0);
     }
     // Each card's picture is its own.
-    expect(new Set(pictures.map((svg) => svg.innerHTML)).size).toBe(9);
+    expect(new Set(pictures.map((svg) => svg.innerHTML)).size).toBe(10);
   });
 
   it('shares the title screen stylesheet, tab icon and signature', () => {

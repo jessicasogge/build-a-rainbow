@@ -151,6 +151,13 @@ const PICTURES = {
     <path d="M18 11L13 6L17 7L18 3L19 7L23 6Z" fill="${GREEN}" />
     <path d="M30 16Q50 8 66 30" fill="none" stroke="${ink}" stroke-width="2.5" stroke-linecap="round" stroke-dasharray="4 4" />
     <path d="M60 28L67 32L68 24" fill="none" stroke="${ink}" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />`,
+  // A pattern: red, blue, red, then a "?" for what comes next.
+  'patterns': `
+    <circle cx="12" cy="28" r="11" fill="${RED}" />
+    <circle cx="36" cy="28" r="11" fill="${BLUE}" />
+    <circle cx="60" cy="28" r="11" fill="${RED}" />
+    <rect x="74" y="16" width="13" height="24" rx="4" fill="#ffffff" stroke="${ink}" stroke-width="2" stroke-dasharray="4 3" />
+    <text x="80.5" y="33" text-anchor="middle" font-family="Fredoka, system-ui, sans-serif" font-weight="700" font-size="14" fill="${ink}">?</text>`,
   // A jumbled rainbow with swap arrows.
   'fix-the-rainbow': `
     ${tinyRainbow((i) => [GREEN, ORANGE, PURPLE, RED, BLUE, YELLOW][i])}
