@@ -1568,6 +1568,99 @@ button.round-button {
   }
 }
 
+/* ---- What comes next? ---- */
+
+/* The pattern: a tile per thing, then the gap, all on one line, so a
+   longer pattern just makes the tiles smaller. */
+.pattern-row {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(0, 1fr);
+  gap: clamp(0.35rem, 1.5vw, 1rem);
+  width: min(760px, 100%);
+}
+
+.pattern-tile,
+.pattern-gap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: 1;
+  padding: 12%;
+  border-radius: clamp(12px, 2.5vw, 22px);
+  background: #fff;
+  box-shadow: 0 5px 0 var(--cloud-shadow);
+}
+
+.pattern-tile svg,
+.pattern-gap svg {
+  width: 100%;
+  height: 100%;
+}
+
+/* The gap is a dashed box with a question mark until it's filled. */
+.pattern-gap {
+  border: 4px dashed var(--ink);
+  background: #fff6d6;
+  box-shadow: none;
+  font-family: Fredoka, system-ui, sans-serif;
+  font-size: clamp(1.5rem, 5vw, 3rem);
+}
+
+.pattern-gap.is-filled {
+  border: 4px solid var(--ink);
+  background: #fff;
+  animation: pop 0.35s ease-out;
+}
+
+/* Three big choices. */
+.pattern-choices {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+  width: min(520px, 100%);
+}
+
+.pattern-choice {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: 1;
+  padding: 18%;
+  border: 0;
+  border-radius: 26px;
+  background: #fff;
+  box-shadow: 0 7px 0 var(--cloud-shadow);
+  cursor: pointer;
+  transition: transform 0.08s, box-shadow 0.08s;
+}
+
+.pattern-choice svg {
+  width: 100%;
+  height: 100%;
+}
+
+.pattern-choice:active:not(:disabled) {
+  transform: translateY(5px);
+  box-shadow: 0 2px 0 var(--cloud-shadow);
+}
+
+.pattern-choice.is-wrong {
+  animation: wiggle 0.4s;
+}
+
+.pattern-choice:focus-visible {
+  outline: 4px solid var(--ink);
+  outline-offset: 4px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pattern-gap.is-filled,
+  .pattern-choice.is-wrong {
+    animation: none;
+  }
+}
+
 /* ---- Word scramble ---- */
 
 .scramble-clue {

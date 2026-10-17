@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>What Comes Next?: Build a Rainbow</title>
+    <meta name="description" content="Finish patterns of rainbow colors and shapes: red, blue, red, blue... what comes next? A free pattern game for kids." />
+    <link rel="canonical" href="https://jessicasogge.github.io/build-a-rainbow/patterns.html" />
+    <link rel="icon" href="./favicon.svg" type="image/svg+xml" />
+    <link rel="preload" href="./fonts/fredoka-700.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body class="page level-page">
+    <level-header number="10" name="What comes next?" counter="Pattern 1 of 6"></level-header>
+
+    <main class="build">
+      <!-- The pattern, ending in a "?" gap. Drawn by patterns-page.js. -->
+      <div class="pattern-row" role="img" aria-label=""></div>
+
+      <helper-bubble>What comes next?</helper-bubble>
+
+      <!-- Three choices for the gap. Added by patterns-page.js. -->
+      <div class="pattern-choices"></div>
+
+      <button type="button" class="button button-play" id="next" hidden>
+        Next
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4l13 8-13 8z" /></svg>
+      </button>
+
+      <level-done heading="You finished every pattern!" next="All levels">
+        Fun fact: a rainbow is a pattern too. Its colors always come in the same order, from red on the outside to purple on the inside.
+      </level-done>
+    </main>
+
+    <footer class="signature">jsogge 2026</footer>
+
+    <script type="module">
+      import { start } from './game/patterns-page.js';
+      start();
+    </script>
+    <script data-goatcounter="https://petripals.goatcounter.com/count"
+      async src="https://gc.zgo.at/count.js">
+    </script>
+  </body>
+</html>

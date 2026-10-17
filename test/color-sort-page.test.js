@@ -102,7 +102,7 @@ describe('color sort page', () => {
     expect(document.querySelectorAll('.basket-thing')).toHaveLength(6);
     expect($('.sort-stage').hidden).toBe(true);
     expect($('.level-done').hidden).toBe(false);
-    expect($('.level-done a.button-play').textContent).toBe('All levels');
+    expect($('.level-done a.button-play').textContent).toBe('More levels');
     expect(document.activeElement).toBe($('.level-done h2'));
   });
 
