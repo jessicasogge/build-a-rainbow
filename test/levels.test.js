@@ -15,12 +15,12 @@ describe('pick a level page', () => {
     expect(html).toMatch(/<a class="round-button" href="\.\/index\.html" aria-label="Back[^"]*">/);
   });
 
-  it('lists ten levels in order', () => {
-    expect(cards.map((m) => m[1])).toEqual(['1', '2', '3', '4', '5', '6', '7', '8', '9', '10']);
+  it('lists eleven levels in order', () => {
+    expect(cards.map((m) => m[1])).toEqual(['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11']);
   });
 
   it('has every level open, none locked', () => {
-    expect(cards.map((m) => Boolean(m[2]))).toEqual(Array(10).fill(false));
+    expect(cards.map((m) => Boolean(m[2]))).toEqual(Array(11).fill(false));
     expect(html).not.toContain('unlock');
   });
 
@@ -64,15 +64,19 @@ describe('pick a level page', () => {
     expect(html).toContain('<a class="level-card" href="./patterns.html" data-level="10">');
   });
 
+  it('opens Bubble pop from the level 11 card', () => {
+    expect(html).toContain('<a class="level-card" href="./bubble-pop.html" data-level="11">');
+  });
+
   it('gives every card its own picture, hidden from screen readers', () => {
     const pictures = [...document.querySelectorAll('.level-card svg.level-picture')];
-    expect(pictures).toHaveLength(10);
+    expect(pictures).toHaveLength(11);
     for (const svg of pictures) {
       expect(svg.getAttribute('aria-hidden')).toBe('true');
       expect(svg.children.length).toBeGreaterThan(0);
     }
     // Each card's picture is its own.
-    expect(new Set(pictures.map((svg) => svg.innerHTML)).size).toBe(10);
+    expect(new Set(pictures.map((svg) => svg.innerHTML)).size).toBe(11);
   });
 
   it('shares the title screen stylesheet, tab icon and signature', () => {
