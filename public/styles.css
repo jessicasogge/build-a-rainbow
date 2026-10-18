@@ -1568,6 +1568,153 @@ button.round-button {
   }
 }
 
+/* ---- Bubble pop ---- */
+
+/* A dot for each bubble to pop, filled in the color called. */
+.pop-count {
+  display: flex;
+  gap: 0.6rem;
+}
+
+.pop-count span {
+  width: 28px;
+  height: 28px;
+  border: 3px solid var(--target);
+  border-radius: 50%;
+  background: #fff;
+  transition: background 0.2s;
+}
+
+.pop-count span.is-filled {
+  background: var(--target);
+  animation: pop 0.3s ease-out;
+}
+
+/* The helper's face is the color to pop (bubble-pop-page.js sets --face). */
+.bubble-pop .helper-face {
+  background: var(--face, var(--sun));
+  transition: background 0.4s;
+}
+
+.bubble-pop .helper-face svg {
+  stroke: var(--face-ink, var(--ink));
+  transition: stroke 0.4s;
+}
+
+/* The sky the bubbles float up through. */
+.bubble-sky {
+  position: relative;
+  flex: 1;
+  width: min(900px, 100%);
+  min-height: 220px;
+  overflow: hidden;
+  border-radius: 32px;
+  background: linear-gradient(#e8f6ff, #d4eeff);
+}
+
+/* Each bubble floats from below the sky to above it, wobbling side to
+   side. The page sets its color, place, size and speed. */
+.bubble {
+  position: absolute;
+  left: var(--x);
+  bottom: calc(-1 * var(--size));
+  width: var(--size);
+  height: var(--size);
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  touch-action: manipulation;
+  animation:
+    rise var(--time) linear var(--delay) forwards,
+    sway 2.4s ease-in-out infinite alternate;
+}
+
+.bubble-ball {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: 3px solid rgb(255 255 255 / 0.85);
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 32% 30%, rgb(255 255 255 / 0.9) 0 12%, transparent 13%),
+    radial-gradient(circle at 50% 50%, transparent 55%, rgb(255 255 255 / 0.35) 100%),
+    var(--color);
+  box-shadow: 0 4px 10px rgb(27 42 74 / 0.15);
+}
+
+.bubble-ball.is-wrong {
+  animation: boing 0.45s;
+}
+
+/* Popped: it bursts outward and fades. */
+.bubble.is-popped .bubble-ball {
+  animation: burst 0.35s ease-out forwards;
+}
+
+.bubble:focus-visible {
+  outline: 4px solid var(--ink);
+  outline-offset: 4px;
+  border-radius: 50%;
+}
+
+@keyframes rise {
+  to {
+    bottom: 100%;
+  }
+}
+
+@keyframes sway {
+  from {
+    transform: translateX(-12px);
+  }
+  to {
+    transform: translateX(12px);
+  }
+}
+
+@keyframes boing {
+  30% {
+    transform: scale(0.8, 1.15);
+  }
+  60% {
+    transform: scale(1.12, 0.9);
+  }
+}
+
+@keyframes burst {
+  to {
+    transform: scale(1.6);
+    opacity: 0;
+    border-width: 8px;
+  }
+}
+
+.pop-rainbow {
+  width: min(560px, 100%);
+  height: auto;
+}
+
+/* With less motion, bubbles don't float: they appear in place, and a
+   popped one just fades. */
+@media (prefers-reduced-motion: reduce) {
+  .bubble {
+    bottom: auto;
+    top: var(--y);
+    animation: none;
+  }
+
+  .bubble-ball.is-wrong,
+  .pop-count span.is-filled {
+    animation: none;
+  }
+
+  .bubble.is-popped .bubble-ball {
+    animation: none;
+    opacity: 0;
+  }
+}
+
 /* ---- What comes next? ---- */
 
 /* The pattern: a tile per thing, then the gap, all on one line, so a

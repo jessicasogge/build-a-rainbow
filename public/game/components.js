@@ -158,6 +158,15 @@ const PICTURES = {
     <circle cx="60" cy="28" r="11" fill="${RED}" />
     <rect x="74" y="16" width="13" height="24" rx="4" fill="#ffffff" stroke="${ink}" stroke-width="2" stroke-dasharray="4 3" />
     <text x="80.5" y="33" text-anchor="middle" font-family="Fredoka, system-ui, sans-serif" font-weight="700" font-size="14" fill="${ink}">?</text>`,
+  // Three bubbles floating up, one just popped.
+  'bubble-pop': [[18, 34, 13, GREEN], [44, 22, 15, BLUE], [72, 36, 11, ORANGE]]
+    .map(([x, y, r, fill]) => `
+    <circle cx="${x}" cy="${y}" r="${r}" fill="${fill}" />
+    <circle cx="${x - r * 0.35}" cy="${y - r * 0.35}" r="${r * 0.25}" fill="#ffffff" opacity="0.8" />`)
+    .join('') + `
+    <g stroke="${ink}" stroke-width="2.5" stroke-linecap="round">
+      <path d="M64 10l-3-5M72 8V2M80 10l3-5" />
+    </g>`,
   // A jumbled rainbow with swap arrows.
   'fix-the-rainbow': `
     ${tinyRainbow((i) => [GREEN, ORANGE, PURPLE, RED, BLUE, YELLOW][i])}

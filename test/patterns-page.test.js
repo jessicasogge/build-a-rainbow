@@ -72,7 +72,7 @@ describe('what comes next page', () => {
     expect(level.game.round).toBe(5);
     expect($('.level-done').hidden).toBe(false);
     expect($('#next').hidden).toBe(true);
-    expect($('.level-done a.button-play').textContent).toBe('All levels');
+    expect($('.level-done a.button-play').textContent).toBe('More levels');
     expect(document.activeElement).toBe($('.level-done h2'));
   });
 

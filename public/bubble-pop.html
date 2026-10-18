@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Bubble Pop: Build a Rainbow</title>
+    <meta name="description" content="Rainbow bubbles float up the sky. Pop the ones of the color called! A free color game for kids." />
+    <link rel="canonical" href="https://jessicasogge.github.io/build-a-rainbow/bubble-pop.html" />
+    <link rel="icon" href="./favicon.svg" type="image/svg+xml" />
+    <link rel="preload" href="./fonts/fredoka-700.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body class="page level-page bubble-pop">
+    <level-header number="11" name="Bubble pop" counter="Color 1 of 3"></level-header>
+
+    <main class="build">
+      <helper-bubble>Pop the bubbles!</helper-bubble>
+
+      <!-- A dot for each bubble to pop. Filled in by bubble-pop-page.js. -->
+      <div class="pop-count" role="img" aria-label=""></div>
+
+      <!-- The bubbles float up here. Added by bubble-pop-page.js. -->
+      <div class="bubble-sky"></div>
+
+      <!-- Takes the sky's place once every color is popped. -->
+      <rainbow-stripes svg-class="pop-rainbow" hidden></rainbow-stripes>
+
+      <level-done heading="You popped them all!" next="All levels">
+        Fun fact: soap bubbles have rainbow colors swirling on them too. Light bounces off the thin soap and splits into colors, like it does in a rainbow.
+      </level-done>
+    </main>
+
+    <footer class="signature">jsogge 2026</footer>
+
+    <script type="module">
+      import { start } from './game/bubble-pop-page.js';
+      start();
+    </script>
+    <script data-goatcounter="https://petripals.goatcounter.com/count"
+      async src="https://gc.zgo.at/count.js">
+    </script>
+  </body>
+</html>
