@@ -95,8 +95,13 @@ export function start(doc = document, { random = Math.random } = {}) {
     progress.textContent = `Color ${Math.min(game.round + 1, ROUNDS)} of ${ROUNDS}`;
 
     // A dot for each pop to go, filled in the color called as they're popped.
+    // The helper's face turns the color called too, with a white smile on
+    // the darker colors so it still shows.
     if (!finished) {
-      counter.style.setProperty('--target', colorById(target(game)).hex);
+      const called = target(game);
+      counter.style.setProperty('--target', colorById(called).hex);
+      helperBox.style.setProperty('--face', colorById(called).hex);
+      helperBox.style.setProperty('--face-ink', called === 'yellow' ? 'var(--ink)' : '#ffffff');
       [...counter.children].forEach((dot, i) => dot.classList.toggle('is-filled', i < game.popped));
       counter.setAttribute('aria-label', `${game.popped} of ${POPS} popped`);
     }

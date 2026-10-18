@@ -55,6 +55,14 @@ describe('bubble pop page', () => {
     expect(bubble.getAttribute('aria-label')).toMatch(/^[A-Z][a-z]+ bubble$/);
   });
 
+  it('colors the helper face the color called', () => {
+    const face = $('.helper').style;
+    expect(face.getPropertyValue('--face')).toBe($('.pop-count').style.getPropertyValue('--target'));
+    expect(face.getPropertyValue('--face-ink')).toBe(called() === 'yellow' ? 'var(--ink)' : '#ffffff');
+    popColor(POPS);
+    expect(face.getPropertyValue('--face')).toBe($('.pop-count').style.getPropertyValue('--target'));
+  });
+
   it('pops a bubble of the color called and fills a dot', () => {
     const bubble = rightBubble();
     bubble.click();

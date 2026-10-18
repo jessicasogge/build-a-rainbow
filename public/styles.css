@@ -1590,6 +1590,17 @@ button.round-button {
   animation: pop 0.3s ease-out;
 }
 
+/* The helper's face is the color to pop (bubble-pop-page.js sets --face). */
+.bubble-pop .helper-face {
+  background: var(--face, var(--sun));
+  transition: background 0.4s;
+}
+
+.bubble-pop .helper-face svg {
+  stroke: var(--face-ink, var(--ink));
+  transition: stroke 0.4s;
+}
+
 /* The sky the bubbles float up through. */
 .bubble-sky {
   position: relative;
