@@ -28,6 +28,22 @@
   box-sizing: border-box;
 }
 
+/* The shared page pieces (<level-header>, <helper-bubble>, ...) are filled
+   in by game/components.js. Until they are, the page stays hidden, so it
+   never flashes their raw text unstyled; the game's scripts lay out the
+   rest right after, so the page appears all at once. If a script never
+   loads, the page shows anyway after 3 seconds. */
+body:has(:is(level-header, helper-bubble, level-done, rainbow-stripes, level-picture):not(:defined)) {
+  visibility: hidden;
+  animation: show-anyway 0s 3s forwards;
+}
+
+@keyframes show-anyway {
+  to {
+    visibility: visible;
+  }
+}
+
 /* Anything the game hides stays hidden, whatever its display style. */
 [hidden] {
   display: none !important;
