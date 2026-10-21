@@ -1,4 +1,4 @@
-// The rules of Level 11, Bubble pop.
+// The rules of Level 2, Bubble pop.
 import { describe, expect, it } from 'vitest';
 import { COLOR_IDS } from '../public/game/colors.js';
 import { POPS, ROUNDS, bubbleColor, isDone, message, newGame, pop, target } from '../public/game/bubble-pop.js';

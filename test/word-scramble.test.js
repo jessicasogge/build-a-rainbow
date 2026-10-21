@@ -1,4 +1,4 @@
-// The rules of Level 7, Word scramble.
+// The rules of Level 11, Word scramble.
 import { describe, expect, it } from 'vitest';
 import {
   BOX_COLORS, WORDS, boxColor, currentWord, isDone, isWordDone, message, newPuzzle, nextLetter, nextWord, pick, scramble,

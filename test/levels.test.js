@@ -24,48 +24,48 @@ describe('pick a level page', () => {
     expect(html).not.toContain('unlock');
   });
 
-  it('opens Mix a color from the level 1 card', () => {
-    expect(html).toContain('<a class="level-card" href="./mix-a-color.html" data-level="1">');
+  it('opens Mix a color from the level 8 card', () => {
+    expect(html).toContain('<a class="level-card" href="./mix-a-color.html" data-level="8">');
   });
 
-  it('opens Color order from the level 2 card', () => {
-    expect(html).toContain('<a class="level-card" href="./color-order.html" data-level="2">');
+  it('opens Color order from the level 6 card', () => {
+    expect(html).toContain('<a class="level-card" href="./color-order.html" data-level="6">');
   });
 
-  it('opens Memory rainbow from the level 3 card', () => {
-    expect(html).toContain('<a class="level-card" href="./memory-rainbow.html" data-level="3">');
+  it('opens Memory rainbow from the level 7 card', () => {
+    expect(html).toContain('<a class="level-card" href="./memory-rainbow.html" data-level="7">');
   });
 
   it('opens Sun and rain from the level 4 card', () => {
     expect(html).toContain('<a class="level-card" href="./sun-and-rain.html" data-level="4">');
   });
 
-  it('opens Paint a rainbow from the level 5 card', () => {
-    expect(html).toContain('<a class="level-card" href="./paint-a-rainbow.html" data-level="5">');
+  it('opens Paint a rainbow from the level 1 card', () => {
+    expect(html).toContain('<a class="level-card" href="./paint-a-rainbow.html" data-level="1">');
   });
 
-  it('opens Rainbow road from the level 6 card', () => {
-    expect(html).toContain('<a class="level-card" href="./rainbow-road.html" data-level="6">');
+  it('opens Rainbow road from the level 5 card', () => {
+    expect(html).toContain('<a class="level-card" href="./rainbow-road.html" data-level="5">');
   });
 
-  it('opens Word scramble from the level 7 card', () => {
-    expect(html).toContain('<a class="level-card" href="./word-scramble.html" data-level="7">');
+  it('opens Word scramble from the level 11 card', () => {
+    expect(html).toContain('<a class="level-card" href="./word-scramble.html" data-level="11">');
   });
 
-  it('opens Fix the rainbow from the level 8 card', () => {
-    expect(html).toContain('<a class="level-card" href="./fix-the-rainbow.html" data-level="8">');
+  it('opens Fix the rainbow from the level 10 card', () => {
+    expect(html).toContain('<a class="level-card" href="./fix-the-rainbow.html" data-level="10">');
   });
 
-  it('opens Color sort from the level 9 card', () => {
-    expect(html).toContain('<a class="level-card" href="./color-sort.html" data-level="9">');
+  it('opens Color sort from the level 3 card', () => {
+    expect(html).toContain('<a class="level-card" href="./color-sort.html" data-level="3">');
   });
 
-  it('opens What comes next? from the level 10 card', () => {
-    expect(html).toContain('<a class="level-card" href="./patterns.html" data-level="10">');
+  it('opens What comes next? from the level 9 card', () => {
+    expect(html).toContain('<a class="level-card" href="./patterns.html" data-level="9">');
   });
 
-  it('opens Bubble pop from the level 11 card', () => {
-    expect(html).toContain('<a class="level-card" href="./bubble-pop.html" data-level="11">');
+  it('opens Bubble pop from the level 2 card', () => {
+    expect(html).toContain('<a class="level-card" href="./bubble-pop.html" data-level="2">');
   });
 
   it('gives every card its own picture, hidden from screen readers', () => {

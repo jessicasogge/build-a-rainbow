@@ -1,4 +1,4 @@
-// Draws Level 11 (Bubble pop) on bubble-pop.html: bubbles float up the sky
+// Draws Level 2 (Bubble pop) on bubble-pop.html: bubbles float up the sky
 // and pop when tapped. The rules live in bubble-pop.js.
 import './components.js'; // the shared page pieces (header, helper, ...)
 import { colorById } from './colors.js';

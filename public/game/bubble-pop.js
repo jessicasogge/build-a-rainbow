@@ -1,4 +1,4 @@
-// Level 11: rainbow bubbles float up; pop the ones of the color called.
+// Level 2: rainbow bubbles float up; pop the ones of the color called.
 // Three colors a game, five pops each. A wrong bubble just boings away.
 // Testable rules only; bubble-pop-page.js handles the bubbles and taps.
 import { COLOR_IDS, colorById } from './colors.js';

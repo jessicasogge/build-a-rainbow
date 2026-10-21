@@ -2,19 +2,19 @@
 
 A browser game for young elementary-age kids: eleven rainbow levels where you mix colors, build and paint rainbows, sort colors, finish patterns, pop bubbles, drive a rainbow road and more. Works on computers, tablets and phones.
 
-There's an opening screen, a level picker, and eleven levels:
+There's an opening screen, a level picker, and eleven levels, from easiest to hardest:
 
-1. **Mix a color:** two paint colors are shown; pick the color they make. Three questions, one for each pair of primary colors (red + yellow, yellow + blue, red + blue).
-2. **Color order:** red starts filled in on top; tap the rest of the colors in rainbow order to fill in each stripe. A wrong pick wiggles and the helper says to try another color.
-3. **Memory rainbow:** twelve cards lie face down, two of each rainbow color. Turn over two at a time to find the pairs. A pair stays face up; two that don't match turn back over.
+1. **Paint a rainbow:** pick from ten paints and tap any stripe to paint it, in any colors you like. Once every stripe is painted, tap Done.
+2. **Bubble pop:** rainbow bubbles float slowly up the sky, and the helper calls a color. Pop five bubbles of that color, then the next color is called. Three colors a game. A bubble of another color just boings away; there's no losing and no time limit.
+3. **Color sort:** a strawberry, a frog, a banana and other everyday things come up one at a time. Drag each one into the basket of its color, or tap the basket. Six things a game, one of each color, picked from twelve.
 4. **Sun and rain:** turn the sun, rain, snow, clouds and wind on and off until there's a rainbow. It needs sunshine and raindrops at the same time, with no snow and no thick clouds hiding the sun. Wind blows the rain sideways but doesn't stop a rainbow.
-5. **Paint a rainbow:** pick from ten paints and tap any stripe to paint it, in any colors you like. Once every stripe is painted, tap Done.
-6. **Rainbow road:** drive a little car through a roundabout six times. Each time, tap the exit in the color the helper names, and the car drives around the ring and out that way. The trip ends at a pot of gold at the end of the rainbow.
-7. **Word scramble:** the letters of RAINBOW come mixed up. Tap them in order to spell the word; each right letter drops into the next box with a rainbow-colored border. Then tap Next and do the same with SUNSHINE, then CLOUDS.
-8. **Fix the rainbow:** the stripes come jumbled. Tap one stripe, then another, to swap them, until every color is back in its place.
-9. **Color sort:** a strawberry, a frog, a banana and other everyday things come up one at a time. Drag each one into the basket of its color, or tap the basket. Six things a game, one of each color, picked from twelve.
-10. **What comes next?:** six patterns of colors and shapes, each ending in a gap. Pick which of three choices comes next. They get harder: two colors taking turns, then patterns like red, red, yellow, then shapes, then color and shape together, and last the rainbow itself.
-11. **Bubble pop:** rainbow bubbles float slowly up the sky, and the helper calls a color. Pop five bubbles of that color, then the next color is called. Three colors a game. A bubble of another color just boings away; there's no losing and no time limit.
+5. **Rainbow road:** drive a little car through a roundabout six times. Each time, tap the exit in the color the helper names, and the car drives around the ring and out that way. The trip ends at a pot of gold at the end of the rainbow.
+6. **Color order:** red starts filled in on top; tap the rest of the colors in rainbow order to fill in each stripe. A wrong pick wiggles and the helper says to try another color.
+7. **Memory rainbow:** twelve cards lie face down, two of each rainbow color. Turn over two at a time to find the pairs. A pair stays face up; two that don't match turn back over.
+8. **Mix a color:** two paint colors are shown; pick the color they make. Three questions, one for each pair of primary colors (red + yellow, yellow + blue, red + blue).
+9. **What comes next?:** six patterns of colors and shapes, each ending in a gap. Pick which of three choices comes next. They get harder: two colors taking turns, then patterns like red, red, yellow, then shapes, then color and shape together, and last the rainbow itself.
+10. **Fix the rainbow:** the stripes come jumbled. Tap one stripe, then another, to swap them, until every color is back in its place.
+11. **Word scramble:** the letters of RAINBOW come mixed up. Tap them in order to spell the word; each right letter drops into the next box with a rainbow-colored border. Then tap Next and do the same with SUNSHINE, then CLOUDS.
 
 ## Running it locally
 

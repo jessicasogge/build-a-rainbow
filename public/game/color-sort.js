@@ -1,4 +1,4 @@
-// Level 9: drag everyday things into the basket of their color.
+// Level 3: drag everyday things into the basket of their color.
 // One thing of each color per game, picked from two choices each.
 // Testable rules only; color-sort-page.js handles drawing and dragging.
 import { COLOR_IDS, colorById } from './colors.js';

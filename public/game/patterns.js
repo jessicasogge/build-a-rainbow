@@ -1,4 +1,4 @@
-// Level 10: what comes next? Finish six patterns of colors and shapes,
+// Level 9: what comes next? Finish six patterns of colors and shapes,
 // from two colors taking turns up to the rainbow itself.
 // Testable rules only; patterns-page.js handles drawing and taps.
 import { colorById } from './colors.js';

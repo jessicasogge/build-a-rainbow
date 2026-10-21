@@ -1,4 +1,4 @@
-// Draws Level 1 (Mix a color) on mix-a-color.html and handles the taps.
+// Draws Level 8 (Mix a color) on mix-a-color.html and handles the taps.
 // The rules live in mix-a-color.js.
 import './components.js'; // the shared page pieces (header, helper, ...)
 import { colorById as color } from './colors.js';
