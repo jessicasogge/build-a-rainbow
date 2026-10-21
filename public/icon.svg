@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 180">
+  <!-- The home screen icon (apple-touch-icon.png is made from this). A
+       solid sky, since iOS fills see-through corners with black, and
+       everything kept clear of the corners iOS rounds off. -->
+  <rect width="180" height="180" fill="#bfe6ff" />
+  <circle cx="142" cy="40" r="15" fill="#ffd23f" />
+  <path d="M20 122 A70 70 0 0 1 160 122 L152 122 A62 62 0 0 0 28 122 Z" fill="#E5383B" />
+  <path d="M28 122 A62 62 0 0 1 152 122 L144 122 A54 54 0 0 0 36 122 Z" fill="#F77F00" />
+  <path d="M36 122 A54 54 0 0 1 144 122 L136 122 A46 46 0 0 0 44 122 Z" fill="#FCBF49" />
+  <path d="M44 122 A46 46 0 0 1 136 122 L128 122 A38 38 0 0 0 52 122 Z" fill="#43AA8B" />
+  <path d="M52 122 A38 38 0 0 1 128 122 L120 122 A30 30 0 0 0 60 122 Z" fill="#277DA1" />
+  <path d="M60 122 A30 30 0 0 1 120 122 L112 122 A22 22 0 0 0 68 122 Z" fill="#7B4FA0" />
+  <g fill="#ffffff">
+    <circle cx="25" cy="125" r="12" /><circle cx="40" cy="117" r="16" /><circle cx="54" cy="126" r="11" />
+    <rect x="13" y="123" width="52" height="16" rx="8" />
+  </g>
+  <g fill="#ffffff">
+    <circle cx="129" cy="125" r="12" /><circle cx="144" cy="117" r="16" /><circle cx="158" cy="126" r="11" />
+    <rect x="117" y="123" width="52" height="16" rx="8" />
+  </g>
+</svg>
