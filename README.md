@@ -50,6 +50,7 @@ Shared by every level:
 - `public/game/page-helpers.js`: the wrong-answer wiggle and tapping drawn shapes.
 - `public/game/components.js`: the pieces every page repeats, written once: `<level-header>`, `<helper-bubble>`, `<level-done>` and `<rainbow-stripes>`.
 - `public/game/levels-page.js` and `levels-paging.js`: page the level picker, showing as many cards as fit the screen (4 on a small phone, up to 8 on a computer).
+- `public/icon.svg`: the home screen icon. `apple-touch-icon.png` (180 × 180, for iPhones) and `icon-512.png` (for Android) are made from it, and `manifest.webmanifest` opens the game full screen when it's started from a home screen.
 - `public/sitemap.xml`: every page, for search engines. A new page goes here too (a test checks).
 - `public/styles.css`: one stylesheet, in sections: the title screen, the level picker, what all levels share, then one section per level.
 
