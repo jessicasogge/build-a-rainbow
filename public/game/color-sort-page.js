@@ -1,4 +1,4 @@
-// Draws Level 9 (Color sort) on color-sort.html and handles dragging.
+// Draws Level 3 (Color sort) on color-sort.html and handles dragging.
 // A thing can be dragged onto a basket, or a basket tapped, for kids who
 // find dragging hard and for keyboards. The rules live in color-sort.js.
 import './components.js'; // the shared page pieces (header, helper, ...)

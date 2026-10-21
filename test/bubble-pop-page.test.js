@@ -1,4 +1,4 @@
-// Plays Level 11, Bubble pop, on the real page, in a pretend browser.
+// Plays Level 2, Bubble pop, on the real page, in a pretend browser.
 // @vitest-environment jsdom
 import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
@@ -35,8 +35,8 @@ afterEach(() => {
 });
 
 describe('bubble pop page', () => {
-  it('is level 11, with bubbles already floating and one of them the color called', () => {
-    expect($('.level-title').textContent).toBe('Level 11 · Bubble pop');
+  it('is level 2, with bubbles already floating and one of them the color called', () => {
+    expect($('.level-title').textContent).toBe('Level 2 · Bubble pop');
     expect($('.progress-pill').textContent).toBe('Color 1 of 3');
     expect(bubbles().length).toBeGreaterThan(0);
     expect(rightBubble()).toBeTruthy();
@@ -96,7 +96,7 @@ describe('bubble pop page', () => {
     expect($('.level-done').hidden).toBe(false);
     expect($('.bubble-sky').hidden).toBe(true);
     expect($('rainbow-stripes').hidden).toBe(false);
-    expect($('.level-done a.button-play').textContent).toBe('All levels');
+    expect($('.level-done a.button-play').textContent).toBe('More levels');
     expect(document.activeElement).toBe($('.level-done h2'));
     vi.advanceTimersByTime(SPAWN_EVERY * 5);
     expect(document.querySelectorAll('.bubble')).toHaveLength(0);

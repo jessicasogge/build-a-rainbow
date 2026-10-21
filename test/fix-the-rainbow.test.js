@@ -1,4 +1,4 @@
-// The rules of Level 8, Fix the rainbow.
+// The rules of Level 10, Fix the rainbow.
 import { describe, expect, it } from 'vitest';
 import { COLORS } from '../public/game/colors.js';
 import { inPlaceCount, isFixed, isInPlace, message, newRainbow, tapStripe } from '../public/game/fix-the-rainbow.js';

@@ -1,4 +1,4 @@
-// Draws Level 7 (Word scramble) on word-scramble.html and handles the taps.
+// Draws Level 11 (Word scramble) on word-scramble.html and handles the taps.
 // The rules live in word-scramble.js.
 import './components.js'; // the shared page pieces (header, helper, ...)
 import { wiggle } from './page-helpers.js';

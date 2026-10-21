@@ -1,4 +1,4 @@
-// Level 5, Paint a rainbow: pick any paint and tap a stripe to paint it.
+// Level 1, Paint a rainbow: pick any paint and tap a stripe to paint it.
 // There are no wrong colors. Once every stripe has paint, you can say
 // you're done.
 //

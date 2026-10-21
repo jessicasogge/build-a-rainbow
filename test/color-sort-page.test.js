@@ -1,4 +1,4 @@
-// Plays Level 9, Color sort, on the real page, in a pretend browser.
+// Plays Level 3, Color sort, on the real page, in a pretend browser.
 // @vitest-environment jsdom
 import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
@@ -38,8 +38,8 @@ beforeEach(() => {
 });
 
 describe('color sort page', () => {
-  it('is level 9, with the first thing and six empty baskets', () => {
-    expect($('.level-title').textContent).toBe('Level 9 · Color sort');
+  it('is level 3, with the first thing and six empty baskets', () => {
+    expect($('.level-title').textContent).toBe('Level 3 · Color sort');
     expect($('.progress-pill').textContent).toBe('0 of 6');
     expect(document.querySelectorAll('.basket')).toHaveLength(6);
     expect(document.querySelectorAll('.basket-thing')).toHaveLength(0);

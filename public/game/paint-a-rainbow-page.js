@@ -1,4 +1,4 @@
-// Draws Level 5 (Paint a rainbow) on paint-a-rainbow.html and handles the
+// Draws Level 1 (Paint a rainbow) on paint-a-rainbow.html and handles the
 // taps. The rules live in paint-a-rainbow.js.
 import './components.js'; // the shared page pieces (header, helper, ...)
 import { ORDINALS, onTap } from './page-helpers.js';

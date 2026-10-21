@@ -1,4 +1,4 @@
-// Plays Level 7, Word scramble, on the real page, in a pretend browser.
+// Plays Level 11, Word scramble, on the real page, in a pretend browser.
 // @vitest-environment jsdom
 import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
@@ -24,8 +24,8 @@ beforeEach(() => {
 });
 
 describe('word scramble page', () => {
-  it('is level 7, starting on RAINBOW: seven empty boxes, seven scrambled letters and a rainbow', () => {
-    expect($('.level-title').textContent).toBe('Level 7 · Word scramble');
+  it('is level 11, starting on RAINBOW: seven empty boxes, seven scrambled letters and a rainbow', () => {
+    expect($('.level-title').textContent).toBe('Level 11 · Word scramble');
     expect($('.progress-pill').textContent).toBe('Word 1 of 3');
     expect(boxes()).toHaveLength(7);
     expect(filled()).toBe(0);
@@ -104,6 +104,7 @@ describe('word scramble page', () => {
     expect($('.level-done').hidden).toBe(false);
     expect($('#next').hidden).toBe(true);
     expect($('.letter-boxes').getAttribute('aria-label')).toBe('CLOUDS');
+    expect($('.level-done a.button-play').textContent).toBe('All levels'); // the last level
     expect(document.activeElement).toBe($('.level-done h2'));
   });
 

@@ -1,4 +1,4 @@
-// The rules of Level 9, Color sort.
+// The rules of Level 3, Color sort.
 import { describe, expect, it } from 'vitest';
 import { COLOR_IDS } from '../public/game/colors.js';
 import { THINGS, currentThing, drop, isDone, message, newGame, thingById } from '../public/game/color-sort.js';

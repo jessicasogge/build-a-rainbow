@@ -1,4 +1,4 @@
-// Level 2: tap rainbow colors, red first, to fill stripes.
+// Level 6: tap rainbow colors, red first, to fill stripes.
 // Testable rules only; color-order-page.js handles drawing and taps.
 import { COLORS } from './colors.js';
 import { sameOrder, shuffleUntil } from './shuffle.js';

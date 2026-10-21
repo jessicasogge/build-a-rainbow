@@ -1,4 +1,4 @@
-// Plays Level 5, Paint a rainbow, on the real page, in a pretend browser.
+// Plays Level 1, Paint a rainbow, on the real page, in a pretend browser.
 // @vitest-environment jsdom
 import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
@@ -21,8 +21,8 @@ beforeEach(() => {
 });
 
 describe('paint a rainbow page', () => {
-  it('is level 5 and starts with a blank rainbow and ten paints', () => {
-    expect($('.level-title').textContent).toBe('Level 5 · Paint a rainbow');
+  it('is level 1 and starts with a blank rainbow and ten paints', () => {
+    expect($('.level-title').textContent).toBe('Level 1 · Paint a rainbow');
     expect(stripes()).toHaveLength(6);
     expect(stripes().every((s) => s.getAttribute('fill') === '#ffffff')).toBe(true);
     expect(document.querySelectorAll('.paint')).toHaveLength(10);

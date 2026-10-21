@@ -1,4 +1,4 @@
-// The rules of Level 5, Paint a rainbow.
+// The rules of Level 1, Paint a rainbow.
 import { describe, expect, it } from 'vitest';
 import { COLORS } from '../public/game/colors.js';
 import { PAINTS, STRIPE_COUNT, chooseBrush, isFinished, message, newPainting, paintStripe } from '../public/game/paint-a-rainbow.js';

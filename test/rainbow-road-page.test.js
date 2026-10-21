@@ -1,4 +1,4 @@
-// Plays Level 6, Rainbow road, on the real page, in a pretend browser.
+// Plays Level 5, Rainbow road, on the real page, in a pretend browser.
 // @vitest-environment jsdom
 import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
@@ -35,8 +35,8 @@ beforeEach(() => {
 });
 
 describe('rainbow road page', () => {
-  it('is level 6 and starts at the first of six turns', () => {
-    expect($('.level-title').textContent).toBe('Level 6 · Rainbow road');
+  it('is level 5 and starts at the first of six turns', () => {
+    expect($('.level-title').textContent).toBe('Level 5 · Rainbow road');
     expect($('.progress-pill').textContent).toBe('Turn 1 of 6');
     expect(roads()).toHaveLength(3);
   });
