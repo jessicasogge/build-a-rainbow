@@ -1,4 +1,4 @@
-// Plays Level 9, What comes next?, on the real page, in a pretend browser.
+// Plays Level 10, What comes next?, on the real page, in a pretend browser.
 // @vitest-environment jsdom
 import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
@@ -28,8 +28,8 @@ beforeEach(() => {
 });
 
 describe('what comes next page', () => {
-  it('is level 9, with the first pattern, a gap and three choices', () => {
-    expect($('.level-title').textContent).toBe('Level 9 · What comes next?');
+  it('is level 10, with the first pattern, a gap and three choices', () => {
+    expect($('.level-title').textContent).toBe('Level 10 · What comes next?');
     expect($('.progress-pill').textContent).toBe('Pattern 1 of 6');
     expect(document.querySelectorAll('.pattern-tile')).toHaveLength(5);
     expect($('.pattern-gap').textContent).toBe('?');

@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>I Spy: Build a Rainbow</title>
+    <meta name="description" content="I spy something purple that flutters! Find the things hiding in a rainbow meadow from their color and a clue. A free color game for kids." />
+    <link rel="canonical" href="https://jessicasogge.github.io/build-a-rainbow/i-spy.html" />
+    <link rel="icon" href="./favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="./apple-touch-icon.png" />
+    <link rel="manifest" href="./manifest.webmanifest" />
+    <meta name="apple-mobile-web-app-title" content="Rainbow" />
+    <meta name="theme-color" content="#bfe6ff" />
+    <link rel="preload" href="./fonts/fredoka-700.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="./fonts/nunito-700.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body class="page level-page">
+    <level-header number="6" name="I spy" counter="Clue 1 of 6"></level-header>
+
+    <main class="build">
+      <helper-bubble>I spy something!</helper-bubble>
+
+      <!-- The meadow, cropped to where the things are, so they're drawn as
+           big as they can be. Each thing is a button with an invisible tap
+           area (spy-hit) a little bigger than its drawing; i-spy-page.js
+           also counts a tap just outside one. -->
+      <svg class="spy-scene" viewBox="24 40 752 460" role="group" aria-label="A meadow under a rainbow">
+        <rect class="spy-sky" width="800" height="500" />
+        <g aria-hidden="true">
+          <path d="M150 300 A250 250 0 0 1 650 300 L630 300 A230 230 0 0 0 170 300 Z" fill="#E5383B" />
+          <path d="M170 300 A230 230 0 0 1 630 300 L610 300 A210 210 0 0 0 190 300 Z" fill="#F77F00" />
+          <path d="M190 300 A210 210 0 0 1 610 300 L590 300 A190 190 0 0 0 210 300 Z" fill="#FCBF49" />
+          <path d="M210 300 A190 190 0 0 1 590 300 L570 300 A170 170 0 0 0 230 300 Z" fill="#43AA8B" />
+          <path d="M230 300 A170 170 0 0 1 570 300 L550 300 A150 150 0 0 0 250 300 Z" fill="#277DA1" />
+          <path d="M250 300 A150 150 0 0 1 550 300 L530 300 A130 130 0 0 0 270 300 Z" fill="#7B4FA0" />
+          <circle cx="716" cy="94" r="30" fill="#FFD23F" />
+          <g fill="#ffffff">
+            <circle cx="100" cy="94" r="20" /><circle cx="126" cy="84" r="25" /><circle cx="152" cy="96" r="18" />
+            <rect x="80" y="94" width="90" height="22" rx="11" />
+          </g>
+          <path d="M0 300Q180 262 400 296T800 290V500H0Z" fill="#8FD19E" />
+          <path d="M0 330Q200 310 380 336T800 330" fill="none" stroke="#7CC59A" stroke-width="6" />
+          <rect x="96" y="220" width="28" height="110" rx="8" fill="#9C6B3F" />
+          <g fill="#3E9C77">
+            <circle cx="110" cy="190" r="62" /><circle cx="64" cy="214" r="38" /><circle cx="158" cy="212" r="40" />
+          </g>
+          <ellipse cx="620" cy="418" rx="150" ry="56" fill="#8ECAE6" stroke="#6BB3D6" stroke-width="4" />
+          <path d="M540 404q12-4 24 0M600 440q12-4 24 0M676 420q12-4 24 0" fill="none" stroke="#ffffff" stroke-width="3" stroke-linecap="round" opacity="0.7" />
+          <g stroke="#2E8A6E" stroke-width="4" stroke-linecap="round">
+            <path d="M470 400v-28M476 402v-36M482 400v-24" />
+            <path d="M40 470l6-16M52 474l2-18M140 480l6-14M470 480l4-16M480 482l-2-14M760 470l-4-16" />
+          </g>
+        </g>
+        <g class="spy-thing" data-thing="kite" role="button" tabindex="0" aria-label="purple kite">
+          <circle class="spy-hit" cx="300" cy="100" r="40" />
+            <path d="M330 140Q345 220 335 300" fill="none" stroke="#1B2A4A" stroke-width="2" stroke-dasharray="5 4" />
+            <path d="M300 62L326 100L300 140L274 100Z" fill="#7B4FA0" stroke="#5E3A7D" stroke-width="3" stroke-linejoin="round" />
+            <path d="M300 62V140M274 100H326" stroke="#ffffff" stroke-width="2" opacity="0.6" />
+            <path d="M300 140q-8 10 0 18q8 8 0 16" fill="none" stroke="#7B4FA0" stroke-width="3" stroke-linecap="round" />
+        </g>
+        <g class="spy-thing" data-thing="apple" role="button" tabindex="0" aria-label="red apple">
+          <circle class="spy-hit" cx="78" cy="214" r="32" />
+            <path d="M78 198q2-9 7-13" stroke="#7A4A22" stroke-width="3" stroke-linecap="round" fill="none" />
+            <circle cx="78" cy="214" r="15" fill="#E5383B" />
+            <ellipse cx="72" cy="209" rx="3" ry="5" fill="#ffffff" opacity="0.4" />
+        </g>
+        <g class="spy-thing" data-thing="bird" role="button" tabindex="0" aria-label="blue bird">
+          <circle class="spy-hit" cx="158" cy="160" r="32" />
+            <path d="M138 172h44" stroke="#7A4A22" stroke-width="5" stroke-linecap="round" />
+            <ellipse cx="158" cy="158" rx="17" ry="13" fill="#277DA1" />
+            <circle cx="170" cy="148" r="9" fill="#277DA1" />
+            <path d="M178 147l8 3-8 3z" fill="#FCBF49" />
+            <circle cx="172" cy="146" r="2.2" fill="#1B2A4A" />
+            <path d="M143 156l-10-6 3 12z" fill="#1D6688" />
+            <path d="M152 156q8 6 14 0" fill="none" stroke="#1D6688" stroke-width="3" stroke-linecap="round" />
+        </g>
+        <g class="spy-thing" data-thing="caterpillar" role="button" tabindex="0" aria-label="green caterpillar">
+          <circle class="spy-hit" cx="228" cy="352" r="36" />
+            <ellipse cx="228" cy="368" rx="40" ry="12" fill="#A9B4C0" />
+            <circle cx="204" cy="356" r="9" fill="#43AA8B" stroke="#2E8A6E" stroke-width="2" /><circle cx="216" cy="352" r="9" fill="#43AA8B" stroke="#2E8A6E" stroke-width="2" /><circle cx="228" cy="356" r="9" fill="#43AA8B" stroke="#2E8A6E" stroke-width="2" /><circle cx="240" cy="352" r="9" fill="#43AA8B" stroke="#2E8A6E" stroke-width="2" />
+            <circle cx="252" cy="348" r="10" fill="#43AA8B" stroke="#2E8A6E" stroke-width="2" />
+            <circle cx="255" cy="346" r="2.2" fill="#1B2A4A" />
+            <path d="M249 338l-3-7M256 338l2-7" stroke="#1B2A4A" stroke-width="2" stroke-linecap="round" />
+        </g>
+        <g class="spy-thing" data-thing="butterfly" role="button" tabindex="0" aria-label="purple butterfly">
+          <circle class="spy-hit" cx="345" cy="345" r="34" />
+            <ellipse cx="333" cy="338" rx="13" ry="16" fill="#7B4FA0" transform="rotate(-20 333 338)" />
+            <ellipse cx="357" cy="338" rx="13" ry="16" fill="#7B4FA0" transform="rotate(20 357 338)" />
+            <ellipse cx="335" cy="357" rx="9" ry="10" fill="#9B6FC0" />
+            <ellipse cx="355" cy="357" rx="9" ry="10" fill="#9B6FC0" />
+            <rect x="342" y="330" width="6" height="34" rx="3" fill="#1B2A4A" />
+            <path d="M343 330l-6-10M347 330l6-10" stroke="#1B2A4A" stroke-width="2" stroke-linecap="round" />
+        </g>
+        <g class="spy-thing" data-thing="flower" role="button" tabindex="0" aria-label="yellow flower">
+          <circle class="spy-hit" cx="214" cy="440" r="34" />
+            <path d="M214 470V448" stroke="#2E8A6E" stroke-width="4" stroke-linecap="round" />
+            <path d="M214 462q-12-2-14-12q10 0 14 10z" fill="#2E8A6E" />
+            <circle cx="225.0" cy="436.0" r="8" fill="#FCBF49" /><circle cx="219.5" cy="445.5" r="8" fill="#FCBF49" /><circle cx="208.5" cy="445.5" r="8" fill="#FCBF49" /><circle cx="203.0" cy="436.0" r="8" fill="#FCBF49" /><circle cx="208.5" cy="426.5" r="8" fill="#FCBF49" /><circle cx="219.5" cy="426.5" r="8" fill="#FCBF49" />
+            <circle cx="214" cy="436" r="7" fill="#F77F00" />
+        </g>
+        <g class="spy-thing" data-thing="pumpkin" role="button" tabindex="0" aria-label="orange pumpkin">
+          <circle class="spy-hit" cx="300" cy="428" r="36" />
+            <path d="M298 404l2-12h7l-1 12z" fill="#7A4A22" />
+            <g fill="#F77F00" stroke="#C25E00" stroke-width="2.5">
+              <ellipse cx="287" cy="428" rx="15" ry="20" />
+              <ellipse cx="313" cy="428" rx="15" ry="20" />
+              <ellipse cx="300" cy="428" rx="14" ry="22" />
+            </g>
+        </g>
+        <g class="spy-thing" data-thing="ladybug" role="button" tabindex="0" aria-label="red ladybug">
+          <circle class="spy-hit" cx="398" cy="455" r="34" />
+            <path d="M366 470q20-40 62-22q-24 30-62 22z" fill="#2E8A6E" />
+            <circle cx="384" cy="448" r="7" fill="#1B2A4A" />
+            <circle cx="398" cy="452" r="13" fill="#E5383B" />
+            <path d="M398 439v26" stroke="#1B2A4A" stroke-width="2" />
+            <circle cx="392" cy="447" r="2.6" fill="#1B2A4A" /><circle cx="404" cy="447" r="2.6" fill="#1B2A4A" />
+            <circle cx="392" cy="458" r="2.6" fill="#1B2A4A" /><circle cx="404" cy="458" r="2.6" fill="#1B2A4A" />
+        </g>
+        <g class="spy-thing" data-thing="duck" role="button" tabindex="0" aria-label="yellow duck">
+          <circle class="spy-hit" cx="488" cy="378" r="34" />
+            <ellipse cx="486" cy="386" rx="22" ry="13" fill="#FCBF49" />
+            <circle cx="500" cy="366" r="11" fill="#FCBF49" />
+            <path d="M510 366l11 3-11 4z" fill="#F77F00" />
+            <circle cx="503" cy="363" r="2.2" fill="#1B2A4A" />
+            <path d="M478 382q8 8 16 0" fill="none" stroke="#E0A83A" stroke-width="3" stroke-linecap="round" />
+        </g>
+        <g class="spy-thing" data-thing="fish" role="button" tabindex="0" aria-label="orange fish">
+          <circle class="spy-hit" cx="566" cy="418" r="32" />
+            <path d="M584 418l14-10v20z" fill="#F77F00" />
+            <ellipse cx="566" cy="418" rx="20" ry="11" fill="#F77F00" />
+            <circle cx="556" cy="415" r="2.4" fill="#1B2A4A" />
+        </g>
+        <g class="spy-thing" data-thing="frog" role="button" tabindex="0" aria-label="green frog">
+          <circle class="spy-hit" cx="646" cy="448" r="34" />
+            <ellipse cx="646" cy="460" rx="34" ry="10" fill="#2E8A6E" />
+            <ellipse cx="646" cy="448" rx="17" ry="12" fill="#43AA8B" />
+            <circle cx="638" cy="436" r="6" fill="#43AA8B" /><circle cx="654" cy="436" r="6" fill="#43AA8B" />
+            <circle cx="638" cy="435" r="3.5" fill="#ffffff" /><circle cx="654" cy="435" r="3.5" fill="#ffffff" />
+            <circle cx="638" cy="435" r="1.8" fill="#1B2A4A" /><circle cx="654" cy="435" r="1.8" fill="#1B2A4A" />
+            <path d="M640 452q6 4 12 0" fill="none" stroke="#1B2A4A" stroke-width="2" stroke-linecap="round" />
+        </g>
+        <g class="spy-thing" data-thing="boat" role="button" tabindex="0" aria-label="blue boat">
+          <circle class="spy-hit" cx="700" cy="388" r="36" />
+            <path d="M700 352v32" stroke="#7A4A22" stroke-width="3" />
+            <path d="M703 354l22 26h-22z" fill="#ffffff" stroke="#C9D3DD" stroke-width="2" />
+            <path d="M674 386h52l-8 14h-36z" fill="#277DA1" />
+        </g>
+      </svg>
+
+      <level-done heading="You found them all!">
+        Fun fact: a rainbow is really a whole circle! From an airplane you can sometimes see all of it.
+      </level-done>
+    </main>
+
+    <footer class="signature">jsogge 2026</footer>
+
+    <script type="module">
+      import { start } from './game/i-spy-page.js';
+      start();
+    </script>
+    <script data-goatcounter="https://petripals.goatcounter.com/count"
+      async src="https://gc.zgo.at/count.js">
+    </script>
+  </body>
+</html>

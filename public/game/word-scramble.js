@@ -1,4 +1,4 @@
-// Level 11: tap scrambled letters to spell RAINBOW, SUNSHINE, then CLOUDS.
+// Level 12: tap scrambled letters to spell RAINBOW, SUNSHINE, then CLOUDS.
 // Testable rules only; word-scramble-page.js handles drawing and taps.
 import { COLORS, PINK } from './colors.js';
 import { shuffleUntil } from './shuffle.js';

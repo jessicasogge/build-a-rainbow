@@ -167,6 +167,15 @@ const PICTURES = {
     <g stroke="${ink}" stroke-width="2.5" stroke-linecap="round">
       <path d="M64 10l-3-5M72 8V2M80 10l3-5" />
     </g>`,
+  // A magnifying glass spying a ladybug on a leaf.
+  'i-spy': `
+    <path d="M14 44q16-28 40-12q-18 22-40 12z" fill="${GREEN}" />
+    <circle cx="34" cy="31" r="10" fill="${RED}" />
+    <path d="M34 21v20" stroke="${ink}" stroke-width="1.5" />
+    <circle cx="30" cy="27" r="1.8" fill="${ink}" /><circle cx="38" cy="27" r="1.8" fill="${ink}" />
+    <circle cx="30" cy="35" r="1.8" fill="${ink}" /><circle cx="38" cy="35" r="1.8" fill="${ink}" />
+    <circle cx="40" cy="28" r="18" fill="#ffffff" fill-opacity="0.25" stroke="${ink}" stroke-width="4" />
+    <path d="M53 41l14 13" stroke="${ink}" stroke-width="6" stroke-linecap="round" />`,
   // A jumbled rainbow with swap arrows.
   'fix-the-rainbow': `
     ${tinyRainbow((i) => [GREEN, ORANGE, PURPLE, RED, BLUE, YELLOW][i])}

@@ -1584,6 +1584,109 @@ button.round-button {
   }
 }
 
+/* ---- I spy ---- */
+
+/* As wide as fits, but no taller than 62% of the screen (the picture is
+   752 × 460); smaller once every clue is found, so the celebration and
+   its buttons fit below it. */
+.spy-scene {
+  width: min(900px, 100%, calc(62vh * 752 / 460));
+  height: auto;
+  border-radius: 32px;
+  overflow: hidden;
+  transition: width 0.4s;
+}
+
+.spy-scene.is-done {
+  width: min(900px, 100%, calc(36vh * 752 / 460));
+}
+
+.spy-sky {
+  fill: #e8f6ff;
+}
+
+.spy-thing {
+  cursor: pointer;
+  outline: none;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+/* The tap area is invisible, but rings the thing once it's found or has
+   the keyboard's focus. */
+.spy-hit {
+  fill: transparent;
+  stroke: transparent;
+  stroke-width: 5;
+}
+
+.spy-thing:focus-visible .spy-hit {
+  stroke: var(--ink);
+  stroke-dasharray: 8 6;
+}
+
+.spy-thing.is-found .spy-hit {
+  fill: rgb(255 255 255 / 0.45);
+  stroke: #ffd23f;
+  stroke-dasharray: 3 7;
+  stroke-linecap: round;
+  animation: sparkle 3s linear infinite;
+}
+
+.spy-thing.is-found {
+  animation: pop 0.4s ease-out;
+}
+
+.spy-thing.is-wrong {
+  animation: wiggle 0.4s;
+}
+
+/* At the end, everything in the meadow waves hello. */
+.spy-scene.is-done .spy-thing {
+  animation: wave 0.9s ease-in-out 3 alternate;
+}
+
+.spy-scene.is-done .spy-thing:nth-of-type(even) {
+  animation-delay: 0.2s;
+}
+
+@keyframes sparkle {
+  to {
+    stroke-dashoffset: -60;
+  }
+}
+
+@keyframes wave {
+  from {
+    transform: rotate(-8deg);
+  }
+  to {
+    transform: rotate(8deg);
+  }
+}
+
+/* The color in a clue, as a chip of that color. */
+.spy-color {
+  display: inline-block;
+  padding: 0 0.45em;
+  border-radius: 999px;
+  background: var(--chip);
+  color: #fff;
+}
+
+.spy-color[data-color='yellow'] {
+  color: var(--ink);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .spy-thing.is-found,
+  .spy-thing.is-found .spy-hit,
+  .spy-thing.is-wrong,
+  .spy-scene.is-done .spy-thing {
+    animation: none;
+  }
+}
+
 /* ---- Bubble pop ---- */
 
 /* A dot for each bubble to pop, filled in the color called. */
