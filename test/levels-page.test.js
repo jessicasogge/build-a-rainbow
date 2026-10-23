@@ -35,9 +35,11 @@ describe('level picker pages', () => {
     expect(more().hidden).toBe(false);
     more().click();
     expect(shown()).toEqual(['9', '10', '11', '12']);
+    more().click();
+    expect(shown()).toEqual(['13']);
     expect(more().hidden).toBe(true);
     back().click();
-    expect(shown()).toEqual(['5', '6', '7', '8']);
+    expect(shown()).toEqual(['9', '10', '11', '12']);
   });
 
   it('turns the page with the arrow keys, and stops at the ends', () => {
@@ -46,7 +48,8 @@ describe('level picker pages', () => {
     key('ArrowRight');
     key('ArrowRight');
     key('ArrowRight');
-    expect(picker.page).toBe(2);
+    key('ArrowRight');
+    expect(picker.page).toBe(3);
   });
 
   it('turns the page with a sideways swipe, without opening a level', () => {
@@ -87,8 +90,8 @@ describe('level picker pages', () => {
 
   it('hides Back and More levels when every level fits on one page', () => {
     loadPage('levels.html');
-    start(document, { size: 12 });
-    expect(shown()).toHaveLength(12);
+    start(document, { size: 16 });
+    expect(shown()).toHaveLength(13);
     expect($('.pager').hidden).toBe(true);
   });
 

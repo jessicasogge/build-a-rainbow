@@ -1,4 +1,4 @@
-// Plays Level 8, Memory rainbow, on the real page, in a pretend browser.
+// Plays Level 9, Memory rainbow, on the real page, in a pretend browser.
 // @vitest-environment jsdom
 import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
@@ -27,8 +27,8 @@ afterEach(() => {
 });
 
 describe('memory rainbow page', () => {
-  it('is level 8, with twelve cards face down', () => {
-    expect($('.level-title').textContent).toBe('Level 8 · Memory rainbow');
+  it('is level 9, with twelve cards face down', () => {
+    expect($('.level-title').textContent).toBe('Level 9 · Memory rainbow');
     expect($('.progress-pill').textContent).toBe('0 of 6 pairs');
     expect(cards()).toHaveLength(12);
     expect(upCount()).toBe(0);

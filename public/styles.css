@@ -1584,6 +1584,203 @@ button.round-button {
   }
 }
 
+/* ---- Rainbow garden ---- */
+
+/* The dots for the flowers wanted: a row for each color. */
+.garden-goal {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5rem 1.5rem;
+}
+
+.goal-row {
+  display: flex;
+  gap: 0.4rem;
+}
+
+.goal-dot {
+  width: 26px;
+  height: 26px;
+  border: 3px solid var(--color);
+  border-radius: 50%;
+  background: #fff;
+  transition: background 0.2s;
+}
+
+.goal-dot.is-filled {
+  background: var(--color);
+  animation: pop 0.3s ease-out;
+}
+
+/* The pots stand in a strip of soil. */
+.garden {
+  position: relative;
+  width: min(760px, 100%);
+  padding: 0 clamp(0.5rem, 2vw, 1.5rem);
+  border-radius: 28px;
+  background: linear-gradient(transparent 70%, #9C6B3F 70%);
+}
+
+.pots {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: clamp(0.25rem, 1.5vw, 1rem);
+}
+
+.garden-pot {
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+}
+
+.garden-pot svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.garden-pot:focus-visible {
+  outline: 4px solid var(--ink);
+  outline-offset: 2px;
+  border-radius: 12px;
+}
+
+.garden-pot.is-wrong {
+  animation: wiggle 0.4s;
+}
+
+/* A new flower grows: the stem shoots up, then the flower pops open. */
+.garden-pot.is-growing .flower-stem {
+  transform-box: fill-box;
+  transform-origin: center bottom;
+  animation: grow 0.5s ease-out;
+}
+
+.garden-pot.is-growing .flower-head {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: bloom 0.4s ease-out 0.4s backwards;
+}
+
+@keyframes grow {
+  from {
+    transform: scaleY(0);
+  }
+}
+
+@keyframes bloom {
+  from {
+    transform: scale(0);
+  }
+  70% {
+    transform: scale(1.2);
+  }
+}
+
+/* Butterflies flutter in once the garden is all grown. */
+.garden-butterfly {
+  position: absolute;
+  width: clamp(36px, 7vw, 60px);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.butterfly-one {
+  top: 0;
+  left: 18%;
+}
+
+.butterfly-two {
+  top: 8%;
+  right: 16%;
+}
+
+.garden.is-done .garden-butterfly {
+  opacity: 1;
+  animation: flutter 1.6s ease-in-out infinite alternate;
+}
+
+.garden.is-done .butterfly-two {
+  animation-delay: 0.5s;
+}
+
+@keyframes flutter {
+  from {
+    transform: translate(-12px, 6px) rotate(-8deg) scaleX(1);
+  }
+  50% {
+    transform: translate(0, -10px) rotate(0deg) scaleX(0.7);
+  }
+  to {
+    transform: translate(12px, 4px) rotate(8deg) scaleX(1);
+  }
+}
+
+/* A seed packet for each color; the one picked is pressed in. */
+.seed-packets {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 0.75rem;
+  width: min(760px, 100%);
+}
+
+@media (max-width: 600px) {
+  .seed-packets {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.seed-packet {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.1rem;
+  padding: 0.4rem 0.25rem 0.6rem;
+  border: 4px solid transparent;
+  border-radius: 18px;
+  background: #fff6d6;
+  box-shadow: 0 6px 0 var(--cloud-shadow);
+  color: var(--ink);
+  font-family: Fredoka, system-ui, sans-serif;
+  font-size: clamp(1rem, 2.4vw, 1.3rem);
+  cursor: pointer;
+  transition: transform 0.08s, box-shadow 0.08s;
+}
+
+.seed-packet svg {
+  width: min(64px, 70%);
+  height: auto;
+}
+
+.seed-packet[aria-pressed='true'] {
+  border-color: var(--ink);
+  background: #fff;
+  transform: translateY(-4px);
+  box-shadow: 0 10px 0 var(--cloud-shadow);
+}
+
+.seed-packet.is-wrong {
+  animation: wiggle 0.4s;
+}
+
+.seed-packet:focus-visible {
+  outline: 4px solid var(--ink);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .goal-dot.is-filled,
+  .garden-pot.is-wrong,
+  .garden-pot.is-growing .flower-stem,
+  .garden-pot.is-growing .flower-head,
+  .garden.is-done .garden-butterfly,
+  .seed-packet.is-wrong {
+    animation: none;
+  }
+}
+
 /* ---- I spy ---- */
 
 /* As wide as fits, but no taller than 62% of the screen (the picture is

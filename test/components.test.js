@@ -94,7 +94,7 @@ describe('<rainbow-stripes>', () => {
 });
 
 describe('<level-picture>', () => {
-  const LEVELS = ['mix-a-color', 'color-order', 'memory-rainbow', 'sun-and-rain', 'paint-a-rainbow', 'rainbow-road', 'word-scramble', 'fix-the-rainbow', 'color-sort', 'patterns', 'bubble-pop', 'i-spy'];
+  const LEVELS = ['mix-a-color', 'color-order', 'memory-rainbow', 'sun-and-rain', 'paint-a-rainbow', 'rainbow-road', 'word-scramble', 'fix-the-rainbow', 'color-sort', 'patterns', 'bubble-pop', 'i-spy', 'rainbow-garden'];
 
   it.each(LEVELS)('draws a picture for %s', (level) => {
     const el = render(`<level-picture level="${level}"></level-picture>`);

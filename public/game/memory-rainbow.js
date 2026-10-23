@@ -1,4 +1,4 @@
-// Level 8: match six rainbow pairs from face-down cards.
+// Level 9: match six rainbow pairs from face-down cards.
 // Matches stay up; mismatches flip back.
 // Testable rules only; memory-rainbow-page.js handles drawing and taps.
 import { COLOR_IDS, colorById } from './colors.js';

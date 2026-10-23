@@ -1,4 +1,4 @@
-// Draws Level 8 (Memory rainbow) on memory-rainbow.html and handles the taps.
+// Draws Level 9 (Memory rainbow) on memory-rainbow.html and handles the taps.
 // The rules live in memory-rainbow.js.
 import { COLORS, colorById } from './colors.js';
 import { stripePath } from './components.js';

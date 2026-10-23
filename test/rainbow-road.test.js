@@ -1,4 +1,4 @@
-// The rules of Level 5, Rainbow road.
+// The rules of Level 6, Rainbow road.
 import { describe, expect, it } from 'vitest';
 import { COLORS } from '../public/game/colors.js';
 import { ROADS_PER_TURN, turn, isDone, message, newTrip, pick } from '../public/game/rainbow-road.js';

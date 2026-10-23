@@ -1,4 +1,4 @@
-// Plays Level 6, I spy, on the real page, in a pretend browser.
+// Plays Level 7, I spy, on the real page, in a pretend browser.
 // @vitest-environment jsdom
 import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
@@ -20,8 +20,8 @@ beforeEach(() => {
 });
 
 describe('i spy page', () => {
-  it('is level 6, with the meadow and the first clue', () => {
-    expect($('.level-title').textContent).toBe('Level 6 · I spy');
+  it('is level 7, with the meadow and the first clue', () => {
+    expect($('.level-title').textContent).toBe('Level 7 · I spy');
     expect($('.progress-pill').textContent).toBe('Clue 1 of 6');
     expect($('.helper-text').textContent).toBe(`I spy something ${level.looking.color} that ${level.looking.hint}!`);
   });
