@@ -1,4 +1,4 @@
-// The rules of Level 4, Sun and rain.
+// The rules of Level 5, Sun and rain.
 import { describe, expect, it } from 'vitest';
 import { WEATHER, hasRainbow, message, newSky, toggle } from '../public/game/sun-and-rain.js';
 

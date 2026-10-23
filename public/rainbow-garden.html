@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Rainbow Garden: Build a Rainbow</title>
+    <meta name="description" content="Plant 3 red flowers! Count and grow a rainbow garden, one flower at a time. A free counting and color game for kids." />
+    <link rel="canonical" href="https://jessicasogge.github.io/build-a-rainbow/rainbow-garden.html" />
+    <link rel="icon" href="./favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="./apple-touch-icon.png" />
+    <link rel="manifest" href="./manifest.webmanifest" />
+    <meta name="apple-mobile-web-app-title" content="Rainbow" />
+    <meta name="theme-color" content="#bfe6ff" />
+    <link rel="preload" href="./fonts/fredoka-700.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="./fonts/nunito-700.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body class="page level-page">
+    <level-header number="4" name="Rainbow garden" counter="Round 1 of 5"></level-header>
+
+    <main class="build">
+      <helper-bubble>Plant some flowers!</helper-bubble>
+
+      <!-- A dot for each flower wanted, in its color. rainbow-garden-page.js
+           fills them in as flowers are planted. -->
+      <div class="garden-goal"></div>
+
+      <!-- Six pots in a row of soil. Butterflies visit once it's all grown. -->
+      <div class="garden">
+        <div class="pots"></div>
+        <svg class="garden-butterfly butterfly-one" viewBox="0 0 60 50" aria-hidden="true">
+          <ellipse cx="18" cy="18" rx="14" ry="12" fill="#7B4FA0" /><ellipse cx="42" cy="18" rx="14" ry="12" fill="#7B4FA0" />
+          <ellipse cx="20" cy="36" rx="10" ry="9" fill="#7B4FA0" opacity="0.8" /><ellipse cx="40" cy="36" rx="10" ry="9" fill="#7B4FA0" opacity="0.8" />
+          <rect x="27" y="10" width="6" height="34" rx="3" fill="#1B2A4A" />
+        </svg>
+        <svg class="garden-butterfly butterfly-two" viewBox="0 0 60 50" aria-hidden="true">
+          <ellipse cx="18" cy="18" rx="14" ry="12" fill="#F28AB2" /><ellipse cx="42" cy="18" rx="14" ry="12" fill="#F28AB2" />
+          <ellipse cx="20" cy="36" rx="10" ry="9" fill="#F28AB2" opacity="0.8" /><ellipse cx="40" cy="36" rx="10" ry="9" fill="#F28AB2" opacity="0.8" />
+          <rect x="27" y="10" width="6" height="34" rx="3" fill="#1B2A4A" />
+        </svg>
+      </div>
+
+      <!-- A seed packet for each color. Pick one, then tap pots to plant it. -->
+      <div class="seed-packets"></div>
+
+      <button type="button" class="button button-play" id="next" hidden>
+        Next
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4l13 8-13 8z" /></svg>
+      </button>
+
+      <level-done heading="Your garden is all grown!">
+        Fun fact: bees can see colors we can't! Many flowers have hidden patterns that only bees can see, pointing the way to the sweet nectar.
+      </level-done>
+    </main>
+
+    <footer class="signature">jsogge 2026</footer>
+
+    <script type="module">
+      import { start } from './game/rainbow-garden-page.js';
+      start();
+    </script>
+    <script data-goatcounter="https://petripals.goatcounter.com/count"
+      async src="https://gc.zgo.at/count.js">
+    </script>
+  </body>
+</html>

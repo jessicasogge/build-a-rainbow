@@ -1,21 +1,22 @@
 # Build a Rainbow 🌈
 
-A browser game for young elementary-age kids: twelve rainbow levels where you mix colors, build and paint rainbows, sort colors, finish patterns, pop bubbles, play I spy, drive a rainbow road and more. Works on computers, tablets and phones.
+A browser game for young elementary-age kids: thirteen rainbow levels where you mix colors, build and paint rainbows, sort colors, grow a garden, finish patterns, pop bubbles, play I spy, drive a rainbow road and more. Works on computers, tablets and phones.
 
-There's an opening screen, a level picker, and twelve levels, from easiest to hardest:
+There's an opening screen, a level picker, and thirteen levels, from easiest to hardest:
 
 1. **Paint a rainbow:** pick from ten paints and tap any stripe to paint it, in any colors you like. Once every stripe is painted, tap Done.
 2. **Bubble pop:** rainbow bubbles float slowly up the sky, and the helper calls a color. Pop five bubbles of that color, then the next color is called. Three colors a game. A bubble of another color just boings away; there's no losing and no time limit.
 3. **Color sort:** a strawberry, a frog, a banana and other everyday things come up one at a time. Drag each one into the basket of its color, or tap the basket. Six things a game, one of each color, picked from twelve.
-4. **Sun and rain:** turn the sun, rain, snow, clouds and wind on and off until there's a rainbow. It needs sunshine and raindrops at the same time, with no snow and no thick clouds hiding the sun. Wind blows the rain sideways but doesn't stop a rainbow.
-5. **Rainbow road:** drive a little car through a roundabout six times. Each time, tap the exit in the color the helper names, and the car drives around the ring and out that way. The trip ends at a pot of gold at the end of the rainbow.
-6. **I spy:** twelve things hide in a rainbow meadow, two of each color: a red ladybug and a red apple, an orange fish and an orange pumpkin, and so on. The helper gives a clue with a color and a hint ("I spy something purple that flutters!"), so both are needed to find the right one. Six clues a game, one of each color.
-7. **Color order:** red starts filled in on top; tap the rest of the colors in rainbow order to fill in each stripe. A wrong pick wiggles and the helper says to try another color.
-8. **Memory rainbow:** twelve cards lie face down, two of each rainbow color. Turn over two at a time to find the pairs. A pair stays face up; two that don't match turn back over.
-9. **Mix a color:** two paint colors are shown; pick the color they make. Three questions, one for each pair of primary colors (red + yellow, yellow + blue, red + blue).
-10. **What comes next?:** six patterns of colors and shapes, each ending in a gap. Pick which of three choices comes next. They get harder: two colors taking turns, then patterns like red, red, yellow, then shapes, then color and shape together, and last the rainbow itself.
-11. **Fix the rainbow:** the stripes come jumbled. Tap one stripe, then another, to swap them, until every color is back in its place.
-12. **Word scramble:** the letters of RAINBOW come mixed up. Tap them in order to spell the word; each right letter drops into the next box with a rainbow-colored border. Then tap Next and do the same with SUNSHINE, then CLOUDS.
+4. **Rainbow garden:** the helper asks for flowers ("Plant 3 red flowers!") and dots show how many. Pick a seed packet, then tap pots to plant it, and each flower grows as the helper counts along. Planting one too many, or a color that isn't asked for, just wiggles the pot. Five rounds, from one color to three at once; then butterflies visit the garden.
+5. **Sun and rain:** turn the sun, rain, snow, clouds and wind on and off until there's a rainbow. It needs sunshine and raindrops at the same time, with no snow and no thick clouds hiding the sun. Wind blows the rain sideways but doesn't stop a rainbow.
+6. **Rainbow road:** drive a little car through a roundabout six times. Each time, tap the exit in the color the helper names, and the car drives around the ring and out that way. The trip ends at a pot of gold at the end of the rainbow.
+7. **I spy:** twelve things hide in a rainbow meadow, two of each color: a red ladybug and a red apple, an orange fish and an orange pumpkin, and so on. The helper gives a clue with a color and a hint ("I spy something purple that flutters!"), so both are needed to find the right one. Six clues a game, one of each color.
+8. **Color order:** red starts filled in on top; tap the rest of the colors in rainbow order to fill in each stripe. A wrong pick wiggles and the helper says to try another color.
+9. **Memory rainbow:** twelve cards lie face down, two of each rainbow color. Turn over two at a time to find the pairs. A pair stays face up; two that don't match turn back over.
+10. **Mix a color:** two paint colors are shown; pick the color they make. Three questions, one for each pair of primary colors (red + yellow, yellow + blue, red + blue).
+11. **What comes next?:** six patterns of colors and shapes, each ending in a gap. Pick which of three choices comes next. They get harder: two colors taking turns, then patterns like red, red, yellow, then shapes, then color and shape together, and last the rainbow itself.
+12. **Fix the rainbow:** the stripes come jumbled. Tap one stripe, then another, to swap them, until every color is back in its place.
+13. **Word scramble:** the letters of RAINBOW come mixed up. Tap them in order to spell the word; each right letter drops into the next box with a rainbow-colored border. Then tap Next and do the same with SUNSHINE, then CLOUDS.
 
 ## Running it locally
 

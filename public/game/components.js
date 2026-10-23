@@ -176,6 +176,18 @@ const PICTURES = {
     <circle cx="30" cy="35" r="1.8" fill="${ink}" /><circle cx="38" cy="35" r="1.8" fill="${ink}" />
     <circle cx="40" cy="28" r="18" fill="#ffffff" fill-opacity="0.25" stroke="${ink}" stroke-width="4" />
     <path d="M53 41l14 13" stroke="${ink}" stroke-width="6" stroke-linecap="round" />`,
+  // Three flowers in pots: red, yellow and blue.
+  'rainbow-garden': [[18, RED], [44, YELLOW], [70, BLUE]]
+    .map(([x, fill]) => `
+    <path d="M${x} 44V22" stroke="#2E8A6E" stroke-width="2.5" stroke-linecap="round" />
+    <path d="M${x} 36q-7-1-9-6q6 0 9 5z" fill="#43AA8B" />
+    ${[0, 1, 2, 3, 4].map((i) => {
+      const a = (i * 2 * Math.PI) / 5 - Math.PI / 2;
+      return `<circle cx="${(x + 6 * Math.cos(a)).toFixed(1)}" cy="${(16 + 6 * Math.sin(a)).toFixed(1)}" r="5" fill="${fill}" />`;
+    }).join('')}
+    <circle cx="${x}" cy="16" r="3.5" fill="${fill === YELLOW ? '#7A4A22' : YELLOW}" />
+    <path d="M${x - 10} 42h20l-3 12h-14z" fill="#C8693A" />`)
+    .join(''),
   // A jumbled rainbow with swap arrows.
   'fix-the-rainbow': `
     ${tinyRainbow((i) => [GREEN, ORANGE, PURPLE, RED, BLUE, YELLOW][i])}

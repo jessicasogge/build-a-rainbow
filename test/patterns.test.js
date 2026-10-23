@@ -1,4 +1,4 @@
-// The rules of Level 10, What comes next?
+// The rules of Level 11, What comes next?
 import { describe, expect, it } from 'vitest';
 import { COLOR_IDS } from '../public/game/colors.js';
 import {

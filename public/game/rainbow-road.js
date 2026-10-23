@@ -1,4 +1,4 @@
-// Level 5, Rainbow road: drive a little car through a roundabout with three
+// Level 6, Rainbow road: drive a little car through a roundabout with three
 // colored exits. The helper says which color road to take; tap it to drive
 // on. There are six turns, one for each rainbow color, and the trip ends at a
 // pot of gold at the end of the rainbow.

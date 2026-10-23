@@ -1,4 +1,4 @@
-// The rules of Level 6, I spy.
+// The rules of Level 7, I spy.
 import { describe, expect, it } from 'vitest';
 import { COLOR_IDS } from '../public/game/colors.js';
 import { THINGS, clue, currentThing, isDone, message, newGame, tap, thingById } from '../public/game/i-spy.js';
