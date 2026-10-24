@@ -1,5 +1,6 @@
 // Level 4: Rainbow garden. Plant the flowers asked for: "Plant 3 red
-// flowers!" Five rounds, from one color to three at once, counting to five.
+// flowers!" Five rounds, from one color to three at once, ending with
+// every pot full.
 // Testable rules only; rainbow-garden-page.js handles the garden and taps.
 import { colorById } from './colors.js';
 
@@ -9,7 +10,7 @@ export const ROUNDS = [
   { red: 3 },
   { blue: 4 },
   { purple: 1, green: 2 },
-  { orange: 2, red: 1, blue: 2 },
+  { orange: 2, red: 2, blue: 2 }, // fills every pot
 ];
 
 export const POTS = 6;
