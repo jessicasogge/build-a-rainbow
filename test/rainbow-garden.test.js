@@ -20,14 +20,18 @@ function playAll() {
 }
 
 describe('the rounds', () => {
-  it('ask for rainbow colors, never more flowers than there are pots, up to five', () => {
+  const total = (round) => Object.values(round).reduce((a, b) => a + b, 0);
+
+  it('ask for rainbow colors, never more flowers than there are pots', () => {
     expect(ROUNDS).toHaveLength(5);
     for (const round of ROUNDS) {
       for (const color of Object.keys(round)) expect(COLOR_IDS).toContain(color);
-      const total = Object.values(round).reduce((a, b) => a + b, 0);
-      expect(total).toBeLessThan(POTS); // a pot to spare, so too many can happen
-      expect(total).toBeLessThanOrEqual(5);
+      expect(total(round)).toBeLessThanOrEqual(POTS);
     }
+  });
+
+  it('end with every pot full', () => {
+    expect(total(ROUNDS.at(-1))).toBe(POTS);
   });
 
   it('build from one color to three', () => {
@@ -97,7 +101,7 @@ describe('message', () => {
   it('asks for the flowers', () => {
     expect(ask(newGame())).toBe('Plant 2 yellow flowers!');
     expect(ask({ round: 3, pots: [] })).toBe('Plant 1 purple and 2 green flowers!');
-    expect(ask({ round: 4, pots: [] })).toBe('Plant 2 orange, 1 red and 2 blue flowers!');
+    expect(ask({ round: 4, pots: [] })).toBe('Plant 2 orange, 2 red and 2 blue flowers!');
   });
 
   it('counts along', () => {
