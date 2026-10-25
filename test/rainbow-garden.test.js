@@ -19,23 +19,17 @@ function playAll() {
   return turn;
 }
 
-describe('the rounds', () => {
-  const total = (round) => Object.values(round).reduce((a, b) => a + b, 0);
+// Round 2: 2 orange flowers.
+const ROUND2 = { round: 1, pots: Array(POTS).fill(null) };
 
-  it('ask for rainbow colors, never more flowers than there are pots', () => {
-    expect(ROUNDS).toHaveLength(5);
-    for (const round of ROUNDS) {
-      for (const color of Object.keys(round)) expect(COLOR_IDS).toContain(color);
-      expect(total(round)).toBeLessThanOrEqual(POTS);
-    }
+describe('the rounds', () => {
+  it('go one color at a time, in rainbow order, one more flower each round', () => {
+    expect(ROUNDS).toEqual(COLOR_IDS.map((color, i) => ({ [color]: i + 1 })));
+    expect(ROUNDS[0]).toEqual({ red: 1 });
   });
 
   it('end with every pot full', () => {
-    expect(total(ROUNDS.at(-1))).toBe(POTS);
-  });
-
-  it('build from one color to three', () => {
-    expect(ROUNDS.map((r) => Object.keys(r).length)).toEqual([1, 1, 1, 2, 3]);
+    expect(ROUNDS.at(-1)).toEqual({ purple: POTS });
   });
 });
 
@@ -45,34 +39,27 @@ describe('plant', () => {
   });
 
   it('plants a color that is asked for, and counts it', () => {
-    const { game, result } = plant(newGame(), 0, 'yellow');
+    const { game, result } = plant(ROUND2, 0, 'orange');
     expect(result).toBe('right');
-    expect(planted(game, 'yellow')).toBe(1);
+    expect(planted(game, 'orange')).toBe(1);
   });
 
   it("won't plant a color that isn't asked for", () => {
     const start = newGame();
-    expect(plant(start, 0, 'red')).toEqual({ game: start, result: 'unwanted' });
+    expect(plant(start, 0, 'yellow')).toEqual({ game: start, result: 'unwanted' });
   });
 
   it('ends a round as soon as it has what it asks for', () => {
-    const one = plant(newGame(), 0, 'yellow').game;
-    const { game, result } = plant(one, 1, 'yellow');
+    const one = plant(ROUND2, 0, 'orange').game;
+    const { game, result } = plant(one, 1, 'orange');
     expect(result).toBe('round');
     expect(isRoundDone(game)).toBe(true);
-    expect(plant(game, 2, 'yellow').result).toBe('full'); // no more planting
-  });
-
-  it('says when a color is all planted, before the round is', () => {
-    const game = { round: 3, pots: Array(POTS).fill(null) }; // 1 purple and 2 green
-    const turn = plant(game, 0, 'purple');
-    expect(turn.result).toBe('color');
-    expect(plant(turn.game, 1, 'purple')).toEqual({ game: turn.game, result: 'extra' });
+    expect(plant(game, 2, 'orange').result).toBe('full'); // no more planting
   });
 
   it("won't plant in a pot that already has a flower", () => {
-    const one = plant(newGame(), 0, 'yellow').game;
-    expect(plant(one, 0, 'yellow')).toEqual({ game: one, result: 'full' });
+    const one = plant(ROUND2, 0, 'orange').game;
+    expect(plant(one, 0, 'orange')).toEqual({ game: one, result: 'full' });
   });
 
   it("won't move on before the round is done", () => {
@@ -85,42 +72,33 @@ describe('plant', () => {
     expect(next.pots).toEqual(Array(POTS).fill(null));
   });
 
-  it('is done after the fifth round', () => {
+  it('is done after the sixth round, with every pot full', () => {
     const { game, result } = playAll();
     expect(result).toBe('done');
     expect(isDone(game)).toBe(true);
+    expect(game.pots).toEqual(Array(POTS).fill('purple'));
   });
 
   it('refuses a pot or color that does not exist', () => {
-    expect(() => plant(newGame(), POTS, 'yellow')).toThrow();
+    expect(() => plant(newGame(), POTS, 'red')).toThrow();
     expect(() => plant(newGame(), 0, 'pink')).toThrow();
   });
 });
 
 describe('message', () => {
   it('asks for the flowers', () => {
-    expect(ask(newGame())).toBe('Plant 2 yellow flowers!');
-    expect(ask({ round: 3, pots: [] })).toBe('Plant 1 purple and 2 green flowers!');
-    expect(ask({ round: 4, pots: [] })).toBe('Plant 2 orange, 2 red and 2 blue flowers!');
+    expect(ask(newGame())).toBe('Plant 1 red flower!');
+    expect(ask(ROUND2)).toBe('Plant 2 orange flowers!');
+    expect(ask({ round: 5, pots: [] })).toBe('Plant 6 purple flowers!');
   });
 
   it('counts along', () => {
-    const { game, result } = plant(newGame(), 0, 'yellow');
-    expect(message(game, result, 'yellow')).toBe('One!');
-  });
-
-  it('says when a color is all planted', () => {
-    const { game, result } = plant({ round: 3, pots: Array(POTS).fill(null) }, 0, 'purple');
-    expect(message(game, result, 'purple')).toBe('One purple flower!');
-  });
-
-  it('is gentle about one too many', () => {
-    const game = { round: 3, pots: ['purple', null, null, null, null, null] };
-    expect(message(game, 'extra', 'purple')).toBe("Oops, that's 2! We need 1 purple.");
+    const { game, result } = plant(ROUND2, 0, 'orange');
+    expect(message(game, result, 'orange')).toBe('One!');
   });
 
   it('is gentle about a color not asked for', () => {
-    expect(message(newGame(), 'unwanted', 'red')).toBe("We don't need red this time. Look at the dots!");
+    expect(message(newGame(), 'unwanted', 'yellow')).toBe("We don't need yellow this time. Look at the dots!");
   });
 
   it('points to Next, and celebrates at the end', () => {

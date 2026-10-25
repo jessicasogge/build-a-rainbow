@@ -1,17 +1,12 @@
-// Level 4: Rainbow garden. Plant the flowers asked for: "Plant 3 red
-// flowers!" Five rounds, from one color to three at once, ending with
-// every pot full.
+// Level 4: Rainbow garden. Plant the flowers asked for: "Plant 3 yellow
+// flowers!" Six rounds, one color each, in rainbow order: 1 red, 2 orange,
+// and so on up to 6 purple, which fills every pot.
 // Testable rules only; rainbow-garden-page.js handles the garden and taps.
-import { colorById } from './colors.js';
+import { COLOR_IDS, colorById } from './colors.js';
 
-// What each round asks for: how many flowers of each color.
-export const ROUNDS = [
-  { yellow: 2 },
-  { red: 3 },
-  { blue: 4 },
-  { purple: 1, green: 2 },
-  { orange: 2, red: 2, blue: 2 }, // fills every pot
-];
+// What each round asks for: round 1 wants 1 red flower, round 2 wants
+// 2 orange, ... Written { red: 1 }.
+export const ROUNDS = COLOR_IDS.map((color, i) => ({ [color]: i + 1 }));
 
 export const POTS = 6;
 
@@ -30,24 +25,20 @@ export const isLastRound = (game) => game.round === ROUNDS.length - 1;
 export const isDone = (game) => isLastRound(game) && isRoundDone(game);
 
 // Plant a `color` seed in pot `pot`. Returns the new game and what happened:
-//   'right'   – planted, and more of that color are wanted
-//   'color'   – planted, and that's all of that color
+//   'right'   – planted, and more are wanted
 //   'round'   – planted, and the round is done, with another to come
 //   'done'    – planted, and that was the last round
-//   'extra'   – that color already has all it needs; nothing is planted
 //   'unwanted' – that color isn't asked for this round; nothing is planted
 //   'full'    – that pot already has a flower; nothing changes
 export function plant(game, pot, color) {
   colorById(color); // throws for a color that isn't in the rainbow
   if (pot < 0 || pot >= POTS) throw new Error(`No pot ${pot}`);
   if (isRoundDone(game) || game.pots[pot]) return { game, result: 'full' };
-  const goal = wanted(game)[color];
-  if (!goal) return { game, result: 'unwanted' };
-  if (planted(game, color) >= goal) return { game, result: 'extra' };
+  if (!wanted(game)[color]) return { game, result: 'unwanted' };
   const pots = game.pots.map((c, i) => (i === pot ? color : c));
   const next = { ...game, pots };
   if (isRoundDone(next)) return { game: next, result: isLastRound(next) ? 'done' : 'round' };
-  return { game: next, result: planted(next, color) === goal ? 'color' : 'right' };
+  return { game: next, result: 'right' };
 }
 
 // On to the next round, with empty pots.
@@ -59,12 +50,10 @@ export function nextRound(game) {
 const nameOf = (color) => colorById(color).name.toLowerCase();
 const flowers = (n) => (n === 1 ? 'flower' : 'flowers');
 
-// "Plant 1 purple and 2 green flowers!"
+// "Plant 3 yellow flowers!"
 export function ask(game) {
-  const parts = Object.entries(wanted(game)).map(([color, n]) => `${n} ${nameOf(color)}`);
-  const list = parts.length > 1 ? `${parts.slice(0, -1).join(', ')} and ${parts.at(-1)}` : parts[0];
-  const total = Object.values(wanted(game)).at(-1);
-  return `Plant ${list} ${flowers(total)}!`;
+  const [[color, n]] = Object.entries(wanted(game));
+  return `Plant ${n} ${nameOf(color)} ${flowers(n)}!`;
 }
 
 // What the helper says. Short, so a new reader can manage it. `color` is
@@ -73,11 +62,6 @@ export function message(game, result, color) {
   if (isDone(game)) return 'Your rainbow garden is all grown!';
   if (result === 'round') return 'You did it! Tap Next.';
   if (result === 'unwanted') return `We don't need ${nameOf(color)} this time. Look at the dots!`;
-  if (result === 'extra') {
-    const goal = wanted(game)[color];
-    return `Oops, that's ${goal + 1}! We need ${goal} ${nameOf(color)}.`;
-  }
-  if (result === 'color') return `${capital(WORDS[planted(game, color)])} ${nameOf(color)} ${flowers(planted(game, color))}!`;
   if (result === 'right') return `${capital(WORDS[planted(game, color)])}!`;
   if (result === 'pick') return 'Tap a seed packet first!';
   return ask(game);
