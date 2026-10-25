@@ -36,12 +36,12 @@ beforeEach(() => {
 describe('rainbow garden page', () => {
   it('is level 4, with empty pots, seed packets and dots for the flowers wanted', () => {
     expect($('.level-title').textContent).toBe('Level 4 · Rainbow garden');
-    expect($('.progress-pill').textContent).toBe('Round 1 of 5');
+    expect($('.progress-pill').textContent).toBe('Round 1 of 6');
     expect(pots()).toHaveLength(POTS);
     expect(pots()[0].getAttribute('aria-label')).toBe('Pot 1, empty');
     expect(document.querySelectorAll('.seed-packet')).toHaveLength(6);
-    expect(document.querySelectorAll('.goal-dot')).toHaveLength(2);
-    expect($('.helper-text').textContent).toBe('Plant 2 yellow flowers!');
+    expect(document.querySelectorAll('.goal-dot')).toHaveLength(1);
+    expect($('.helper-text').textContent).toBe('Plant 1 red flower!');
   });
 
   it('asks for a seed packet before planting', () => {
@@ -57,22 +57,24 @@ describe('rainbow garden page', () => {
   });
 
   it('grows a flower, fills a dot and counts', () => {
-    packet('yellow').click();
+    plantRound();
+    $('#next').click(); // round 2: 2 orange
+    packet('orange').click();
     pots()[2].click();
-    expect(pots()[2].dataset.color).toBe('yellow');
+    expect(pots()[2].dataset.color).toBe('orange');
     expect(pots()[2].classList.contains('is-growing')).toBe(true);
     expect(pots()[2].querySelector('.flower-head')).not.toBeNull();
-    expect(pots()[2].getAttribute('aria-label')).toBe('Pot 3, yellow flower');
+    expect(pots()[2].getAttribute('aria-label')).toBe('Pot 3, orange flower');
     expect(filledDots()).toBe(1);
     expect($('.helper-text').textContent).toBe('One!');
   });
 
   it('wiggles the pot for a color not asked for', () => {
-    packet('red').click();
+    packet('yellow').click();
     pots()[0].click();
     expect(pots()[0].dataset.color).toBe('');
     expect(pots()[0].classList.contains('is-wrong')).toBe(true);
-    expect($('.helper-text').textContent).toMatch(/^We don't need red/);
+    expect($('.helper-text').textContent).toMatch(/^We don't need yellow/);
   });
 
   it('shows Next when the round is done, then the next round', () => {
@@ -80,15 +82,16 @@ describe('rainbow garden page', () => {
     expect($('#next').hidden).toBe(false);
     expect($('.seed-packets').hidden).toBe(true);
     $('#next').click();
-    expect($('.progress-pill').textContent).toBe('Round 2 of 5');
+    expect($('.progress-pill').textContent).toBe('Round 2 of 6');
     expect(pots().every((p) => !p.dataset.color)).toBe(true);
-    expect(document.querySelectorAll('.goal-dot')).toHaveLength(3);
+    expect(document.querySelectorAll('.goal-dot')).toHaveLength(2);
     expect(level.picked).toBeNull();
   });
 
   it('brings the butterflies when the garden is all grown', () => {
     playAll();
-    expect(level.game.round).toBe(4);
+    expect(level.game.round).toBe(5);
+    expect(pots().every((p) => p.dataset.color === 'purple')).toBe(true);
     expect($('.garden').classList.contains('is-done')).toBe(true);
     expect($('.level-done').hidden).toBe(false);
     expect($('#next').hidden).toBe(true);

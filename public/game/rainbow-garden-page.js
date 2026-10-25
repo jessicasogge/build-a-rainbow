@@ -102,7 +102,7 @@ export function start(doc = document) {
     done.hidden = !finished;
     if (finished) done.querySelector('h2').focus();
     else if (result === 'round') nextButton.focus();
-    if (result === 'extra' || result === 'unwanted') wiggle(pots[pot]);
+    if (result === 'unwanted') wiggle(pots[pot]);
   }
 
   function tapPot(i) {
