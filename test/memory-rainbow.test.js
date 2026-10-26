@@ -1,4 +1,4 @@
-// The rules of Level 9, Memory rainbow.
+// The rules of Level 10, Memory rainbow.
 import { describe, expect, it } from 'vitest';
 import { COLOR_IDS } from '../public/game/colors.js';
 import { PAIRS, flip, hide, isDone, message, newGame, pairsFound } from '../public/game/memory-rainbow.js';

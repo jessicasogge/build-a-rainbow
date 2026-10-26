@@ -1,4 +1,4 @@
-// Draws Level 11 (What comes next?) on patterns.html and handles the taps.
+// Draws Level 12 (What comes next?) on patterns.html and handles the taps.
 // The rules live in patterns.js.
 import './components.js'; // the shared page pieces (header, helper, ...)
 import { colorById } from './colors.js';

@@ -1,4 +1,4 @@
-// Draws Level 12 (Fix the rainbow) on fix-the-rainbow.html and handles the
+// Draws Level 13 (Fix the rainbow) on fix-the-rainbow.html and handles the
 // taps. The rules live in fix-the-rainbow.js.
 import './components.js'; // the shared page pieces (header, helper, ...)
 import { colorById } from './colors.js';

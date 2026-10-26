@@ -1,4 +1,4 @@
-// Draws Level 8 (Color order) on color-order.html and handles the taps.
+// Draws Level 9 (Color order) on color-order.html and handles the taps.
 // The stripe that goes next is outlined. The rules live in color-order.js.
 import './components.js';
 import { COLORS } from './colors.js';

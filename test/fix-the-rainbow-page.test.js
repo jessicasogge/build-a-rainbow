@@ -1,4 +1,4 @@
-// Plays Level 12, Fix the rainbow, on the real page, in a pretend browser.
+// Plays Level 13, Fix the rainbow, on the real page, in a pretend browser.
 // @vitest-environment jsdom
 import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
@@ -29,8 +29,8 @@ beforeEach(() => {
 });
 
 describe('fix the rainbow page', () => {
-  it('is level 12 and starts with a jumbled rainbow', () => {
-    expect($('.level-title').textContent).toBe('Level 12 · Fix the rainbow');
+  it('is level 13 and starts with a jumbled rainbow', () => {
+    expect($('.level-title').textContent).toBe('Level 13 · Fix the rainbow');
     expect(fills()).toEqual(level.rainbow.order.map(hexOf));
     expect(fills()).not.toEqual(COLORS.map((c) => c.hex));
     expect($('.helper-text').textContent).toBe('Oh no, the colors are mixed up! Tap two stripes to swap them.');

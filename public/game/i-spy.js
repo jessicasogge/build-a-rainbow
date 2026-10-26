@@ -1,4 +1,4 @@
-// Level 7: I spy. Twelve things hide in a rainbow meadow, two of each color.
+// Level 8: I spy. Twelve things hide in a rainbow meadow, two of each color.
 // Each clue gives a color and a hint, so both are needed to find the right
 // one: a red ladybug crawls, a red apple grows on a tree.
 // Testable rules only; i-spy-page.js handles the meadow and taps.

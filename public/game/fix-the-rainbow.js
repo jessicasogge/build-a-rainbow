@@ -1,4 +1,4 @@
-// Level 12: swap jumbled stripes by tapping pairs until the rainbow is fixed.
+// Level 13: swap jumbled stripes by tapping pairs until the rainbow is fixed.
 // Testable rules only; fix-the-rainbow-page.js handles drawing and taps.
 import { COLOR_IDS as RIGHT_ORDER, colorById } from './colors.js';
 import { shuffleUntil } from './shuffle.js';
