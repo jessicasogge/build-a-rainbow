@@ -1,11 +1,12 @@
 // Draws Level 5 (Ice cream shop) on ice-cream.html and handles the taps:
-// tap tubs to scoop the cone in the picture, then Sprinkles to hand it over.
+// tap tubs to scoop the cone in the picture. Once it matches, it gets
+// sprinkles and a cherry and goes to the customer.
 // The rules live in ice-cream.js.
 import './components.js'; // the shared page pieces (header, helper, ...)
 import { COLORS, colorById } from './colors.js';
 import { wiggle } from './page-helpers.js';
 import {
-  CUSTOMERS, currentCustomer, isConeDone, isDone, isLastCustomer, message, newGame, nextCustomer, scoop, serve,
+  CUSTOMERS, currentCustomer, isConeDone, isDone, isLastCustomer, message, newGame, nextCustomer, scoop,
 } from './ice-cream.js';
 
 const INK = '#1B2A4A';
@@ -132,7 +133,6 @@ export function start(doc = document) {
   const progress = doc.querySelector('.progress-pill');
   const helperBox = doc.querySelector('.helper');
   const helper = doc.querySelector('.helper-text');
-  const sprinklesButton = doc.querySelector('#sprinkles');
   const nextButton = doc.querySelector('#next');
   const done = doc.querySelector('.level-done');
   const restartButtons = doc.querySelectorAll('[data-restart]');
@@ -170,7 +170,7 @@ export function start(doc = document) {
     order.setAttribute('aria-label', `${name} wants, from the bottom up: ${names(scoops)}`);
     cone.innerHTML = coneSvg(game.cone, {
       room: scoops.length,
-      fresh: result === 'right' || result === 'cone',
+      fresh: result === 'right' || result === 'served' || result === 'done',
       falling: result === 'wrong' ? color : null,
       sprinkles: game.served,
     });
@@ -182,22 +182,14 @@ export function start(doc = document) {
 
     const finished = isDone(game);
     tubRow.hidden = isConeDone(game);
-    sprinklesButton.hidden = !isConeDone(game) || game.served;
     nextButton.hidden = !game.served || isLastCustomer(game);
     shop.hidden = finished;
     parade.hidden = !finished;
     helperBox.hidden = finished;
     done.hidden = !finished;
     if (finished) done.querySelector('h2').focus();
-    else if (result === 'cone') sprinklesButton.focus();
     else if (result === 'served') nextButton.focus();
   }
-
-  sprinklesButton.addEventListener('click', () => {
-    const turn = serve(game);
-    game = turn.game;
-    draw(turn.result);
-  });
 
   nextButton.addEventListener('click', () => {
     game = nextCustomer(game);

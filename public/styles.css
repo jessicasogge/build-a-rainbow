@@ -1873,7 +1873,7 @@ button.round-button {
 .shop.is-served .sprinkles {
   transform-box: fill-box;
   transform-origin: center;
-  animation: pop-in 0.4s ease-out;
+  animation: pop-in 0.4s ease-out 0.3s backwards; /* after the last scoop plops on */
 }
 
 @keyframes plop {

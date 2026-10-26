@@ -2,7 +2,7 @@
 import { describe, expect, it } from 'vitest';
 import { COLOR_IDS } from '../public/game/colors.js';
 import {
-  CUSTOMERS, ask, currentCustomer, isConeDone, isDone, message, newGame, nextCustomer, nextScoop, scoop, serve,
+  CUSTOMERS, ask, currentCustomer, isConeDone, isDone, message, newGame, nextCustomer, nextScoop, scoop,
 } from '../public/game/ice-cream.js';
 
 // Scoops the whole cone the customer wants.
@@ -12,8 +12,8 @@ function scoopCone(game) {
   return turn;
 }
 function playAll() {
-  let turn = serve(scoopCone(newGame()).game);
-  while (turn.result !== 'done') turn = serve(scoopCone(nextCustomer(turn.game)).game);
+  let turn = scoopCone(newGame());
+  while (turn.result !== 'done') turn = scoopCone(nextCustomer(turn.game));
   return turn;
 }
 const PUPPY = { customer: 1, cone: [], served: false }; // yellow, then blue
@@ -52,10 +52,11 @@ describe('scoop', () => {
     expect(scoop(PUPPY, 'blue')).toEqual({ game: PUPPY, result: 'wrong' });
   });
 
-  it('says when the cone matches the picture', () => {
+  it('serves the cone as soon as it matches the picture', () => {
     const { game, result } = scoopCone(PUPPY);
-    expect(result).toBe('cone');
+    expect(result).toBe('served');
     expect(isConeDone(game)).toBe(true);
+    expect(game.served).toBe(true);
     expect(scoop(game, 'red')).toEqual({ game, result: 'full' });
   });
 
@@ -64,20 +65,13 @@ describe('scoop', () => {
   });
 });
 
-describe('serve and next customer', () => {
-  it('serves only a finished cone, once', () => {
-    expect(() => serve(PUPPY)).toThrow();
-    const served = serve(scoopCone(PUPPY).game);
-    expect(served.result).toBe('served');
-    expect(() => serve(served.game)).toThrow();
-  });
-
+describe('next customer', () => {
   it("won't move on before the customer is served", () => {
-    expect(() => nextCustomer(scoopCone(newGame()).game)).toThrow();
+    expect(() => nextCustomer(scoop(PUPPY, 'yellow').game)).toThrow();
   });
 
   it('moves on to the next customer with an empty cone', () => {
-    const next = nextCustomer(serve(scoopCone(newGame()).game).game);
+    const next = nextCustomer(scoopCone(newGame()).game);
     expect(next).toEqual({ customer: 1, cone: [], served: false });
   });
 
@@ -106,11 +100,9 @@ describe('message', () => {
     expect(message(PUPPY, 'wrong', 'blue')).toBe('Oops, not blue! Look at the picture.');
   });
 
-  it('asks for sprinkles, then thanks you', () => {
+  it('says thank you for the cone', () => {
     const { game, result } = scoopCone(PUPPY);
-    expect(message(game, result, 'blue')).toBe('Just like the picture! Now add sprinkles!');
-    const served = serve(game);
-    expect(message(served.game, served.result)).toBe('Puppy says thank you! Tap Next.');
+    expect(message(game, result, 'blue')).toBe('Puppy says thank you! Tap Next.');
   });
 
   it('celebrates at the end', () => {

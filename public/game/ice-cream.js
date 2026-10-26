@@ -1,5 +1,5 @@
 // Level 5: Ice cream shop. Six animal customers each show a picture of the
-// cone they want; scoop it from the bottom up, add sprinkles and hand it over.
+// cone they want; scoop it from the bottom up, and it's theirs.
 // From 1 scoop for the bunny up to a 6-scoop rainbow for the unicorn.
 // Testable rules only; ice-cream-page.js handles drawing and taps.
 import { colorById } from './colors.js';
@@ -27,24 +27,19 @@ export const isDone = (game) => game.served && isLastCustomer(game);
 export const nextScoop = (game) => currentCustomer(game).scoops[game.cone.length];
 
 // Scoop `color` onto the cone. Returns the new game and what happened:
-//   'right' – it's the next scoop in the picture, and more are wanted
-//   'cone'  – right, and now the cone matches the picture
-//   'wrong' – not the next scoop; it slides off and nothing changes
-//   'full'  – the cone is already done; nothing changes
+//   'right'  – it's the next scoop in the picture, and more are wanted
+//   'served' – right, and now the cone matches the picture, so the
+//              customer gets it, with another customer to come
+//   'done'   – served, and that was the last customer
+//   'wrong'  – not the next scoop; it slides off and nothing changes
+//   'full'   – the cone is already done; nothing changes
 export function scoop(game, color) {
   colorById(color); // throws for a color that isn't in the rainbow
   if (isConeDone(game)) return { game, result: 'full' };
   if (color !== nextScoop(game)) return { game, result: 'wrong' };
   const next = { ...game, cone: [...game.cone, color] };
-  return { game: next, result: isConeDone(next) ? 'cone' : 'right' };
-}
-
-// Sprinkles on top, and the cone goes to the customer. Returns 'served', or
-// 'done' for the last customer.
-export function serve(game) {
-  if (!isConeDone(game) || game.served) throw new Error('No cone to serve');
-  const next = { ...game, served: true };
-  return { game: next, result: isLastCustomer(next) ? 'done' : 'served' };
+  if (!isConeDone(next)) return { game: next, result: 'right' };
+  return { game: { ...next, served: true }, result: isLastCustomer(next) ? 'done' : 'served' };
 }
 
 // On to the next customer, with an empty cone.
@@ -68,7 +63,6 @@ export function ask(game) {
 export function message(game, result, color) {
   if (isDone(game)) return 'Every customer is happy!';
   if (game.served) return `${currentCustomer(game).name} says thank you! Tap Next.`;
-  if (result === 'cone') return 'Just like the picture! Now add sprinkles!';
   if (result === 'wrong') return `Oops, not ${nameOf(color)}! Look at the picture.`;
   if (result === 'right') return `Yum, ${nameOf(color)}! What's next?`;
   return ask(game);

@@ -17,11 +17,9 @@ function scoopCone() {
 }
 function serveAll() {
   scoopCone();
-  $('#sprinkles').click();
   while (!$('#next').hidden) {
     $('#next').click();
     scoopCone();
-    $('#sprinkles').click();
   }
 }
 
@@ -50,23 +48,16 @@ describe('ice cream shop page', () => {
     expect($('.helper-text').textContent).toBe('Oops, not blue! Look at the picture.');
   });
 
-  it('scoops the cone, then asks for sprinkles', () => {
+  it('scoops the cone and hands it over with sprinkles, then brings the next customer', () => {
     tub('red').click();
     expect(scoops()).toBe(1);
     expect($('.cone .is-new')).not.toBeNull();
     expect($('.cone').getAttribute('aria-label')).toBe('Your cone: red');
-    expect($('.tubs').hidden).toBe(true);
-    expect($('#sprinkles').hidden).toBe(false);
-    expect(document.activeElement).toBe($('#sprinkles'));
-  });
-
-  it('hands the cone over with sprinkles, then brings the next customer', () => {
-    scoopCone();
-    $('#sprinkles').click();
     expect($('.cone .sprinkles')).not.toBeNull();
     expect($('.customer').classList.contains('is-happy')).toBe(true);
-    expect($('#sprinkles').hidden).toBe(true);
+    expect($('.tubs').hidden).toBe(true);
     expect($('#next').hidden).toBe(false);
+    expect(document.activeElement).toBe($('#next'));
     expect($('.helper-text').textContent).toBe('Bunny says thank you! Tap Next.');
     $('#next').click();
     expect($('.progress-pill').textContent).toBe('Customer 2 of 6');
