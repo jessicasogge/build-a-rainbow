@@ -1,4 +1,4 @@
-// Level 5: toggle weather for a rainbow—sun + rain, no thick clouds.
+// Level 6: toggle weather for a rainbow—sun + rain, no thick clouds.
 // Snow won't help; wind won't stop it.
 // Testable rules only; sun-and-rain-page.js handles drawing and taps.
 

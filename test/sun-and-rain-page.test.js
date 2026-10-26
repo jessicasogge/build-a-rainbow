@@ -1,4 +1,4 @@
-// Plays Level 5, Sun and rain, on the real page, in a pretend browser.
+// Plays Level 6, Sun and rain, on the real page, in a pretend browser.
 // @vitest-environment jsdom
 import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
@@ -17,8 +17,8 @@ beforeEach(() => {
 });
 
 describe('sun and rain page', () => {
-  it('is level 5 and starts with nothing on', () => {
-    expect($('.level-title').textContent).toBe('Level 5 · Sun and rain');
+  it('is level 6 and starts with nothing on', () => {
+    expect($('.level-title').textContent).toBe('Level 6 · Sun and rain');
     expect(scene().getAttribute('class')).toBe('sky-scene');
     expect(scene().getAttribute('aria-label')).toBe('A sky: grey, with one small cloud.');
     expect(document.querySelectorAll('[data-weather]')).toHaveLength(5);

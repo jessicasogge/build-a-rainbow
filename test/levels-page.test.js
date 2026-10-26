@@ -36,7 +36,7 @@ describe('level picker pages', () => {
     more().click();
     expect(shown()).toEqual(['9', '10', '11', '12']);
     more().click();
-    expect(shown()).toEqual(['13']);
+    expect(shown()).toEqual(['13', '14']);
     expect(more().hidden).toBe(true);
     back().click();
     expect(shown()).toEqual(['9', '10', '11', '12']);
@@ -91,7 +91,7 @@ describe('level picker pages', () => {
   it('hides Back and More levels when every level fits on one page', () => {
     loadPage('levels.html');
     start(document, { size: 16 });
-    expect(shown()).toHaveLength(13);
+    expect(shown()).toHaveLength(14);
     expect($('.pager').hidden).toBe(true);
   });
 

@@ -1,4 +1,4 @@
-// Draws Level 7 (I spy) on i-spy.html and handles the taps on the meadow.
+// Draws Level 8 (I spy) on i-spy.html and handles the taps on the meadow.
 // The rules live in i-spy.js.
 import './components.js'; // the shared page pieces (header, helper, ...)
 import { COLORS } from './colors.js';

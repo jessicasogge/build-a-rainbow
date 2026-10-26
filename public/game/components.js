@@ -188,6 +188,14 @@ const PICTURES = {
     <circle cx="${x}" cy="16" r="3.5" fill="${fill === YELLOW ? '#7A4A22' : YELLOW}" />
     <path d="M${x - 10} 42h20l-3 12h-14z" fill="#C8693A" />`)
     .join(''),
+  // A cone of three scoops with a cherry on top, between two tubs.
+  'ice-cream': `
+    <path d="M34 36h20l-10 19z" fill="#E9A955" />
+    ${[[30, PURPLE], [21, GREEN], [12, RED]].map(([cy, fill]) => `<circle cx="44" cy="${cy}" r="9" fill="${fill}" />`).join('')}
+    <circle cx="44" cy="3.5" r="3.5" fill="#D62F32" />
+    ${[[14, YELLOW], [74, BLUE]].map(([x, fill]) => `
+    <path d="M${x - 10} 40q0-10 10-10t10 10z" fill="${fill}" />
+    <path d="M${x - 11} 40h22l-3 14h-16z" fill="#ffffff" stroke="${fill}" stroke-width="2" />`).join('')}`,
   // A jumbled rainbow with swap arrows.
   'fix-the-rainbow': `
     ${tinyRainbow((i) => [GREEN, ORANGE, PURPLE, RED, BLUE, YELLOW][i])}

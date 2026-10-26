@@ -1,4 +1,4 @@
-// Plays Level 13, Word scramble, on the real page, in a pretend browser.
+// Plays Level 14, Word scramble, on the real page, in a pretend browser.
 // @vitest-environment jsdom
 import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
@@ -24,8 +24,8 @@ beforeEach(() => {
 });
 
 describe('word scramble page', () => {
-  it('is level 13, starting on RAINBOW: seven empty boxes, seven scrambled letters and a rainbow', () => {
-    expect($('.level-title').textContent).toBe('Level 13 · Word scramble');
+  it('is level 14, starting on RAINBOW: seven empty boxes, seven scrambled letters and a rainbow', () => {
+    expect($('.level-title').textContent).toBe('Level 14 · Word scramble');
     expect($('.progress-pill').textContent).toBe('Word 1 of 3');
     expect(boxes()).toHaveLength(7);
     expect(filled()).toBe(0);

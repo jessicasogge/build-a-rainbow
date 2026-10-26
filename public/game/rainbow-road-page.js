@@ -1,4 +1,4 @@
-// Draws Level 6 (Rainbow road) on rainbow-road.html and handles the taps.
+// Draws Level 7 (Rainbow road) on rainbow-road.html and handles the taps.
 // The rules live in rainbow-road.js; where the car drives on the roundabout
 // lives in rainbow-road-route.js.
 import './components.js'; // the shared page pieces (header, helper, ...)

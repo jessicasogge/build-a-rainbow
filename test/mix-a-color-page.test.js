@@ -1,4 +1,4 @@
-// Plays Level 10 on the real page, in a pretend browser.
+// Plays Level 11 on the real page, in a pretend browser.
 // @vitest-environment jsdom
 import { readFileSync } from 'node:fs';
 import { join } from 'node:path';

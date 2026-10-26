@@ -15,76 +15,43 @@ describe('pick a level page', () => {
     expect(html).toMatch(/<a class="round-button" href="\.\/index\.html" aria-label="Back[^"]*">/);
   });
 
-  it('lists thirteen levels in order', () => {
-    expect(cards.map((m) => m[1])).toEqual(['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13']);
+  it('lists fourteen levels in order', () => {
+    expect(cards.map((m) => m[1])).toEqual(['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14']);
   });
 
   it('has every level open, none locked', () => {
-    expect(cards.map((m) => Boolean(m[2]))).toEqual(Array(13).fill(false));
+    expect(cards.map((m) => Boolean(m[2]))).toEqual(Array(14).fill(false));
     expect(html).not.toContain('unlock');
   });
 
-  it('opens Mix a color from the level 10 card', () => {
-    expect(html).toContain('<a class="level-card" href="./mix-a-color.html" data-level="10">');
-  });
-
-  it('opens Color order from the level 8 card', () => {
-    expect(html).toContain('<a class="level-card" href="./color-order.html" data-level="8">');
-  });
-
-  it('opens Memory rainbow from the level 9 card', () => {
-    expect(html).toContain('<a class="level-card" href="./memory-rainbow.html" data-level="9">');
-  });
-
-  it('opens Sun and rain from the level 5 card', () => {
-    expect(html).toContain('<a class="level-card" href="./sun-and-rain.html" data-level="5">');
-  });
-
-  it('opens Paint a rainbow from the level 1 card', () => {
-    expect(html).toContain('<a class="level-card" href="./paint-a-rainbow.html" data-level="1">');
-  });
-
-  it('opens Rainbow road from the level 6 card', () => {
-    expect(html).toContain('<a class="level-card" href="./rainbow-road.html" data-level="6">');
-  });
-
-  it('opens I spy from the level 7 card', () => {
-    expect(html).toContain('<a class="level-card" href="./i-spy.html" data-level="7">');
-  });
-
-  it('opens Word scramble from the level 13 card', () => {
-    expect(html).toContain('<a class="level-card" href="./word-scramble.html" data-level="13">');
-  });
-
-  it('opens Fix the rainbow from the level 12 card', () => {
-    expect(html).toContain('<a class="level-card" href="./fix-the-rainbow.html" data-level="12">');
-  });
-
-  it('opens Color sort from the level 3 card', () => {
-    expect(html).toContain('<a class="level-card" href="./color-sort.html" data-level="3">');
-  });
-
-  it('opens Rainbow garden from the level 4 card', () => {
-    expect(html).toContain('<a class="level-card" href="./rainbow-garden.html" data-level="4">');
-  });
-
-  it('opens What comes next? from the level 11 card', () => {
-    expect(html).toContain('<a class="level-card" href="./patterns.html" data-level="11">');
-  });
-
-  it('opens Bubble pop from the level 2 card', () => {
-    expect(html).toContain('<a class="level-card" href="./bubble-pop.html" data-level="2">');
+  it.each([
+    ['Paint a rainbow', 'paint-a-rainbow', 1],
+    ['Bubble pop', 'bubble-pop', 2],
+    ['Color sort', 'color-sort', 3],
+    ['Rainbow garden', 'rainbow-garden', 4],
+    ['Ice cream shop', 'ice-cream', 5],
+    ['Sun and rain', 'sun-and-rain', 6],
+    ['Rainbow road', 'rainbow-road', 7],
+    ['I spy', 'i-spy', 8],
+    ['Color order', 'color-order', 9],
+    ['Memory rainbow', 'memory-rainbow', 10],
+    ['Mix a color', 'mix-a-color', 11],
+    ['What comes next?', 'patterns', 12],
+    ['Fix the rainbow', 'fix-the-rainbow', 13],
+    ['Word scramble', 'word-scramble', 14],
+  ])('opens %s from its card', (name, page, level) => {
+    expect(html).toContain(`<a class="level-card" href="./${page}.html" data-level="${level}">`);
   });
 
   it('gives every card its own picture, hidden from screen readers', () => {
     const pictures = [...document.querySelectorAll('.level-card svg.level-picture')];
-    expect(pictures).toHaveLength(13);
+    expect(pictures).toHaveLength(14);
     for (const svg of pictures) {
       expect(svg.getAttribute('aria-hidden')).toBe('true');
       expect(svg.children.length).toBeGreaterThan(0);
     }
     // Each card's picture is its own.
-    expect(new Set(pictures.map((svg) => svg.innerHTML)).size).toBe(13);
+    expect(new Set(pictures.map((svg) => svg.innerHTML)).size).toBe(14);
   });
 
   it('shares the title screen stylesheet, tab icon and signature', () => {

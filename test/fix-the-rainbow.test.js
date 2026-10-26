@@ -1,4 +1,4 @@
-// The rules of Level 12, Fix the rainbow.
+// The rules of Level 13, Fix the rainbow.
 import { describe, expect, it } from 'vitest';
 import { COLORS } from '../public/game/colors.js';
 import { inPlaceCount, isFixed, isInPlace, message, newRainbow, tapStripe } from '../public/game/fix-the-rainbow.js';

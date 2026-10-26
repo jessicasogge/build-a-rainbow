@@ -1781,6 +1781,216 @@ button.round-button {
   }
 }
 
+/* ---- Ice cream shop ---- */
+
+/* The customer, the picture of their order and the cone, on a counter. */
+.shop {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: clamp(0.5rem, 3vw, 2.5rem);
+  width: min(760px, 100%);
+  padding: 0 0.75rem;
+  border-radius: 28px;
+  background: linear-gradient(transparent calc(100% - 22px), #f4a6c4 calc(100% - 22px));
+}
+
+.customer {
+  width: clamp(84px, 24vw, 170px);
+  align-self: center;
+}
+
+.customer svg,
+.order svg,
+.cone svg,
+.parade svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.customer.is-arriving {
+  animation: arrive 0.5s ease-out;
+}
+
+.customer.is-happy {
+  animation: hop 0.5s ease-out 2;
+}
+
+@keyframes arrive {
+  from {
+    transform: translateX(-60px);
+    opacity: 0;
+  }
+}
+
+@keyframes hop {
+  50% {
+    transform: translateY(-14px);
+  }
+}
+
+/* The order, in a white bubble, like a thought the customer is having. */
+.order {
+  align-self: center;
+  width: clamp(64px, 15vw, 104px);
+  padding: 0.5rem 0.6rem;
+  border-radius: 24px;
+  background: #fff;
+  box-shadow: 0 6px 0 var(--cloud-shadow);
+}
+
+.shop.is-served .order {
+  opacity: 0.4;
+}
+
+/* The cone, with room for six scoops. Short enough on a phone that the
+   tubs fit below it. */
+.cone {
+  width: auto;
+  height: clamp(190px, 34vh, 320px);
+  aspect-ratio: 100 / 250;
+  margin-bottom: 6px;
+}
+
+.cone svg {
+  height: 100%;
+}
+
+/* A new scoop plops down; a wrong one wobbles and slides off. */
+.cone .is-new {
+  transform-box: fill-box;
+  transform-origin: center bottom;
+  animation: plop 0.35s ease-out;
+}
+
+.cone .is-falling {
+  transform-box: fill-box;
+  transform-origin: center bottom;
+  animation: slide-off 0.8s ease-in forwards;
+}
+
+.shop.is-served .sprinkles {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: pop-in 0.4s ease-out 0.3s backwards; /* after the last scoop plops on */
+}
+
+@keyframes plop {
+  from {
+    transform: translateY(-40px);
+  }
+  70% {
+    transform: translateY(0) scale(1.08, 0.9);
+  }
+}
+
+@keyframes slide-off {
+  0%,
+  100% {
+    transform: none;
+  }
+  15% {
+    transform: rotate(-10deg);
+  }
+  30% {
+    transform: rotate(10deg);
+    opacity: 1;
+  }
+  99% {
+    transform: translate(70px, 80px) rotate(50deg);
+    opacity: 0;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+/* Everyone with their cone, at the end. */
+.parade {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  align-items: end;
+  gap: clamp(0.25rem, 2vw, 1.25rem);
+  width: min(760px, 100%);
+}
+
+.parade-guest {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  animation: hop 0.6s ease-out 3;
+}
+
+.parade-guest:nth-child(even) {
+  animation-delay: 0.2s;
+}
+
+.parade-guest svg:last-child {
+  width: 62%;
+  margin-top: -22%;
+}
+
+/* A tub for each color, in one row so they fit under the cone on phones. */
+.tubs {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: clamp(0.3rem, 1.5vw, 0.75rem);
+  width: min(760px, 100%);
+}
+
+.tub {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.1rem;
+  min-width: 0;
+  padding: 0.4rem 0.1rem 0.5rem;
+  border: 0;
+  border-radius: 18px;
+  background: #fff6d6;
+  box-shadow: 0 6px 0 var(--cloud-shadow);
+  color: var(--ink);
+  font-family: Fredoka, system-ui, sans-serif;
+  font-size: clamp(0.75rem, 2.4vw, 1.3rem);
+  cursor: pointer;
+  transition: transform 0.08s, box-shadow 0.08s;
+}
+
+.tub svg {
+  width: min(72px, 90%);
+  height: auto;
+}
+
+.tub:active {
+  transform: translateY(4px);
+  box-shadow: 0 2px 0 var(--cloud-shadow);
+}
+
+.tub.is-wrong {
+  animation: wiggle 0.4s;
+}
+
+.tub:focus-visible {
+  outline: 4px solid var(--ink);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .customer.is-arriving,
+  .customer.is-happy,
+  .cone .is-new,
+  .shop.is-served .sprinkles,
+  .parade-guest,
+  .tub.is-wrong {
+    animation: none;
+  }
+
+  .cone .is-falling {
+    display: none;
+  }
+}
+
 /* ---- I spy ---- */
 
 /* As wide as fits, but no taller than 62% of the screen (the picture is

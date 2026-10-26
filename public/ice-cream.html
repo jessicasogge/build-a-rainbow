@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Ice Cream Shop: Build a Rainbow</title>
+    <meta name="description" content="Scoop rainbow ice cream cones for a bunny, a puppy, a bear and a unicorn! Match the picture from the bottom up. A free color game for kids." />
+    <link rel="canonical" href="https://jessicasogge.github.io/build-a-rainbow/ice-cream.html" />
+    <link rel="icon" href="./favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="./apple-touch-icon.png" />
+    <link rel="manifest" href="./manifest.webmanifest" />
+    <meta name="apple-mobile-web-app-title" content="Rainbow" />
+    <meta name="theme-color" content="#bfe6ff" />
+    <link rel="preload" href="./fonts/fredoka-700.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="./fonts/nunito-700.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body class="page level-page">
+    <level-header number="5" name="Ice cream shop" counter="Customer 1 of 6"></level-header>
+
+    <main class="build">
+      <helper-bubble>Scoop the cone in the picture!</helper-bubble>
+
+      <!-- The customer, the picture of the cone they want, and the cone
+           being scooped. ice-cream-page.js draws all three. -->
+      <div class="shop">
+        <div class="customer"></div>
+        <div class="order" role="img"></div>
+        <div class="cone" role="img"></div>
+      </div>
+
+      <!-- Every customer with their cone, once they've all been served. -->
+      <div class="parade" hidden></div>
+
+      <!-- A tub of ice cream for each color. Tap one to add a scoop. -->
+      <div class="tubs"></div>
+
+      <button type="button" class="button button-play" id="next" hidden>
+        Next
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4l13 8-13 8z" /></svg>
+      </button>
+
+      <level-done heading="Every customer is happy!">
+        Fun fact: people have eaten icy treats for thousands of years! Long ago, people mixed snow with fruit juice and honey.
+      </level-done>
+    </main>
+
+    <footer class="signature">jsogge 2026</footer>
+
+    <script type="module">
+      import { start } from './game/ice-cream-page.js';
+      start();
+    </script>
+    <script data-goatcounter="https://petripals.goatcounter.com/count"
+      async src="https://gc.zgo.at/count.js">
+    </script>
+  </body>
+</html>
