@@ -196,6 +196,14 @@ const PICTURES = {
     ${[[14, YELLOW], [74, BLUE]].map(([x, fill]) => `
     <path d="M${x - 10} 40q0-10 10-10t10 10z" fill="${fill}" />
     <path d="M${x - 11} 40h22l-3 14h-16z" fill="#ffffff" stroke="${fill}" stroke-width="2" />`).join('')}`,
+  // Two little pictures side by side, the ball a different color in each.
+  'spot-the-difference': [[4, BLUE], [48, YELLOW]]
+    .map(([x, ball]) => `
+    <rect x="${x}" y="8" width="36" height="40" rx="5" fill="#DDF2FF" stroke="${ink}" stroke-width="2" />
+    <path d="M${x + 1} 36h34v6a5 5 0 0 1-5 5h-24a5 5 0 0 1-5-5z" fill="#8FD19E" />
+    <circle cx="${x + 28}" cy="17" r="4" fill="${YELLOW}" />
+    <circle cx="${x + 14}" cy="34" r="7" fill="${ball}" />`)
+    .join(''),
   // A jumbled rainbow with swap arrows.
   'fix-the-rainbow': `
     ${tinyRainbow((i) => [GREEN, ORANGE, PURPLE, RED, BLUE, YELLOW][i])}
