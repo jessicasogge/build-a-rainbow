@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Spot the Difference: Build a Rainbow</title>
+    <meta name="description" content="Two pictures look the same, but some things changed color! Find every difference in a park, a garden and a beach. A free color game for kids." />
+    <link rel="canonical" href="https://jessicasogge.github.io/build-a-rainbow/spot-the-difference.html" />
+    <link rel="icon" href="./favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="./apple-touch-icon.png" />
+    <link rel="manifest" href="./manifest.webmanifest" />
+    <meta name="apple-mobile-web-app-title" content="Rainbow" />
+    <meta name="theme-color" content="#bfe6ff" />
+    <link rel="preload" href="./fonts/fredoka-700.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="./fonts/nunito-700.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body class="page level-page">
+    <level-header number="15" name="Spot the difference" counter="Picture 1 of 3"></level-header>
+
+    <main class="build">
+      <helper-bubble>Find the things that changed color!</helper-bubble>
+
+      <!-- Two copies of the picture; some things in the second are a
+           different color. Drawn by spot-the-difference-page.js. -->
+      <div class="spot-pictures"></div>
+
+      <button type="button" class="button button-play" id="next" hidden>
+        Next
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4l13 8-13 8z" /></svg>
+      </button>
+
+      <level-done heading="You found every difference!" next="All levels">
+        Fun fact: some animals can change color too! An octopus can change its color in less than a second to hide from fish.
+      </level-done>
+    </main>
+
+    <footer class="signature">jsogge 2026</footer>
+
+    <script type="module">
+      import { start } from './game/spot-the-difference-page.js';
+      start();
+    </script>
+    <script data-goatcounter="https://petripals.goatcounter.com/count"
+      async src="https://gc.zgo.at/count.js">
+    </script>
+  </body>
+</html>

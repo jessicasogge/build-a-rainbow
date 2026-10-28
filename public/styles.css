@@ -2509,3 +2509,93 @@ button.round-button {
   font-size: 0.9rem;
   opacity: 0.7;
 }
+
+/* ---- Spot the difference ---- */
+
+/* The two copies side by side; one above the other on a phone, small
+   enough that both fit on the screen with the helper. */
+.spot-pictures {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(0.5rem, 2vw, 1.5rem);
+  width: min(1300px, 100%);
+}
+
+@media (max-width: 700px), (orientation: portrait) {
+  .spot-pictures {
+    grid-template-columns: minmax(0, 1fr);
+    width: min(640px, 100%, calc(100svh - 345px));
+    gap: 0.6rem;
+  }
+}
+
+.spot-picture {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 24px;
+  box-shadow: 0 6px 0 var(--cloud-shadow);
+  background: #fff;
+}
+
+/* Once a picture's differences are all found, only the first copy stays,
+   smaller, so Next (or the celebration) fits below it. */
+.spot-pictures.is-solved {
+  grid-template-columns: minmax(0, 1fr);
+  width: min(560px, 100%, calc(100svh - 372px));
+}
+
+.spot-pictures.is-solved .spot-picture + .spot-picture {
+  display: none;
+}
+
+.spot-thing {
+  cursor: pointer;
+  outline: none;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+/* The tap area is invisible, but rings the thing once it's found or has
+   the keyboard's focus, like in I spy. */
+.spot-hit {
+  fill: transparent;
+  stroke: transparent;
+  stroke-width: 5;
+}
+
+.spot-thing:focus-visible .spot-hit {
+  stroke: var(--ink);
+  stroke-dasharray: 8 6;
+}
+
+.spot-thing.is-found .spot-hit {
+  fill: rgb(255 255 255 / 0.45);
+  stroke: #ffd23f;
+  stroke-width: 6;
+  stroke-dasharray: 3 7;
+  stroke-linecap: round;
+  animation: sparkle 3s linear infinite;
+}
+
+.spot-thing.is-found {
+  animation: pop 0.4s ease-out;
+}
+
+.spot-thing.is-wrong {
+  animation: wiggle 0.4s;
+}
+
+/* At the end, the things that changed wave hello. */
+.spot-pictures.is-done .spot-thing.is-found {
+  animation: wave 0.9s ease-in-out 3 alternate;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .spot-thing.is-found,
+  .spot-thing.is-found .spot-hit,
+  .spot-thing.is-wrong,
+  .spot-pictures.is-done .spot-thing.is-found {
+    animation: none;
+  }
+}

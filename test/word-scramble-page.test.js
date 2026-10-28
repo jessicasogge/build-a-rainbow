@@ -104,7 +104,7 @@ describe('word scramble page', () => {
     expect($('.level-done').hidden).toBe(false);
     expect($('#next').hidden).toBe(true);
     expect($('.letter-boxes').getAttribute('aria-label')).toBe('CLOUDS');
-    expect($('.level-done a.button-play').textContent).toBe('All levels'); // the last level
+    expect($('.level-done a.button-play').textContent).toBe('More levels');
     expect(document.activeElement).toBe($('.level-done h2'));
   });
 
