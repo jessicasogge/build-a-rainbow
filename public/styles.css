@@ -2599,3 +2599,142 @@ button.round-button {
     animation: none;
   }
 }
+
+/* ---- Rainbow puzzle ---- */
+
+/* The board: the faint picture, with a grid of spots on top. The page sets
+   --cols, --rows and --aspect (the picture's width over its height). Small
+   enough on a phone that the tray fits below. */
+.puzzle-board {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(var(--cols), minmax(0, 1fr));
+  grid-template-rows: repeat(var(--rows), minmax(0, 1fr));
+  width: min(720px, 100%, calc((100svh - 455px) * var(--aspect)));
+  aspect-ratio: var(--aspect);
+  overflow: hidden;
+  border: 4px solid #fff;
+  border-radius: 20px;
+  background: #fff;
+  box-shadow: 0 6px 0 var(--cloud-shadow);
+}
+
+.puzzle-guide {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.28;
+}
+
+.puzzle-spot {
+  position: relative;
+  padding: 0;
+  border: 0;
+  outline: 1.5px dashed rgb(27 42 74 / 0.35);
+  outline-offset: -1px;
+  background: none;
+  cursor: pointer;
+}
+
+.puzzle-spot svg,
+.puzzle-piece svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.puzzle-spot.is-filled {
+  outline: none;
+  cursor: default;
+}
+
+.puzzle-spot.is-new {
+  animation: pop-in 0.3s ease-out;
+}
+
+/* While a piece is picked, or dragged over it, an empty spot lights up. */
+.puzzle-board.is-picking .puzzle-spot:not(.is-filled):hover,
+.puzzle-spot.is-over:not(.is-filled) {
+  background: rgb(255 210 63 / 0.45);
+}
+
+.puzzle-spot:focus-visible {
+  z-index: 1;
+  outline: 4px solid var(--ink);
+  outline-offset: -4px;
+}
+
+.puzzle-spot.is-wrong {
+  animation: wiggle 0.4s;
+}
+
+/* After the last puzzle, the picture gets smaller so the celebration fits
+   below it. */
+.puzzle-board.is-final {
+  width: min(560px, 100%, calc((100svh - 540px) * var(--aspect)));
+}
+
+/* The finished picture does a little hop. The picture underneath shows in
+   full, so no seams show between the pieces. */
+.puzzle-board.is-done .puzzle-guide {
+  opacity: 1;
+}
+
+.puzzle-board.is-done {
+  animation: pop 0.5s ease-out;
+}
+
+/* The pieces left, six to a row, so even 12 take only two rows. */
+.puzzle-tray {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: clamp(0.4rem, 1.5vw, 0.9rem);
+  width: min(720px, 100%);
+}
+
+.puzzle-piece {
+  aspect-ratio: var(--aspect);
+  padding: 0;
+  overflow: hidden;
+  border: 3px solid #fff;
+  border-radius: 10px;
+  background: #fff;
+  box-shadow: 0 5px 0 var(--cloud-shadow);
+  cursor: grab;
+  touch-action: none; /* dragging it doesn't scroll the page */
+  user-select: none;
+  transition: transform 0.08s, box-shadow 0.08s;
+}
+
+.puzzle-piece[aria-pressed='true'] {
+  border-color: var(--ink);
+  transform: translateY(-5px);
+  box-shadow: 0 10px 0 var(--cloud-shadow);
+}
+
+.puzzle-piece.is-dragging {
+  position: relative;
+  z-index: 2;
+  cursor: grabbing;
+  transition: none;
+  box-shadow: 0 12px 14px rgb(27 42 74 / 0.3);
+}
+
+.puzzle-piece.is-wrong {
+  animation: wiggle 0.4s;
+}
+
+.puzzle-piece:focus-visible {
+  outline: 4px solid var(--ink);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .puzzle-spot.is-new,
+  .puzzle-spot.is-wrong,
+  .puzzle-board.is-done,
+  .puzzle-piece.is-wrong {
+    animation: none;
+  }
+}

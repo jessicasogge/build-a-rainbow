@@ -204,6 +204,13 @@ const PICTURES = {
     <circle cx="${x + 28}" cy="17" r="4" fill="${YELLOW}" />
     <circle cx="${x + 14}" cy="34" r="7" fill="${ball}" />`)
     .join(''),
+  // A little rainbow in four puzzle pieces, one of them lifted out.
+  'rainbow-puzzle': `
+    <g transform="translate(-2 2)">${tinyRainbow((i) => COLORS[i].hex)}</g>
+    <path d="M6 52H82M44 14V52" stroke="#ffffff" stroke-width="3" />
+    <path d="M44 33H82" stroke="#ffffff" stroke-width="3" />
+    <rect x="58" y="2" width="28" height="22" rx="3" fill="#ffffff" stroke="${ink}" stroke-width="2" transform="rotate(12 72 13)" />
+    <path d="M62 20a10 10 0 0 1 20 0" fill="none" stroke="${BLUE}" stroke-width="5" transform="rotate(12 72 13)" />`,
   // A jumbled rainbow with swap arrows.
   'fix-the-rainbow': `
     ${tinyRainbow((i) => [GREEN, ORANGE, PURPLE, RED, BLUE, YELLOW][i])}
