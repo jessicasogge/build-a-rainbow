@@ -15,12 +15,12 @@ describe('pick a level page', () => {
     expect(html).toMatch(/<a class="round-button" href="\.\/index\.html" aria-label="Back[^"]*">/);
   });
 
-  it('lists fifteen levels in order', () => {
-    expect(cards.map((m) => m[1])).toEqual(['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15']);
+  it('lists sixteen levels in order', () => {
+    expect(cards.map((m) => m[1])).toEqual(['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16']);
   });
 
   it('has every level open, none locked', () => {
-    expect(cards.map((m) => Boolean(m[2]))).toEqual(Array(15).fill(false));
+    expect(cards.map((m) => Boolean(m[2]))).toEqual(Array(16).fill(false));
     expect(html).not.toContain('unlock');
   });
 
@@ -40,19 +40,20 @@ describe('pick a level page', () => {
     ['Fix the rainbow', 'fix-the-rainbow', 13],
     ['Word scramble', 'word-scramble', 14],
     ['Spot the difference', 'spot-the-difference', 15],
+    ['Rainbow puzzle', 'rainbow-puzzle', 16],
   ])('opens %s from its card', (name, page, level) => {
     expect(html).toContain(`<a class="level-card" href="./${page}.html" data-level="${level}">`);
   });
 
   it('gives every card its own picture, hidden from screen readers', () => {
     const pictures = [...document.querySelectorAll('.level-card svg.level-picture')];
-    expect(pictures).toHaveLength(15);
+    expect(pictures).toHaveLength(16);
     for (const svg of pictures) {
       expect(svg.getAttribute('aria-hidden')).toBe('true');
       expect(svg.children.length).toBeGreaterThan(0);
     }
     // Each card's picture is its own.
-    expect(new Set(pictures.map((svg) => svg.innerHTML)).size).toBe(15);
+    expect(new Set(pictures.map((svg) => svg.innerHTML)).size).toBe(16);
   });
 
   it('shares the title screen stylesheet, tab icon and signature', () => {

@@ -1,8 +1,8 @@
 # Build a Rainbow 🌈
 
-A browser game for young elementary-age kids: fifteen rainbow levels where you mix colors, build and paint rainbows, sort colors, grow a garden, scoop ice cream, finish patterns, pop bubbles, play I spy, spot the difference, drive a rainbow road and more. Works on computers, tablets and phones.
+A browser game for young elementary-age kids: sixteen rainbow levels where you mix colors, build and paint rainbows, sort colors, grow a garden, scoop ice cream, finish patterns, pop bubbles, play I spy, spot the difference, do puzzles, drive a rainbow road and more. Works on computers, tablets and phones.
 
-There's an opening screen, a level picker, and fifteen levels, from easiest to hardest:
+There's an opening screen, a level picker, and sixteen levels, from easiest to hardest:
 
 1. **Paint a rainbow:** pick from ten paints and tap any stripe to paint it, in any colors you like. Once every stripe is painted, tap Done.
 2. **Bubble pop:** rainbow bubbles float slowly up the sky, and the helper calls a color. Pop five bubbles of that color, then the next color is called. Three colors a game. A bubble of another color just boings away; there's no losing and no time limit.
@@ -19,6 +19,7 @@ There's an opening screen, a level picker, and fifteen levels, from easiest to h
 13. **Fix the rainbow:** the stripes come jumbled. Tap one stripe, then another, to swap them, until every color is back in its place.
 14. **Word scramble:** the letters of RAINBOW come mixed up. Tap them in order to spell the word; each right letter drops into the next box with a rainbow-colored border. Then tap Next and do the same with SUNSHINE, then CLOUDS.
 15. **Spot the difference:** two copies of a picture sit side by side (one above the other on a phone), but some things in the second are a different color. Tap a thing that changed, in either picture, and it gets a sparkly ring in both; the helper says what changed ("The ball changed from blue to yellow!"). Three pictures, a park, a garden and a beach, with 3, then 4, then 5 differences. Tapping something that didn't change just wiggles it.
+16. **Rainbow puzzle:** a picture is cut into pieces, mixed up in a tray, with a faint copy of the picture to follow. Tap a piece and then the spot where it goes, or drag it there. A piece in the wrong spot wiggles and stays in the tray. Three puzzles: a rainbow in 6 pieces, ice cream friends in 9 and the park in 12.
 
 ## Running it locally
 

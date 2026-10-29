@@ -72,12 +72,11 @@ describe('spot the difference page', () => {
     expect($('#next').hidden).toBe(true);
   });
 
-  it('celebrates after the last picture, and leads back to all the levels', () => {
+  it('celebrates after the last picture', () => {
     playAll();
     expect(level.game.scene).toBe(2);
     expect($('.spot-pictures').classList.contains('is-done')).toBe(true);
     expect($('.level-done').hidden).toBe(false);
-    expect($('.level-done a.button-play').textContent).toBe('All levels'); // the last level
     expect(document.activeElement).toBe($('.level-done h2'));
   });
 
