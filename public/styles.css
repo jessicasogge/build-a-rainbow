@@ -28,6 +28,12 @@
   box-sizing: border-box;
 }
 
+/* Quick taps are just taps: a child tapping fast on a phone doesn't zoom
+   the page in by double-tapping. Pinch zoom still works. */
+html {
+  touch-action: manipulation;
+}
+
 /* The shared page pieces (<level-header>, <helper-bubble>, ...) are filled
    in by game/components.js. Until they are, the page stays hidden, so it
    never flashes their raw text unstyled; the game's scripts lay out the
@@ -65,8 +71,10 @@ body {
 
 /* ---- Sky ---- */
 
+/* Fixed, so the part off the edge of the screen can't make the title
+   screen slide sideways. */
 .sun {
-  position: absolute;
+  position: fixed;
   top: -60px;
   right: -60px;
   width: 200px;
@@ -1164,6 +1172,18 @@ button.round-button {
 .tray.tray-3 {
   grid-template-columns: repeat(3, minmax(0, 1fr)); /* 3 across on phones too */
   width: min(760px, 100%);
+}
+
+/* On the narrowest phones, smaller blobs so all three fit across. */
+@media (max-width: 360px) {
+  .blob {
+    width: 62px;
+  }
+
+  .mix-sign {
+    width: 26px;
+    height: 26px;
+  }
 }
 
 #next svg {
